@@ -44,13 +44,14 @@ class Station{
 public:
 		virtual int answer(Train* t) = 0; 				// (Interazione con stazione) -1: binario non disponibile (vai in park, chiedi binario di nuovo dopo), >=0 n. binario (ogni ciclo: partenze, richiesta e risposta) 
   	virtual bool answer_exit(Train* t) = 0;		// (Con treno sui binari) TRUE: partenza consentita, FALSE: stazionamento
-      
+    
 protected:
     std::vector<Train*> platforms;						// Binari passeggeri e transito andata
     std::vector<Train*> platforms_reverse;		// Binari passeggeri e transito ritorno
     std::vector<Train*> park_;								// (Binari) Parcheggio andata
     std::vector<Train*> park_reverse_;				// (Binari) Parcheggio ritorno
     int distance;															// Distanza dalla stazione primaria
+  	void announce(Train* t);									// Il metodo comunica l'arrivo. Nel metodo: si restituisce al flusso generale il messaggio di treno arrivato in stazione.
 };
 
 class Principal : public Station{
@@ -90,23 +91,26 @@ public:
   	int status() const;
   	void set_status();
   
-  	virtual void request() = 0;						// void perchè possono modificare le variabili membro
-  	virtual void request_exit() = 0;
+  	
   
   	virtual ~Train();
 protected:
     Train();
     //int train_id_;
     std::string train_num_;
-    bool reverse_;								// true per i treni in ritorno
-    const double max_spd_;				// km/min
-    double curr_spd_;							// km/min
-    double curr_km_;							// da partenza
-    Station* curr_stat_;					// nullptr quando parte dalla stazione (e quindi sta viaggiando) 
-    Station* next_stat_;					//
-    std::vector<int> arrivals_; 	// minuti
-    int delay_;										// anticipo = ritardo negativo
-    int status_; 									// 0 Mov Normale, 1 Mov Staz, 2 Binario, 3 Park, 4 Fine corsa
+    bool reverse_;												// true per i treni in ritorno
+    const double max_spd_;								// km/min
+    double curr_spd_;											// km/min
+    double curr_km_;											// da partenza
+    Station* curr_stat_;									// nullptr quando parte dalla stazione (e quindi sta viaggiando) 
+    Station* next_stat_;									//
+    std::vector<int> arrivals_; 					// minuti
+    int delay_;														// anticipo = ritardo negativo
+    int status_; 													// 0 Mov Normale, 1 Mov Staz, 2 Binario, 3 Park, 4 Fine corsa
+  
+  	virtual void request() = 0;						// void perchè possono modificare le variabili membro
+  	virtual void request_exit() = 0;
+  	void arrived();												//funzione interna invocata dal treno stesso per annunciare il suo arrivo in una stazione
 };
 
 class Regional : public Train{
