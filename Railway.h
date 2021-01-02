@@ -42,10 +42,12 @@ class Railway{
 // ===== STAZIONI =====
 class Station{
 public:
-		virtual int answer() = 0; 								// (Interazione con stazione) -2: binario non disponibile, -1:
+		virtual int answer(Train* t) = 0; 				// (Interazione con stazione) -1: binario non disponibile (vai in park, chiedi binario di nuovo dopo), >=0 n. binario (ogni ciclo: partenze, richiesta e risposta) 
+  	virtual bool answer_exit(Train* t) = 0;		// (Con treno sui binari) TRUE: partenza consentita, FALSE: stazionamento
+      
 protected:
-    std::vector<Train*> people_plt_;					// Binari passeggeri e transito andata
-    std::vector<Train*> people_ptl_reverse_;	// Binari passeggeri e transito ritorno
+    std::vector<Train*> platforms;						// Binari passeggeri e transito andata
+    std::vector<Train*> platforms_reverse;		// Binari passeggeri e transito ritorno
     std::vector<Train*> park_;								// (Binari) Parcheggio andata
     std::vector<Train*> park_reverse_;				// (Binari) Parcheggio ritorno
     int distance;															// Distanza dalla stazione primaria
@@ -59,7 +61,7 @@ private:
 
 class Secondary : public Station{
 public:
-
+	//	-2: OK transito,
 private:
 };
 
@@ -80,7 +82,7 @@ public:
   	double curr_spd() const;
   	void set_curr_spd(double val);
   	double current_km() const;
-  	std::string advance_train();			// Calcolo del km al prossimo minuto. Aggiorna stato 
+  	std::string advance_train();					// Calcolo del km al prossimo minuto. Aggiorna stato 
     Station* curr_stat() const;
     Station* next_stat() const;
   	std::vector<int>& arrivals() const;
@@ -88,7 +90,8 @@ public:
   	int status() const;
   	void set_status();
   
-  	virtual void request() = 0; 			   
+  	virtual void request() = 0;						// void perchè possono modificare le variabili membro
+  	virtual void request_exit() = 0;
   
   	virtual ~Train();
 protected:
@@ -99,7 +102,7 @@ protected:
     const double max_spd_;				// km/min
     double curr_spd_;							// km/min
     double curr_km_;							// da partenza
-    Station* curr_stat_;					// nullptr quando parte dalla stazione
+    Station* curr_stat_;					// nullptr quando parte dalla stazione (e quindi sta viaggiando) 
     Station* next_stat_;					//
     std::vector<int> arrivals_; 	// minuti
     int delay_;										// anticipo = ritardo negativo
