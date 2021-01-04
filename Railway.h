@@ -17,11 +17,7 @@
 - Nessun controllo sulla distanza tra treni che sono compresi nel parcheggio
 */
 
-/*
-Domande:
-1. Come costruire la stringa che verrà ritornata dal metodo advance_time? (es. idiota variabile globale di tipo temp_str dove vengono messi tutti gli aggiornamenti di stazioni e binari (tipo return temp_str))
-   Oppure avendo i due vetori stations_ e trains_ io vedo cosa cambia dallo stato precedente e segno ogni cambiamento?
-*/
+
 #include <iostream>
 
 class Railway;
@@ -40,6 +36,7 @@ public:
     std::string advance_time();					// Fa avanzare il tempo e restituisce una concatenazione di stringhe che indica ciò che è successo nel minuto precedente
     bool is_completed();					 	// Controllo se tutti i treni sono arrivati a destinazione finale (se si termina il programma) (tutti status 4, e tutti con next_stat_ = nullptr)
     std::string check_interaction();		    // Controllo distanza (collisioni e sorpasso)
+    int curr_time();							// Ritorna il tempo corrente
 
     ~Railway();
 private:
@@ -69,7 +66,7 @@ public:
     virtual ~Station();
 
 protected:
-    Station(std::string name, int distance, Station* prev);
+    Station(std::string name, int distance, Station* prev, Railway* rail);
 
     std::string station_name_;						// Nome della stazione
     std::vector<Train*> platforms;					// Binari passeggeri e transito andata
@@ -80,11 +77,12 @@ protected:
     Station* next_stat_;							// Punta alla stazione sucessiva per poterlo comunicare ai treni che dovranno partire
     Station* prev_stat_;							// Punta alla precedente per il reverse
     int since_train_;								// Minuti passati dall'ultima partenza
+    Railway* central_railw_; 						// Per avere il tempo corrente mi serve il riferimento al rail
 };
 
 class Principal : public Station{
 public:
-    Principal(std::string name, int distance, Station* prev);
+    Principal(std::string name, int distance, Station* prev, Railway* rail);
 
     int answer(Train* t); 							// (Interazione con stazione) -1: binario non disponibile (vai in park, chiedi binario di nuovo dopo), >=0 n. binario (ogni ciclo: partenze, richiesta e risposta)
     bool answer_exit(Train* t);						// (Con treno sui binari) TRUE: partenza consentita, FALSE: stazionamento
@@ -93,12 +91,12 @@ public:
 };
 
 class Secondary : public Station{					// Il binario di transito è dato dal diverso comportamento delle stazioni di tipo Principal e Secondary
-                                                    //      (perchè nel secondo caso lasciamo passare il treno transito facendo aspettare gli altri)
+    //      (perchè nel secondo caso lasciamo passare il treno transito facendo aspettare gli altri)
 public:
-    Secondary(std::string name, int distance, Station* prev);
+    Secondary(std::string name, int distance, Station* prev, Railway* rail);
 
     int answer(Train* t); 							// (Interazione con stazione) -1: binario non disponibile (vai in park, chiedi binario di nuovo dopo), >=0 n. binario
-                                                    //      (ogni ciclo: partenze, richiesta e risposta)
+    //      (ogni ciclo: partenze, richiesta e risposta)
     bool answer_exit(Train* t);						// (Con treno sui binari) TRUE: partenza consentita, FALSE: stazionamento
 
     virtual ~Secondary();
@@ -134,7 +132,7 @@ public:
     virtual ~Train();
 
 protected:
-    Train(std::string number, bool rev, double max, Station* curr, std::vector<int> times);
+    Train(std::string number, bool rev, double max, Station* curr, std::vector<int> times, Railway* rail);
 
     virtual void request() = 0;					// (richiedere binario sia banchina che transito) void perchè possono modificare le variabili membro
     virtual void request_exit() = 0;			// Richiede alla stazione il permesso di uscire dalla stessa (non è detto che serva, la priorità è data dalla stazione che fa uscire i treni dal parcheggio)
@@ -147,15 +145,16 @@ protected:
     double curr_km_;							// Distanza percosa dalla stazione iniziale (o finale nel caso di reverse)
     Station* curr_stat_;						// nullptr quando parte dalla stazione (e quindi sta viaggiando) oppure è nel parcheggio
     Station* next_stat_;						// Puntatore alla prossima stazione di arrivo, è nullptr nel caso in cui sia al capolinea
-    std::vector<int> arrivals_; 				// minuti
+    std::vector<int> arrivals_; 				// Orari in cui io arrivo alle stazioni
     int delay_;									// anticipo = ritardo negativo
     int wait_count_;							// countdown d'attesa del treno prima che parta, viene assegnato dalla stazione
     int status_; 								// 0 Mov Normale, 1 Mov Staz, 2 Binario, 3 Park, 4 Fine corsa
+    Railway* central_railw_; 					// Per avere il tempo corrente mi serve il riferimento al rail
 };
 
 class Regional : public Train{
 public:
-    Regional(std::string number, bool rev, double max, Station* curr, std::vector<int> times);
+    Regional(std::string number, bool rev, double max, Station* curr, std::vector<int> times, Railway* rail);
     virtual ~Regional();
 private:
     virtual void request() = 0;					// (richiedere binario sia banchina che transito) void perchè possono modificare le variabili membro
@@ -165,7 +164,7 @@ private:
 
 class Fast : public Train{
 public:
-    Fast(std::string number, bool rev, double max, Station* curr, std::vector<int> times);
+    Fast(std::string number, bool rev, double max, Station* curr, std::vector<int> times, Railway* rail);
     virtual ~Fast();
 private:
     virtual void request() = 0;					// (richiedere binario sia banchina che transito) void perchè possono modificare le variabili membro
@@ -175,7 +174,7 @@ private:
 
 class SuperFast : public Train{
 public:
-    SuperFast(std::string number, bool rev, double max, Station* curr, std::vector<int> times);
+    SuperFast(std::string number, bool rev, double max, Station* curr, std::vector<int> times, Railway* rail);
     virtual ~SuperFast();
 private:
     virtual void request() = 0;					// (richiedere binario sia banchina che transito) void perchè possono modificare le variabili membro
