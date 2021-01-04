@@ -22,7 +22,7 @@
 // ===== SISTEMA CENTRALE =====
 class Railway{
 	public:
-  	Railway(const std::string line_description, const std::string timetables);
+  	Railway(const std::string line_description, const std::string timetables);	// Crea i vettori stations_ e trains_
   	Railway(const Railway& r) = delete;
   	Railway& operator=(const Railway& r) = delete;
   	Railway(Railway&& r) = delete;
@@ -42,21 +42,36 @@ class Railway{
 // ===== STAZIONI =====
 class Station{
 public:
-		virtual int answer(Train* t) = 0; 				// (Interazione con stazione) -1: binario non disponibile (vai in park, chiedi binario di nuovo dopo), >=0 n. binario (ogni ciclo: partenze, richiesta e risposta) 
-  	virtual bool answer_exit(Train* t) = 0;		// (Con treno sui binari) TRUE: partenza consentita, FALSE: stazionamento
+  	Station(const Station& s) = delete;
+  	Station& operator=(const Station& s) = delete;
+  	Station(Station&& s) = delete;
+  	Station& operator=(Station&& s) = delete;
+  	
+		std::string station_name() const;
+  	int distance() const;
+  	int since_train_() const;	
     
+  	virtual ~Station() const;
+  
 protected:
+  	Station();
+  
+  	virtual int answer(Train* t) = 0; 				// (Interazione con stazione) -1: binario non disponibile (vai in park, chiedi binario di nuovo dopo), >=0 n. binario (ogni ciclo: partenze, richiesta e risposta) 
+  	virtual bool answer_exit(Train* t) = 0;		// (Con treno sui binari) TRUE: partenza consentita, FALSE: stazionamento
+  	void announce(Train* t) const;						// Il metodo comunica l'arrivo. Nel metodo: si restituisce al flusso generale il messaggio di treno arrivato in stazione.
+  
+  	std::string station_name_;
     std::vector<Train*> platforms;						// Binari passeggeri e transito andata
     std::vector<Train*> platforms_reverse;		// Binari passeggeri e transito ritorno
     std::vector<Train*> park_;								// (Binari) Parcheggio andata
     std::vector<Train*> park_reverse_;				// (Binari) Parcheggio ritorno
-    int distance;															// Distanza dalla stazione primaria
-  	void announce(Train* t);									// Il metodo comunica l'arrivo. Nel metodo: si restituisce al flusso generale il messaggio di treno arrivato in stazione.
+    int distance_;														// Distanza dalla stazione primaria
+  	int since_train_;													// Minuti passati dall'ultima partenza
 };
 
 class Principal : public Station{
 public:
-
+  	
 private:
 };
 
@@ -88,14 +103,20 @@ public:
     Station* next_stat() const;
   	std::vector<int>& arrivals() const;
   	int delay() const;
+  	int wait_count() const;								// ritorna il countdown d'attesa del treno prima che parta, viene assegnato dalla stazione 
+  	void set_wait_count(int min);					// imposta il countdown d'attesa (in qualsiasi situazione) 
   	int status() const;
   	void set_status();
-  
   	
-  
   	virtual ~Train();
+  
 protected:
     Train();
+  
+  	virtual void request() = 0;						// (richiedere binario sia banchina che transito) void perchè possono modificare le variabili membro
+  	virtual void request_exit() = 0;
+  	void arrived();												//funzione interna invocata dal treno stesso per annunciare il suo arrivo in una stazione
+  	
     //int train_id_;
     std::string train_num_;
     bool reverse_;												// true per i treni in ritorno
@@ -106,11 +127,8 @@ protected:
     Station* next_stat_;									//
     std::vector<int> arrivals_; 					// minuti
     int delay_;														// anticipo = ritardo negativo
+  	int wait_count_;											// countdown d'attesa del treno prima che parta, viene assegnato dalla stazione 
     int status_; 													// 0 Mov Normale, 1 Mov Staz, 2 Binario, 3 Park, 4 Fine corsa
-  
-  	virtual void request() = 0;						// void perchè possono modificare le variabili membro
-  	virtual void request_exit() = 0;
-  	void arrived();												//funzione interna invocata dal treno stesso per annunciare il suo arrivo in una stazione
 };
 
 class Regional : public Train{
@@ -130,8 +148,6 @@ public:
 
 private:
 };
-
-
 
 
 
