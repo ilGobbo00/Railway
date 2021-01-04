@@ -37,15 +37,15 @@ public:
     bool is_completed();					 	// Controllo se tutti i treni sono arrivati a destinazione finale (se si termina il programma) (tutti status 4, e tutti con next_stat_ = nullptr)
     std::string check_interaction();		    // Controllo distanza (collisioni e sorpasso)
     int curr_time();							// Ritorna il tempo corrente
-    void append(std::string msg);                  // Funzione per aggiungere contenuto in coda alla stringa di output della Railway
-    std::string printout();                  // Funzione di stampa della stringa di output messages_ (svuota la stringa dopo averla restituita)
+    void append(std::string msg);               // Funzione per aggiungere contenuto in coda alla stringa di output della Railway
+    std::string printout();                     // Funzione di stampa della stringa di output messages_ (svuota la stringa dopo averla restituita)
 
     ~Railway();
 private:
     int curr_time_;							    // Tempo corrente
     std::vector<Station*> stations_;		    // Vettore che contiene tutte le stazioni in sequenza line_description.txt
     std::vector<Train*> trains_;			    // Vettore che contiene tutti i teni presenti in timetables.txt
-    std::string messages_;               // Stringa per l'output a console
+    std::string messages_;                      // Stringa per l'output a console
 };
 
 // ===== STAZIONI ===== DIEGO SPINOSA
