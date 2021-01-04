@@ -49,12 +49,13 @@ public:
   	
 		std::string station_name() const;
   	int distance() const;
-  	int since_train_() const;	
-    
+  	int since_train_() const;
+    Station* next_stat() const;
+  	Station* prev_stat() const;
   	virtual ~Station() const;
   
 protected:
-  	Station();
+  	Station(std::string name, int distance, Station* prev);
   
   	virtual int answer(Train* t) = 0; 				// (Interazione con stazione) -1: binario non disponibile (vai in park, chiedi binario di nuovo dopo), >=0 n. binario (ogni ciclo: partenze, richiesta e risposta) 
   	virtual bool answer_exit(Train* t) = 0;		// (Con treno sui binari) TRUE: partenza consentita, FALSE: stazionamento
@@ -66,19 +67,21 @@ protected:
     std::vector<Train*> park_;								// (Binari) Parcheggio andata
     std::vector<Train*> park_reverse_;				// (Binari) Parcheggio ritorno
     int distance_;														// Distanza dalla stazione primaria
+  	Station* next_stat_;											// Punta alla stazione sucessiva per poterlo comunicare ai treni che dovranno partire
+  	Station* prev_stat_;											// Punta alla precedente per il reverse
   	int since_train_;													// Minuti passati dall'ultima partenza
 };
 
 class Principal : public Station{
 public:
-  	
-private:
+  	int answer(Train* t); 										// (Interazione con stazione) -1: binario non disponibile (vai in park, chiedi binario di nuovo dopo), >=0 n. binario (ogni ciclo: partenze, richiesta e risposta) 
+  	bool answer_exit(Train* t);								// (Con treno sui binari) TRUE: partenza consentita, FALSE: stazionamento
 };
 
-class Secondary : public Station{
+class Secondary : public Station{							// Il binario di transito è dato dal diverso comportamento delle stazioni di tipo Principal e Secondary (perchè nel secondo caso lasciamo passare il treno transito facendo aspettare gli altri) 
 public:
-	//	-2: OK transito,
-private:
+    int answer(Train* t); 										// (Interazione con stazione) -1: binario non disponibile (vai in park, chiedi binario di nuovo dopo), >=0 n. binario (ogni ciclo: partenze, richiesta e risposta) 
+  	bool answer_exit(Train* t);								// (Con treno sui binari) TRUE: partenza consentita, FALSE: stazionamento
 };
 
 
@@ -148,10 +151,6 @@ public:
 
 private:
 };
-
-
-
-
 
 
 
