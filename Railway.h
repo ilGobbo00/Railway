@@ -19,78 +19,82 @@
 
 #include <iostream>
 
+class Railway;
+class Station;
+class Train;
+
 // ===== SISTEMA CENTRALE =====
 class Railway{
-public:
-    Railway(const std::string line_description, const std::string timetables);	// Crea i vettori stations_ e trains_
-    Railway(const Railway& r) = delete;
-    Railway& operator=(const Railway& r) = delete;
-    Railway(Railway&& r) = delete;
-    Railway& operator=(Railway&& r) = delete;
-
-    std::string advance_time();
-    bool is_completed();				// Controllo se tutti i treni sono arrivati a destinazione finale (se si termina il programma) (tutti status 4)
-    std::string check_interaction();	// Controllo distanza (collisioni e sorpasso)
-
-    ~Railway();
-private:
-    int curr_time_;
-    std::vector<Station*> stations_;
-    std::vector<Train*> trains_;
+	public:
+  	Railway(const std::string line_description, const std::string timetables);	// Crea i vettori stations_ e trains_
+  	Railway(const Railway& r) = delete;
+  	Railway& operator=(const Railway& r) = delete;
+  	Railway(Railway&& r) = delete;
+  	Railway& operator=(Railway&& r) = delete;
+  	
+  	std::string advance_time();
+  	bool is_completed();				// Controllo se tutti i treni sono arrivati a destinazione finale (se si termina il programma) (tutti status 4)
+  	std::string check_interaction();	// Controllo distanza (collisioni e sorpasso)
+  
+  	~Railway();
+  private:
+  	int curr_time_;
+  	std::vector<Station*> stations_;
+  	std::vector<Train*> trains_;			
 };
 
 // ===== STAZIONI =====
 class Station{
 public:
-    Station(const Station& s) = delete;
-    Station& operator=(const Station& s) = delete;
-    Station(Station&& s) = delete;
-    Station& operator=(Station&& s) = delete;
-
-    std::string station_name() const;
-    int distance() const;
-    int since_train_() const;
+  	Station(const Station& s) = delete;
+  	Station& operator=(const Station& s) = delete;
+  	Station(Station&& s) = delete;
+  	Station& operator=(Station&& s) = delete;
+  	
+		std::string station_name() const;
+  	int distance() const;
+  	int since_train_() const;
     Station* next_stat() const;
-    Station* prev_stat() const;
-
+  	Station* prev_stat() const;
+  
     virtual int answer(Train* t) = 0; 			// (Interazione con stazione) -1: binario non disponibile (vai in park, chiedi binario di nuovo dopo), >=0 n. binario (ogni ciclo: partenze, richiesta e risposta)
-    virtual bool answer_exit(Train* t) = 0;		// (Con treno sui binari) TRUE: partenza consentita, FALSE: stazionamento
-    void announce(Train* t) const;				// Il metodo comunica l'arrivo. Nel metodo: si restituisce al flusso generale il messaggio di treno arrivato in stazione.
-
-    virtual ~Station();
-
+  	virtual bool answer_exit(Train* t) = 0;		// (Con treno sui binari) TRUE: partenza consentita, FALSE: stazionamento
+  	void announce(Train* t) const;		        // Il metodo comunica l'arrivo. Nel metodo: si restituisce al flusso generale il messaggio di treno arrivato in stazione.
+  
+  	virtual ~Station();
+  
 protected:
-    Station(std::string name, int distance, Station* prev);
-
-    std::string station_name_;
+  	Station(std::string name, int distance, Station* prev);
+  
+  	std::string station_name_;
     std::vector<Train*> platforms;				// Binari passeggeri e transito andata
     std::vector<Train*> platforms_reverse;		// Binari passeggeri e transito ritorno
     std::vector<Train*> park_;					// (Binari) Parcheggio andata
     std::vector<Train*> park_reverse_;			// (Binari) Parcheggio ritorno
     int distance_;								// Distanza dalla stazione primaria
-    Station* next_stat_;						// Punta alla stazione sucessiva per poterlo comunicare ai treni che dovranno partire
-    Station* prev_stat_;						// Punta alla precedente per il reverse
-    int since_train_;							// Minuti passati dall'ultima partenza
+  	Station* next_stat_;						// Punta alla stazione sucessiva per poterlo comunicare ai treni che dovranno partire
+  	Station* prev_stat_;						// Punta alla precedente per il reverse
+  	int since_train_;							// Minuti passati dall'ultima partenza
 };
 
 class Principal : public Station{
 public:
-    Principal(std::string name, int distance, Station* prev);
-
-    int answer(Train* t); 						// (Interazione con stazione) -1: binario non disponibile (vai in park, chiedi binario di nuovo dopo), >=0 n. binario (ogni ciclo: partenze, richiesta e risposta)
-    bool answer_exit(Train* t);					// (Con treno sui binari) TRUE: partenza consentita, FALSE: stazionamento
-
-    virtual ~Principal();
+  	Principal(std::string name, int distance, Station* prev);
+  
+  	int answer(Train* t); 						// (Interazione con stazione) -1: binario non disponibile (vai in park, chiedi binario di nuovo dopo), >=0 n. binario (ogni ciclo: partenze, richiesta e risposta)
+  	bool answer_exit(Train* t);					// (Con treno sui binari) TRUE: partenza consentita, FALSE: stazionamento
+  
+  	virtual ~Principal();
 };
 
 class Secondary : public Station{				// Il binario di transito è dato dal diverso comportamento delle stazioni di tipo Principal e Secondary (perchè nel secondo caso lasciamo passare il treno transito facendo aspettare gli altri)
 public:
     Secondary(std::string name, int distance, Station* prev);
 
-    int answer(Train* t); 						// (Interazione con stazione) -1: binario non disponibile (vai in park, chiedi binario di nuovo dopo), >=0 n. binario (ogni ciclo: partenze, richiesta e risposta)
-    bool answer_exit(Train* t);					// (Con treno sui binari) TRUE: partenza consentita, FALSE: stazionamento
-
-    virtual ~Secondary();
+  	int answer(Train* t); 						// (Interazione con stazione) -1: binario non disponibile (vai in park, chiedi binario di nuovo dopo), >=0 n. binario (ogni ciclo: partenze, richiesta e risposta)
+  	bool answer_exit(Train* t);					// (Con treno sui binari) TRUE: partenza consentita, FALSE: stazionamento
+  
+  	virtual ~Secondary();
 };
 
 
@@ -99,36 +103,36 @@ public:
 // ===== TRENI =====
 class Train{
 public:
-    Train(const Train& t) = delete;
-    Train& operator=(const Train& t) = delete;
-    Train(Train&& t) = delete;
-    Train& operator=(Train&& t) = delete;
-
-    std::string train_num() const;
-    bool reverse() const;
-    const double max_spd() const;
-    double curr_spd() const;
-    void set_curr_spd(double val);
-    double current_km() const;
-    std::string advance_train();				// Calcolo del km al prossimo minuto. Aggiorna stato
+  	Train(const Train& t) = delete;
+  	Train& operator=(const Train& t) = delete;
+  	Train(Train&& t) = delete;
+  	Train& operator=(Train&& t) = delete;
+  
+		std::string train_num() const;
+  	bool reverse() const;
+  	const double max_spd() const;
+  	double curr_spd() const;
+  	void set_curr_spd(double val);
+  	double current_km() const;
+  	std::string advance_train();				// Calcolo del km al prossimo minuto. Aggiorna stato
     Station* curr_stat() const;
     Station* next_stat() const;
-    std::vector<int>& arrivals() const;
-    int delay() const;
-    int wait_count() const;						// ritorna il countdown d'attesa del treno prima che parta, viene assegnato dalla stazione
-    void set_wait_count(int min);				// imposta il countdown d'attesa (in qualsiasi situazione)
-    int status() const;
-    void set_status();
-
-    virtual ~Train();
-
+  	std::vector<int>& arrivals() const;
+  	int delay() const;
+  	int wait_count() const;						// ritorna il countdown d'attesa del treno prima che parta, viene assegnato dalla stazione
+  	void set_wait_count(int min);				// imposta il countdown d'attesa (in qualsiasi situazione)
+  	int status() const;
+  	void set_status();
+  	
+  	virtual ~Train();
+  
 protected:
     Train();
-
-    virtual void request() = 0;					// (richiedere binario sia banchina che transito) void perchè possono modificare le variabili membro
-    virtual void request_exit() = 0;
-    void arrived();								//funzione interna invocata dal treno stesso per annunciare il suo arrivo in una stazione
-
+  
+  	virtual void request() = 0;					// (richiedere binario sia banchina che transito) void perchè possono modificare le variabili membro
+  	virtual void request_exit() = 0;
+  	void arrived();					            //funzione interna invocata dal treno stesso per annunciare il suo arrivo in una stazione
+  	
     std::string train_num_;
     bool reverse_;								// true per i treni in ritorno
     const double max_spd_;						// km/min
@@ -138,7 +142,7 @@ protected:
     Station* next_stat_;						//
     std::vector<int> arrivals_; 				// minuti
     int delay_;									// anticipo = ritardo negativo
-    int wait_count_;							// countdown d'attesa del treno prima che parta, viene assegnato dalla stazione
+  	int wait_count_;							// countdown d'attesa del treno prima che parta, viene assegnato dalla stazione
     int status_; 								// 0 Mov Normale, 1 Mov Staz, 2 Binario, 3 Park, 4 Fine corsa
 };
 
