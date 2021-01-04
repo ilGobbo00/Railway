@@ -28,7 +28,7 @@ class Railway;
 class Station;
 class Train;
 
-// ===== SISTEMA CENTRALE =====
+// ===== SISTEMA CENTRALE ===== GIULIO REBECCHI
 class Railway{
 public:
     Railway(const std::string line_description, const std::string timetables);	// Crea i vettori stations_ e trains_
@@ -48,7 +48,7 @@ private:
     std::vector<Train*> trains_;			    // Vettore che contiene tutti i teni presenti in timetables.txt
 };
 
-// ===== STAZIONI =====
+// ===== STAZIONI ===== DIEGO SPINOSA
 class Station{
 public:
     Station(const Station& s) = delete;				//
@@ -107,7 +107,7 @@ public:
 
 
 
-// ===== TRENI =====
+// ===== TRENI ===== RICCARDO GOBBO
 class Train{
 public:
     Train(const Train& t) = delete;				//
