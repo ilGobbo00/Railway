@@ -10,6 +10,3 @@ visto che simulazione garantita per 24h -> max ritardo 1440min
 3.rit - SAV
 
 La priorità sarà negativa con treni in anticipo.
-
-1. Ma la simulazione può durare più di 24h se ci sono treni che partono alle 23.59 per esempio
-2. È una modifica circoscritta per la classe Station o anche per Train?
