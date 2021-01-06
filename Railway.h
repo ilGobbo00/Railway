@@ -23,6 +23,7 @@
 
 #include <iostream>
 #include <vector>
+#include <string>
 
 class Railway;
 class Station;
