@@ -1,0 +1,11 @@
+LIVELLI PRIORITA'
+salvati in DOUBLE
+rit ritardo in minuti
+salvato come
+int + rit/10'000
+visto che simulazione garantita per 24h -> max ritardo 1440min
+
+(0 - Treno in anticipo) <-- non obbligatoriamente implementabile
+1.rit - Regionale
+2.rit - AV
+3.rit - SAV
