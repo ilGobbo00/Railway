@@ -62,7 +62,7 @@ public:
 
     std::string station_name() const;				// Restituisce il nome della stazione
     int distance() const;							// Restituisce la distanza della stazione dall'origine
-    int since_train() const;						// Restituisce il numero di minuti trascorsi dall'ultima partenza della stazione
+    int haltTimer() const;						   // Restituisce il numero di minuti trascorsi dall'ultima partenza della stazione
     Station* next_stat() const;						// Restituisce il puntatore alla prossima stazione
     Station* prev_stat() const;						// Restituisce il puntatore alla stazione precedente (usato per i treni reverse)
 
@@ -84,7 +84,7 @@ protected:
     int distance_;									// Distanza dalla stazione primaria
     Station* next_stat_;							// Punta alla stazione sucessiva per poterlo comunicare ai treni che dovranno partire
     Station* prev_stat_;							// Punta alla precedente per il reverse
-    int haltTimer;								// Minuti di fermo stazione (caricato da partenze o transiti, quando >0 ferma partenze)
+    int haltTimer_;								// Minuti di fermo stazione (caricato da partenze o transiti, quando >0 ferma partenze)
     Railway* central_railw_; 						// Per avere il tempo corrente mi serve il riferimento al rail
 };
 
