@@ -94,7 +94,7 @@ public:
     int answer(Train* t); 							// (Interazione con stazione) -1: binario non disponibile (vai in park, chiedi binario di nuovo dopo), >=0 n. binario (ogni ciclo: partenze, richiesta e risposta)
     bool answer_exit(Train* t);						// (Con treno sui binari) TRUE: partenza consentita, FALSE: stazionamento
 
-    virtual ~Principal();
+    ~Principal();
 };
 
 class Secondary : public Station{					// Il binario di transito è dato dal diverso comportamento delle stazioni di tipo Principal e Secondary
@@ -106,7 +106,7 @@ public:
     //      (ogni ciclo: partenze, richiesta e risposta)
     bool answer_exit(Train* t);						// (Con treno sui binari) TRUE: partenza consentita, FALSE: stazionamento
 
-    virtual ~Secondary();
+    ~Secondary();
 };
 
 
@@ -134,7 +134,7 @@ public:
     int wait_count() const;						// Ritorna il countdown d'attesa del treno prima che parta, viene assegnato dalla stazione
     void set_wait_count(int min);				// Imposta il countdown d'attesa (in qualsiasi situazione)
     int status() const;							// Ritorna lo stato del treno (0 movimento normale, 1 movimento nei pressi della stazione, 2 nel binario, 3 nel parcheggio, 4 capolinea)
-    void set_status();							// Imposta lo stato del treno
+    void set_status(int status);				// Imposta lo stato del treno
 
     virtual ~Train();
 
@@ -156,36 +156,38 @@ protected:
     int delay_;									// anticipo = ritardo negativo
     int wait_count_;							// countdown d'attesa del treno prima che parta, viene assegnato dalla stazione
     int status_; 								// 0 Mov Normale, 1 Mov Staz, 2 Binario, 3 Park, 4 Fine corsa
+    int time_arrival_next_stat_;                 // Orario in cui il treno dovrebbe arrivare alla stazione (indice del vettore arrivals
+    int time_arrival_next_stat_reverse_;
     Railway* central_railw_; 					// Per avere il tempo corrente mi serve il riferimento al rail
 };
 
 class Regional : public Train{
 public:
     Regional(std::string number, bool rev, double max, Station* curr, std::vector<int> times, Railway* rail);
-    virtual ~Regional();
+    ~Regional();
 private:
-    virtual void request() = 0;					// (richiedere binario sia banchina che transito) void perchè possono modificare le variabili membro
-    virtual void request_exit() = 0;			// Richiede alla stazione il permesso di uscire dalla stessa (non è detto che serva, la priorità è data dalla stazione che fa uscire i treni dal parcheggio)
+    void request();		    			// (richiedere binario sia banchina che transito) void perchè possono modificare le variabili membro
+    void request_exit();	    		// Richiede alla stazione il permesso di uscire dalla stessa (non è detto che serva, la priorità è data dalla stazione che fa uscire i treni dal parcheggio)
     void arrived();								// Funzione interna invocata dal treno stesso per annunciare il suo arrivo in una stazione
 };
 
 class Fast : public Train{
 public:
     Fast(std::string number, bool rev, double max, Station* curr, std::vector<int> times, Railway* rail);
-    virtual ~Fast();
+    ~Fast();
 private:
-    virtual void request() = 0;					// (richiedere binario sia banchina che transito) void perchè possono modificare le variabili membro
-    virtual void request_exit() = 0;			// Richiede alla stazione il permesso di uscire dalla stessa (non è detto che serva, la priorità è data dalla stazione che fa uscire i treni dal parcheggio)
+    void request(); 					// (richiedere binario sia banchina che transito) void perchè possono modificare le variabili membro
+    void request_exit();    			// Richiede alla stazione il permesso di uscire dalla stessa (non è detto che serva, la priorità è data dalla stazione che fa uscire i treni dal parcheggio)
     void arrived();								// Funzione interna invocata dal treno stesso per annunciare il suo arrivo in una stazione
 };
 
 class SuperFast : public Train{
 public:
     SuperFast(std::string number, bool rev, double max, Station* curr, std::vector<int> times, Railway* rail);
-    virtual ~SuperFast();
+    ~SuperFast();
 private:
-    virtual void request() = 0;					// (richiedere binario sia banchina che transito) void perchè possono modificare le variabili membro
-    virtual void request_exit() = 0;			// Richiede alla stazione il permesso di uscire dalla stessa (non è detto che serva, la priorità è data dalla stazione che fa uscire i treni dal parcheggio)
+    void request();					// (richiedere binario sia banchina che transito) void perchè possono modificare le variabili membro
+    void request_exit();			// Richiede alla stazione il permesso di uscire dalla stessa (non è detto che serva, la priorità è data dalla stazione che fa uscire i treni dal parcheggio)
     void arrived();								// Funzione interna invocata dal treno stesso per annunciare il suo arrivo in una stazione
 };
 
