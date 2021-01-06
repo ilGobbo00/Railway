@@ -63,14 +63,16 @@ public:
 
     std::string station_name() const;				// Restituisce il nome della stazione
     int distance() const;							// Restituisce la distanza della stazione dall'origine
-    int haltTimer() const;						   // Restituisce il numero di minuti trascorsi dall'ultima partenza della stazione
+    int getHaltTimer() const;						   // Restituisce il numero di minuti trascorsi dall'ultima partenza della stazione
     Station* next_stat() const;						// Restituisce il puntatore alla prossima stazione
     Station* prev_stat() const;						// Restituisce il puntatore alla stazione precedente (usato per i treni reverse)
 
-    virtual int answer(Train* t) = 0; 				// (Interazione con stazione) -2: binaario transito, -1: binario non disponibile (vai in park, chiedi binario di nuovo dopo), >=0 (0/1) n. binario (ogni ciclo: partenze, richiesta e risposta)
-    virtual bool answer_exit(Train* t) = 0;		    // (Con treno sui binari) TRUE: partenza consentita, FALSE: stazionamento
+    virtual int answer(Train* t) = 0; 				// (Interazione con stazione) -1: binario non disponibile (vai in park, chiedi binario di nuovo dopo), >=0 n. binario (ogni ciclo: partenze, richiesta e risposta)
+    bool answer_exit(Train* t) = 0;		    // (Con treno sui binari) TRUE: partenza consentita, FALSE: stazionamento
     void announce(Train* t) const;					// Il metodo comunica l'arrivo. Nel metodo: si restituisce al flusso generale il messaggio di treno arrivato in stazione.
     void update();                              // AGGIUNTO 06-1 9:45 Metodo con cui "far passare il tempo" in stazione. Verrà invocato da Railway nella parte inziale d'ogni minuto, PRIMA di verifiche varie/avanzamento treni.
+
+
 
     virtual ~Station();
 
@@ -174,7 +176,6 @@ public:
 private:
     void request();		    			// (richiedere binario sia banchina che transito) void perchè possono modificare le variabili membro
     void request_exit();	    		// Richiede alla stazione il permesso di uscire dalla stessa (non è detto che serva, la priorità è data dalla stazione che fa uscire i treni dal parcheggio)
-
 };
 
 class Fast : public Train{
