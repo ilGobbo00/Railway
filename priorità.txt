@@ -10,3 +10,7 @@ visto che simulazione garantita per 24h -> max ritardo 1440min
 3.rit - SAV
 
 La priorità sarà negativa con treni in anticipo.
+
+ESEMPIO: Treno regionale con ritardo 99 minuti
+
+1.0099
