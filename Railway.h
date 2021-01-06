@@ -123,14 +123,14 @@ public:
 
     std::string train_num() const;				// Numero del treno
     bool reverse() const;						// Andata (false) /ritorno (true)
-    const double max_spd() const;				// Massima velocità del treno, possibile controllo del tipo di treno
+    double max_spd() const;				// Massima velocità del treno, possibile controllo del tipo di treno
     double curr_spd() const;					// Velocità corrente: solitamente massima, altrimenti velocità del treno davanti, altrimenti gli 80km/h
     void set_curr_spd(double val);				// Imposta velocità corrente
     double current_km() const;					// Distanza percosa dalla stazione iniziale (o finale nel caso di reverse)
     std::string advance_train();				// Calcolo del km al prossimo minuto. Aggiorna stato
     Station* curr_stat() const;					// Ritorna il puntatore alla stazione dove risiede
     Station* next_stat() const;					// Ritorna il puntatore alla prossima stazione
-    std::vector<int>& arrivals() const;		    // Ritorna il riferimento al vettore arrivals_ (non è detto che serva)
+    const std::vector<int> & arrivals() const;		    // Ritorna il riferimento al vettore arrivals_ (non è detto che serva)
     int delay() const;							// Ritorna l'eventuale anticipo/ritardo
     int wait_count() const;						// Ritorna il countdown d'attesa del treno prima che parta, viene assegnato dalla stazione
     void set_wait_count(int min);				// Imposta il countdown d'attesa (in qualsiasi situazione)
@@ -142,8 +142,8 @@ public:
 protected:
     Train(std::string number, bool rev, double max, Station* curr, std::vector<int> times, Railway* rail);
 
-    virtual bool request() = 0;					// (richiedere binario sia banchina che transito) void perchè possono modificare le variabili membro
-    virtual bool request_exit() = 0;			// Richiede alla stazione il permesso di uscire dalla stessa (non è detto che serva, la priorità è data dalla stazione che fa uscire i treni dal parcheggio)
+    virtual void request() = 0;					// (richiedere binario sia banchina che transito) void perchè possono modificare le variabili membro
+    virtual void request_exit() = 0;			// Richiede alla stazione il permesso di uscire dalla stessa (non è detto che serva, la priorità è data dalla stazione che fa uscire i treni dal parcheggio)
     void arrived();								// Funzione interna invocata dal treno stesso per annunciare il suo arrivo in una stazione
 
     std::string train_num_;						// Numero del treno
@@ -153,12 +153,13 @@ protected:
     double curr_km_;							// Distanza percosa dalla stazione iniziale (o finale nel caso di reverse)
     Station* curr_stat_;						// nullptr quando parte dalla stazione (e quindi sta viaggiando) oppure è nel parcheggio
     Station* next_stat_;						// Puntatore alla prossima stazione di arrivo, è nullptr nel caso in cui sia al capolinea
-    std::vector<int> arrivals_; 				// Orari in cui io arrivo alle stazioni
+    const std::vector<int> arrivals_; 				// Orari in cui io arrivo alle stazioni
     int delay_;									// anticipo = ritardo negativo
     int wait_count_;							// countdown d'attesa del treno prima che parta, viene assegnato dalla stazione
     int status_; 								// 0 Mov Normale, 1 Mov Staz, 2 Binario, 3 Park, 4 Fine corsa
-    int time_arrival_next_stat_;                 // Orario in cui il treno dovrebbe arrivare alla stazione (indice del vettore arrivals
-    int time_arrival_next_stat_reverse_;
+    int time_arrival_next_stat_;                // Orario in cui il treno dovrebbe arrivare alla stazione (indice del vettore arrivals
+    int time_arrival_next_stat_reverse_;        // Orario in cui il treno dovrebbe arrivare alla stazione (indice del vettore arrivals
+    int last_request_;                          // Risposta dall'utlima richiesta (-2 transito, -1 rifiutata, -3 default, >=0 num binario)
     Railway* central_railw_; 					// Per avere il tempo corrente mi serve il riferimento al rail
 };
 
@@ -167,8 +168,8 @@ public:
     Regional(std::string number, bool rev, double max, Station* curr, std::vector<int> times, Railway* rail);
     ~Regional();
 private:
-    bool request();		    			// (richiedere binario sia banchina che transito) void perchè possono modificare le variabili membro
-    bool request_exit();	    		// Richiede alla stazione il permesso di uscire dalla stessa (non è detto che serva, la priorità è data dalla stazione che fa uscire i treni dal parcheggio)
+    void request();		    			// (richiedere binario sia banchina che transito) void perchè possono modificare le variabili membro
+    void request_exit();	    		// Richiede alla stazione il permesso di uscire dalla stessa (non è detto che serva, la priorità è data dalla stazione che fa uscire i treni dal parcheggio)
     void arrived();								// Funzione interna invocata dal treno stesso per annunciare il suo arrivo in una stazione
 };
 
@@ -177,8 +178,8 @@ public:
     Fast(std::string number, bool rev, double max, Station* curr, std::vector<int> times, Railway* rail);
     ~Fast();
 private:
-    bool request(); 					// (richiedere binario sia banchina che transito) void perchè possono modificare le variabili membro
-    bool request_exit();    			// Richiede alla stazione il permesso di uscire dalla stessa (non è detto che serva, la priorità è data dalla stazione che fa uscire i treni dal parcheggio)
+    void request(); 					// (richiedere binario sia banchina che transito) void perchè possono modificare le variabili membro
+    void request_exit();    			// Richiede alla stazione il permesso di uscire dalla stessa (non è detto che serva, la priorità è data dalla stazione che fa uscire i treni dal parcheggio)
     void arrived();								// Funzione interna invocata dal treno stesso per annunciare il suo arrivo in una stazione
 };
 
