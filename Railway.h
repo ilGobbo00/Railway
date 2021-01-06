@@ -62,13 +62,14 @@ public:
 
     std::string station_name() const;				// Restituisce il nome della stazione
     int distance() const;							// Restituisce la distanza della stazione dall'origine
-    int since_train() const;						// Restituisce il numero di minuti trascorsi dall'ultima partenza della stazione
+    int haltTimer() const;						   // Restituisce il numero di minuti trascorsi dall'ultima partenza della stazione
     Station* next_stat() const;						// Restituisce il puntatore alla prossima stazione
     Station* prev_stat() const;						// Restituisce il puntatore alla stazione precedente (usato per i treni reverse)
 
     virtual int answer(Train* t) = 0; 				// (Interazione con stazione) -1: binario non disponibile (vai in park, chiedi binario di nuovo dopo), >=0 n. binario (ogni ciclo: partenze, richiesta e risposta)
     virtual bool answer_exit(Train* t) = 0;		    // (Con treno sui binari) TRUE: partenza consentita, FALSE: stazionamento
     void announce(Train* t) const;					// Il metodo comunica l'arrivo. Nel metodo: si restituisce al flusso generale il messaggio di treno arrivato in stazione.
+    void update();                              // AGGIUNTO 06-1 9:45 Metodo con cui "far passare il tempo" in stazione. Verrà invocato da Railway nella parte inziale d'ogni minuto, PRIMA di verifiche varie/avanzamento treni.
 
     virtual ~Station();
 
@@ -83,7 +84,7 @@ protected:
     int distance_;									// Distanza dalla stazione primaria
     Station* next_stat_;							// Punta alla stazione sucessiva per poterlo comunicare ai treni che dovranno partire
     Station* prev_stat_;							// Punta alla precedente per il reverse
-    int since_train_;								// Minuti passati dall'ultima partenza
+    int haltTimer_;								// Minuti di fermo stazione (caricato da partenze o transiti, quando >0 ferma partenze)
     Railway* central_railw_; 						// Per avere il tempo corrente mi serve il riferimento al rail
 };
 
