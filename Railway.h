@@ -132,7 +132,7 @@ public:
     double curr_spd() const;					// Velocità corrente: solitamente massima, altrimenti velocità del treno davanti, altrimenti gli 80km/h
     void set_curr_spd(double val);				// Imposta velocità corrente
     double current_km() const;					// Distanza percosa dalla stazione iniziale (o finale nel caso di reverse)
-    std::string advance_train();				// Calcolo del km al prossimo minuto. Aggiorna stato
+    void advance_train();				// Calcolo del km al prossimo minuto. Aggiorna stato
     Station* curr_stat() const;					// Ritorna il puntatore alla stazione dove risiede
     Station* next_stat() const;					// Ritorna il puntatore alla prossima stazione
     const std::vector<int> & arrivals() const;		    // Ritorna il riferimento al vettore arrivals_ (non è detto che serva)
@@ -174,7 +174,6 @@ public:
 private:
     void request();		    			// (richiedere binario sia banchina che transito) void perchè possono modificare le variabili membro
     void request_exit();	    		// Richiede alla stazione il permesso di uscire dalla stessa (non è detto che serva, la priorità è data dalla stazione che fa uscire i treni dal parcheggio)
-    void arrived();								// Funzione interna invocata dal treno stesso per annunciare il suo arrivo in una stazione
 };
 
 class Fast : public Train{
@@ -184,7 +183,6 @@ public:
 private:
     void request(); 					// (richiedere binario sia banchina che transito) void perchè possono modificare le variabili membro
     void request_exit();    			// Richiede alla stazione il permesso di uscire dalla stessa (non è detto che serva, la priorità è data dalla stazione che fa uscire i treni dal parcheggio)
-    void arrived();								// Funzione interna invocata dal treno stesso per annunciare il suo arrivo in una stazione
 };
 
 class SuperFast : public Train{
@@ -194,7 +192,6 @@ public:
 private:
     void request();					// (richiedere binario sia banchina che transito) void perchè possono modificare le variabili membro
     void request_exit();			// Richiede alla stazione il permesso di uscire dalla stessa (non è detto che serva, la priorità è data dalla stazione che fa uscire i treni dal parcheggio)
-    void arrived();								// Funzione interna invocata dal treno stesso per annunciare il suo arrivo in una stazione
 };
 
 #endif
