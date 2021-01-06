@@ -171,29 +171,29 @@ protected:
 
 class Regional : public Train{
 public:
-    Regional(std::string number, bool rev, double max, Station* curr, std::vector<int> times, Railway* rail);
+    Regional(std::string number, bool rev, Station* curr, std::vector<int> times, Railway* rail);
     ~Regional();
 private:
-    void request();		    			// (richiedere binario sia banchina che transito) void perchè possono modificare le variabili membro
-    void request_exit();	    		// Richiede alla stazione il permesso di uscire dalla stessa (non è detto che serva, la priorità è data dalla stazione che fa uscire i treni dal parcheggio)
+//    void request();		    			// (richiedere binario sia banchina che transito) void perchè possono modificare le variabili membro
+//    void request_exit();	    		// Richiede alla stazione il permesso di uscire dalla stessa (non è detto che serva, la priorità è data dalla stazione che fa uscire i treni dal parcheggio)
 };
 
 class Fast : public Train{
 public:
-    Fast(std::string number, bool rev, double max, Station* curr, std::vector<int> times, Railway* rail);
+    Fast(std::string number, bool rev, Station* curr, std::vector<int> times, Railway* rail);
     ~Fast();
 private:
-    void request(); 					// (richiedere binario sia banchina che transito) void perchè possono modificare le variabili membro
-    void request_exit();    			// Richiede alla stazione il permesso di uscire dalla stessa (non è detto che serva, la priorità è data dalla stazione che fa uscire i treni dal parcheggio)
+//    void request(); 					// (richiedere binario sia banchina che transito) void perchè possono modificare le variabili membro
+//    void request_exit();    			// Richiede alla stazione il permesso di uscire dalla stessa (non è detto che serva, la priorità è data dalla stazione che fa uscire i treni dal parcheggio)
 };
 
 class SuperFast : public Train{
 public:
-    SuperFast(std::string number, bool rev, double max, Station* curr, std::vector<int> times, Railway* rail);
+    SuperFast(std::string number, bool rev, Station* curr, std::vector<int> times, Railway* rail);
     ~SuperFast();
 private:
-    void request();					// (richiedere binario sia banchina che transito) void perchè possono modificare le variabili membro
-    void request_exit();			// Richiede alla stazione il permesso di uscire dalla stessa (non è detto che serva, la priorità è data dalla stazione che fa uscire i treni dal parcheggio)
+//    void request();					// (richiedere binario sia banchina che transito) void perchè possono modificare le variabili membro
+//    void request_exit();			// Richiede alla stazione il permesso di uscire dalla stessa (non è detto che serva, la priorità è data dalla stazione che fa uscire i treni dal parcheggio)
 };
 
 #endif
