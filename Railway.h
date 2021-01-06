@@ -77,8 +77,8 @@ protected:
     Station(std::string name, int distance, Station* prev, Railway* rail);
 
     std::string station_name_;						// Nome della stazione
-    std::vector<Train*> platforms;					// Binari passeggeri e transito andata
-    std::vector<Train*> platforms_reverse;		    // Binari passeggeri e transito ritorno
+    std::vector<Train*> platforms[2];					// Binari passeggeri e transito andata
+    std::vector<Train*> platforms_reverse[2];		// Binari passeggeri e transito ritorno
     std::vector<Train*> park_;						// (Binari) Parcheggio andata
     std::vector<Train*> park_reverse_;				// (Binari) Parcheggio ritorno
     int distance_;									// Distanza dalla stazione primaria
