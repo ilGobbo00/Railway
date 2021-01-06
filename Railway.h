@@ -154,10 +154,10 @@ protected:
     const double max_spd_;						// km/min
     double curr_spd_;							// km/min
     double curr_km_;							// Distanza percosa dalla stazione iniziale (o finale nel caso di reverse)
-    Station* prev_stat_;                        // Utilizzato per discriminare tra treni in arrivo o in partenza da una stazione
+//    Station* prev_stat_;                          // Utilizzato per discriminare tra treni in arrivo o in partenza da una stazione
     Station* curr_stat_;						// nullptr quando parte dalla stazione (e quindi sta viaggiando) oppure è nel parcheggio
     Station* next_stat_;						// Puntatore alla prossima stazione di arrivo, è nullptr nel caso in cui sia al capolinea
-    const std::vector<int> arrivals_; 				// Orari in cui io arrivo alle stazioni
+    const std::vector<int> arrivals_; 			// Orari in cui io arrivo alle stazioni
     int delay_;									// anticipo = ritardo negativo
     int wait_count_;							// countdown d'attesa del treno prima che parta, viene assegnato dalla stazione
     int status_; 								// 0 Mov Normale, 1 Mov Staz, 2 Binario, 3 Park, 4 Fine corsa
