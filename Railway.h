@@ -100,19 +100,15 @@ public:
     Principal(std::string name, int distance, Station* prev, Railway* rail);
 
     int answer(Train* t); 							// (Interazione con stazione) -1: binario non disponibile (vai in park, chiedi binario di nuovo dopo), >=0 n. binario (ogni ciclo: partenze, richiesta e risposta)
-    bool answer_exit(Train* t);						// (Con treno sui binari) TRUE: partenza consentita, FALSE: stazionamento
 
     ~Principal();
 };
 
 class Secondary : public Station{					// Il binario di transito è dato dal diverso comportamento delle stazioni di tipo Principal e Secondary
-    //      (perchè nel secondo caso lasciamo passare il treno transito facendo aspettare gli altri)
-public:
+public:                                         // (perchè nel secondo caso lasciamo passare il treno transito facendo aspettare gli altri)
     Secondary(std::string name, int distance, Station* prev, Railway* rail);
 
-    int answer(Train* t); 							// (Interazione con stazione) -1: binario non disponibile (vai in park, chiedi binario di nuovo dopo), >=0 n. binario
-    //      (ogni ciclo: partenze, richiesta e risposta)
-    bool answer_exit(Train* t);						// (Con treno sui binari) TRUE: partenza consentita, FALSE: stazionamento
+    int answer(Train* t); 							// (Interazione con stazione) -1: binario non disponibile (vai in park, chiedi binario di nuovo dopo), >=0 n. binario (ogni ciclo: partenze, richiesta e risposta)
 
     ~Secondary();
 };
