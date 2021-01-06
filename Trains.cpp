@@ -24,10 +24,23 @@
 using std::cout;
 using std::vector;
 
+enum trainState{
+    normalMove = 0,
+    stationMove = 1,
+    platformStation = 2,
+    park = 3,
+    endReached = 4
+};
+
+enum stationRequest{
+    invalid = -3,
+    transit = -2,
+    reject = -1
+};
 // ===== CLASSE TRAIN =====
 Train::Train(std::string number, bool rev, double max, Station* curr, std::vector<int> times, Railway* rail)
         : train_num_{number}, reverse_{rev}, max_spd_{max},  arrivals_{times}, delay_{0}, wait_count_{0},
-          status_{2}, time_arrival_next_stat_{1}, last_request_{-3}, central_railw_{rail}
+          status_{platformStation}, time_arrival_next_stat_{1}, last_request_{invalid}, central_railw_{rail}
 {
     curr_km_ = curr -> distance();
     next_stat_ = curr -> next_stat();
@@ -35,20 +48,45 @@ Train::Train(std::string number, bool rev, double max, Station* curr, std::vecto
 
 void Train::advance_train() {                   // Calcolo del km al prossimo minuto. Aggiorna stato
     switch(status_){
-        case 0:
+        case normalMove:                                 // Movimento Normale
+            if(!reverse_) {
+                curr_km_ += curr_spd_ / 60;
+                if (curr_km_ >= next_stat_->distance() - 20) {   // Appena ha superato il limite di 20km (Non dovrebbe essere necessario currkm < next_station.distance)
+                    if(curr_km_ < next_stat_->distance() - 5)
+                        if(last_request_ != invalid)
+                            last_request_ = next_stat_->answer(this);
+                    else {
+
+                    }
+                }
+            }
             break;
-        case 1:
+        case stationMove:                                 // Movimento stazione
+        // Imposto wait_count_ = 5 se arrivo in stazione
             break;
-        case 2:
+        case platformStation:                                 // Binario nella stazione
+//            if(!reverse_){
+                if(wait_count_ <= 0 && central_railw_->curr_time() >= arrivals_[0]){    // Partenza del treno
+                    if(curr_stat_->answer_exit(this)){
+                        curr_spd_ = max_spd_;
+                        !reverse_ ? next_stat_ = curr_stat_->next_stat() : next_stat_ = curr_stat_->prev_stat();
+                        curr_stat_ = nullptr;
+                        status_ = normalMove;
+                    }
+//                }
+//            }else{}
+            wait_count_--;
             break;
-        case 3:
+        case park:                                 // Parcheggio
             break;
-        case 4:
+        case endReached:                                 // Fine corsa
             break;
         default:
             throw std::logic_error("Invalid status");
     }
 }
+
+
 
 std::string Train::train_num() const {              // Numero del treno
     return train_num_;
