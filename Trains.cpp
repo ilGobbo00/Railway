@@ -51,35 +51,18 @@ Train::Train(std::string number, bool rev, double max, Station* curr, std::vecto
 void Train::advance_train() {                   // Calcolo del km al prossimo minuto. Aggiorna stato
     switch(status_){
         case normalMove:                                 // Movimento Normale
-            if(!reverse_) {
-                curr_km_ += curr_spd_ / 60;                                 // Avanzamento treno
-                if (curr_km_ >= next_stat_->distance() - 20) {              // Appena ha superato il limite di 20km (Non dovrebbe essere necessario currkm < next_station.distance)
-                    if(curr_km_ < next_stat_->distance() - 5) {             // Treno tra i 20km e i 5km prima
-                        if(last_request_ == invalid)
-                            last_request_ = next_stat_->answer(this);    // Il treno continua a chiedere cosa deve fare finchè non gli viene data una risposta esaustiva
-                    }else {                                                 // Treno dentro i 5km prima (non può essere last_request = invalid
-                        curr_km_ = next_stat_->distance() - 5;              // Appena sfora i 5km lo riporta indietro
-                        if(last_request_ = reject){
-                            curr_spd_ = 0;
-                            status_ = park;
-                        }else
-                            status_ = stationMove;
-                    }
-                }
-            }else{
-                curr_km_ -= curr_spd_ / 60;
-                if (curr_km_ <= next_stat_->distance() + 20) {              // Appena ha superato il limite di 20km (Non dovrebbe essere necessario currkm < next_station.distance)
-                    if(curr_km_ > next_stat_->distance() + 5) {             // Treno tra i 20km e i 5km prima
-                        if(last_request_ == invalid)
-                            last_request_ = next_stat_->answer(this);    // Il treno continua a chiedere cosa deve fare finchè non gli viene data una risposta esaustiva
-                    }else {                                                 // Treno dentro i 5km prima (non può essere last_request = invalid
-                        curr_km_ = next_stat_->distance() + 5;              // Appena sfora i 5km lo riporta indietro
-                        if(last_request_ = reject){
-                            curr_spd_ = 0;
-                            status_ = park;
-                        }else
-                            status_ = stationMove;
-                    }
+            !reverse_ ? curr_km_ += curr_spd_ / 60 : curr_km_ -= curr_spd_ / 60;                                // Avanzamento treno
+            if ((curr_km_ >= next_stat_->distance() - 20 && !reverse_) && (curr_km_ <= next_stat_->distance() + 20 && reverse_)) {              // Appena ha superato il limite di 20km (Non dovrebbe essere necessario currkm < next_station.distance)
+                if((curr_km_ < next_stat_->distance() - 5 && !reverse_) && (curr_km_ > next_stat_->distance() + 5 && reverse_)) {             // Treno tra i 20km e i 5km prima
+                    if(last_request_ == invalid)
+                        last_request_ = next_stat_->answer(this);    // Il treno continua a chiedere cosa deve fare finchè non gli viene data una risposta esaustiva
+                }else {                                                 // Treno dentro i 5km prima (non può essere last_request = invalid
+                    !reverse_ ? curr_km_ = next_stat_->distance() - 5 : curr_km_ = next_stat_->distance() + 5;              // Appena sfora i 5km lo riporta indietro
+                    if(last_request_ = reject){
+                        curr_spd_ = 0;
+                        status_ = park;
+                    }else
+                        status_ = stationMove;
                 }
             }
             break;
