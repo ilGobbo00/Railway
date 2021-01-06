@@ -163,7 +163,6 @@ protected:
     int wait_count_;							// countdown d'attesa del treno prima che parta, viene assegnato dalla stazione
     int status_; 								// 0 Mov Normale, 1 Mov Staz, 2 Binario, 3 Park, 4 Fine corsa
     int time_arrival_next_stat_;                // Orario in cui il treno dovrebbe arrivare alla stazione (indice del vettore arrivals
-    int time_arrival_next_stat_reverse_;        // Orario in cui il treno dovrebbe arrivare alla stazione (indice del vettore arrivals
     int last_request_;                          // Risposta dall'utlima richiesta (-2 transito, -1 rifiutata, -3 default, >=0 num binario)
     Railway* central_railw_; 					// Per avere il tempo corrente mi serve il riferimento al rail
 };
