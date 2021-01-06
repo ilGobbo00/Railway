@@ -17,8 +17,12 @@
 - Nessun controllo sulla distanza tra treni che sono compresi nel parcheggio
 */
 
+#ifndef Railway_h
+#define Railway_h
+
 
 #include <iostream>
+#include <vector>
 
 class Railway;
 class Station;
@@ -58,7 +62,7 @@ public:
 
     std::string station_name() const;				// Restituisce il nome della stazione
     int distance() const;							// Restituisce la distanza della stazione dall'origine
-    int since_train_() const;						// Restituisce il numero di minuti trascorsi dall'ultima partenza della stazione
+    int since_train() const;						// Restituisce il numero di minuti trascorsi dall'ultima partenza della stazione
     Station* next_stat() const;						// Restituisce il puntatore alla prossima stazione
     Station* prev_stat() const;						// Restituisce il puntatore alla stazione precedente (usato per i treni reverse)
 
@@ -185,8 +189,7 @@ private:
     void arrived();								// Funzione interna invocata dal treno stesso per annunciare il suo arrivo in una stazione
 };
 
-
-
+#endif
 
 
 
