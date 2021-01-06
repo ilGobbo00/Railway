@@ -87,6 +87,10 @@ protected:
     Station* prev_stat_;							// Punta alla precedente per il reverse
     int haltTimer_;								// Minuti di fermo stazione (caricato da partenze o transiti, quando >0 ferma partenze)
     Railway* central_railw_; 						// Per avere il tempo corrente mi serve il riferimento al rail
+   
+    double getPriority(Train* t) const;             // Restituisce priorità treno
+  	 bool busy() const;                              // Se stazione è piena in senso andata
+  	 bool busyR() const;                             // Se stazione è piena in senso ritorno
 };
 
 class Principal : public Station{
