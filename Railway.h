@@ -84,7 +84,7 @@ protected:
     int distance_;									// Distanza dalla stazione primaria
     Station* next_stat_;							// Punta alla stazione sucessiva per poterlo comunicare ai treni che dovranno partire
     Station* prev_stat_;							// Punta alla precedente per il reverse
-    int since_train_;								// Minuti passati dall'ultima partenza
+    int haltTimer;								// Minuti di fermo stazione (caricato da partenze o transiti, quando >0 ferma partenze)
     Railway* central_railw_; 						// Per avere il tempo corrente mi serve il riferimento al rail
 };
 
