@@ -138,7 +138,8 @@ public:
     void set_wait_count(int min);				// Imposta il countdown d'attesa (in qualsiasi situazione)
     int status() const;							// Ritorna lo stato del treno (0 movimento normale, 1 movimento nei pressi della stazione, 2 nel binario, 3 nel parcheggio, 4 capolinea)
     void set_status(int status);				// Imposta lo stato del treno
-
+    bool is_slowing();                          // Ritorna se il treno sta rallentando qualcuno
+    void set_slowing(bool is_slowing);          // Impostare il caso in cui il treno stia rallentando qualcuno
     virtual ~Train();
 
 protected:
@@ -150,6 +151,7 @@ protected:
     virtual void arrived()=0;								// Funzione interna invocata dal treno stesso per annunciare il suo arrivo in una stazione
 
     std::string train_num_;						// Numero del treno
+    bool is_slowing_;                           // Controllo se il treno sta rallentando un altro treno
     bool reverse_;								// True per i treni in ritorno
     const double max_spd_;						// km/min
     double curr_spd_;							// km/min
