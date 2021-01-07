@@ -44,23 +44,23 @@ enum stationRequest{
 
 // ===== CLASSE TRAIN =====
 Train::Train(std::string number, bool rev, double max, Station* curr, std::vector<int> times, Railway* rail)
-        : train_num_{number}, reverse_{rev}, max_spd_{max}, curr_spd_{0}, /*prev_stat_{curr},*/ arrivals_{times}, delay_{0},
+        : train_num_{number}, reverse_{rev}, max_spd_{max}, curr_spd_{0}, curr_stat_{curr}, arrivals_{times}, delay_{0},
         wait_count_{arrivals_[0]}, status_{platformStation}, time_arrival_next_stat_{1}, last_request_{invalid}, central_railw_{rail}
 {
-    curr_km_ = curr -> distance();
-    next_stat_ = curr -> next_stat();
+    curr_km_ = curr_stat_ -> distance();                                                                                                // Se il treno fa il percorso opposto allora ha il massimo dei km che verranno decrementati
+//    !reverse_ ? next_stat_ = curr_stat_ -> next_stat() : next_stat_ = curr_stat_ -> prev_stat();                                        // (Ripetizione di platformStation) La prossima stazione dipende se il treno va avanti o nella direzione opposta
 }
 
 void Train::advance_train() {                                                                                                           // Calcolo del km al prossimo minuto. Aggiorna stato
     switch (status_) {
         case normalMove:                                                                                                                // Movimento Normale
-            !reverse_ ? curr_km_ += curr_spd_ / 60 : curr_km_ -= curr_spd_ / 60;                                                         // Avanzamento treno
+            !reverse_ ? curr_km_ += curr_spd_ / 60 : curr_km_ -= curr_spd_ / 60;                                                        // Avanzamento treno
             if ((!reverse_ && curr_km_ >= next_stat_->distance() - 20) || (reverse_ && curr_km_ <= next_stat_->distance() + 20)) {      // Appena ha superato il limite di 20km (Non dovrebbe essere necessario currkm < next_station.distance)
-                if(max_spd_ >= 160)                                                                                                     // Per evitare collisioni usciti dalla stazione appena prima del blocco delle partenze è necessario
+                if(curr_spd_ > 190)                                                                                                     // Per evitare collisioni usciti dalla stazione appena prima del blocco delle partenze è necessario
                     curr_spd_ = 190;                                                                                                    //  limitare la velocità dei treni il transdito a 190km/h
                 if ((!reverse_ && curr_km_ < next_stat_->distance() - 5) || (reverse_ && curr_km_ > next_stat_->distance() + 5)) {      // Treno tra i 20km e i 5km prima
                     if (last_request_ == invalid) {                                                                                     // Il treno continua a chiedere cosa deve fare finchè non gli viene data una risposta esaustiva
-                        last_request_ = next_stat_->answer(this);
+                        last_request_ = next_stat_->request(this);
                         if(last_request_ >= 0) last_request_ = to_platform;                                                             // Se mi restituisce un binario pongo 0 = to_platform
                     }
                 }else {                                                                                                                 // Treno dentro i 5km prima (non può essere last_request = invalid)
@@ -108,24 +108,30 @@ void Train::advance_train() {                                                   
         case platformStation:                                                                                       // Binario nella stazione, sicuramente avrà una stazione successiva altrimenti sarebbe nello strato endReached
             if (wait_count_ <= 0) {                                                                                 // Partenza del treno (prima partenza gestita nell'assegnamento di wait_count nel costruttore)
                 if((!reverse_ && curr_stat_ -> next_stat() != nullptr) || (reverse_ && curr_stat_ -> prev_stat() != nullptr)) {
-                    if (curr_stat_->answer_exit(this)) {
+                    if (curr_stat_->request_exit(this)) {
                         curr_spd_ = 190;
                         !reverse_ ? next_stat_ = curr_stat_->next_stat() : next_stat_ = curr_stat_->prev_stat();
                         status_ = stationMove;
-                        time_arrival_next_stat_++;
+                        if((!reverse_ && curr_stat_ -> prev_stat() != nullptr)||(reverse_ && curr_stat_->next_stat() != nullptr)) // Se non sono all'inizio della mia corsa (inversa o non) non aumento l'indice
+                            time_arrival_next_stat_++;                                                                            //   del riferimento dell'orario
                     }
-                }else
+                } else {                                                                                             // Se la stazione successiva è nullptr vuol dire che è al capolinea
                     status_ = endReached;
-            }
-            wait_count_--;
+                    arrived();
+                }
+            }else                                                                                                   // Decremento il tempo d'attesa finchè non ragginge lo 0
+                wait_count_--;
             break;
 
         case park:                                 // Parcheggio
             // last req = invalid
+            // Anche i treni di transito possono andare in parcheggio
             break;
+
         case endReached:                                 // Fine corsa
-            arrived();
+
             break;
+
         default:
             throw std::logic_error("Invalid status in class Train\n");
     }
