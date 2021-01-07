@@ -147,6 +147,7 @@ protected:
 
 //    virtual void request() = 0;					// (richiedere binario sia banchina che transito) void perchè possono modificare le variabili membro
 //    virtual void request_exit() = 0;			// Richiede alla stazione il permesso di uscire dalla stessa (non è detto che serva, la priorità è data dalla stazione che fa uscire i treni dal parcheggio)
+    void delay_calc();
     virtual void arrived()=0;								// Funzione interna invocata dal treno stesso per annunciare il suo arrivo in una stazione
 
     std::string train_num_;						// Numero del treno
