@@ -2,7 +2,7 @@
 
 /*
 - Il sistema centrale si accorge delle collisioni perchè è lui che ha accesso a tutti i treni e va a modificare la velocità del treno da rallentare a meno che uno dei due non is trovi in prossimità
-   della stazione (zona lenta). Il treno che causa il ritardo verrà impostato nello stato "Rallentamento" che lo obbliga a NON prenotare binario perchè andrà obbligatoriamente a sostare 5 min in parcheggio per far avvenire sorpasso.
+   della stazione (zona lenta). Il treno che causa il ritardo verrà impostato nello stato "Rallentamento"  con cui andrà obbligatoriamente a sostare 5 min in parcheggio per far avvenire sorpasso.
 - Se il treno (che deve caricare/scaricare passeggeri) durante l'andatura di crocera supera la piazzola di sosta nel minuto il treno verrà riportato alla piazzola per poi riprendere a 80 km/h nel minuto successivo
 - Le partenze dei treni vengono svolte prima del passaggio dei treni dal parcheggio alla stazione
 - Prima di far andare un treno in arrivo (prima dei 5km) in un binario libero devo assicurarmi che non ci sia un treno della piazzola che stia uscendo per andare su un binario libero: gestito dall'assegnazione dei binari, che viene effettuata al -20° km e successivamente al -5°
