@@ -62,6 +62,7 @@ public:
     Station& operator=(Station&& s) = delete;		//
 
     std::string station_name() const;				   // Restituisce il nome della stazione
+    std::string announcements;                     // Stringa per comunicazioni
     int distance() const;							      // Restituisce la distanza della stazione dall'origine
     int getHaltTimer() const;						      // Restituisce il numero di minuti trascorsi dall'ultima partenza della stazione
     Station* next_stat() const;						   // Restituisce il puntatore alla prossima stazione
@@ -69,8 +70,7 @@ public:
 
     virtual int request(Train* t) = 0; 			   // (Interazione con stazione) -2: transito, -1: binario non disponibile (vai in park, chiedi binario di nuovo dopo), >=0 n. binario (ogni ciclo: partenze, richiesta e risposta)
     bool request_exit(Train* t);		               // (Con treno sui binari) TRUE: partenza consentita, FALSE: stazionamento
-    void announce(Train* t) const;					   // Il metodo comunica l'arrivo. Nel metodo: si restituisce al flusso generale il messaggio di treno arrivato in stazione.
-    void update();                                 // Metodo con cui "far passare il tempo" in stazione. Verrà invocato da Railway nella parte inziale d'ogni minuto, PRIMA di verifiche varie/avanzamento treni.
+    std::string update();                          // Metodo con cui "far passare il tempo" in stazione. Verrà invocato da Railway nella parte inziale d'ogni minuto, PRIMA di verifiche varie/avanzamento treni. Riporta aggiornamenti.
 
     virtual ~Station();
 
