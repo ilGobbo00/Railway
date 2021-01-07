@@ -67,7 +67,7 @@ public:
     Station* next_stat() const;						// Restituisce il puntatore alla prossima stazione
     Station* prev_stat() const;						// Restituisce il puntatore alla stazione precedente (usato per i treni reverse)
 
-    virtual int answer(Train* t) = 0; 				// (Interazione con stazione) -1: binario non disponibile (vai in park, chiedi binario di nuovo dopo), >=0 n. binario (ogni ciclo: partenze, richiesta e risposta)
+    virtual int answer(Train* t) = 0; 				// (Interazione con stazione) -2: transito, -1: binario non disponibile (vai in park, chiedi binario di nuovo dopo), >=0 n. binario (ogni ciclo: partenze, richiesta e risposta)
     bool answer_exit(Train* t);		    // (Con treno sui binari) TRUE: partenza consentita, FALSE: stazionamento
     void announce(Train* t) const;					// Il metodo comunica l'arrivo. Nel metodo: si restituisce al flusso generale il messaggio di treno arrivato in stazione.
     void update();                              // AGGIUNTO 06-1 9:45 Metodo con cui "far passare il tempo" in stazione. Verrà invocato da Railway nella parte inziale d'ogni minuto, PRIMA di verifiche varie/avanzamento treni.
@@ -154,7 +154,6 @@ protected:
     const double max_spd_;						// km/min
     double curr_spd_;							// km/min
     double curr_km_;							// Distanza percosa dalla stazione iniziale (o finale nel caso di reverse)
-//    Station* prev_stat_;                          // Utilizzato per discriminare tra treni in arrivo o in partenza da una stazione
     Station* curr_stat_;						// nullptr quando parte dalla stazione (e quindi sta viaggiando) oppure è nel parcheggio
     Station* next_stat_;						// Puntatore alla prossima stazione di arrivo, è nullptr nel caso in cui sia al capolinea
     const std::vector<int> arrivals_; 			// Orari in cui io arrivo alle stazioni
