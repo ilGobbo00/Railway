@@ -86,6 +86,7 @@ protected:
     Station* next_stat_;							// Punta alla stazione sucessiva per poterlo comunicare ai treni che dovranno partire
     Station* prev_stat_;							// Punta alla precedente per il reverse
     int haltTimer;								// Minuti di fermo stazione (caricato da partenze o transiti, quando >0 ferma partenze)
+    int haltTimerR;								// Minuti di fermo stazione (caricato da partenze o transiti, quando >0 ferma partenze) ritorno
     Railway* central_railw_; 						// Per avere il tempo corrente mi serve il riferimento al rail
    
     double getPriority(Train* t) const;             // Restituisce priorità treno
