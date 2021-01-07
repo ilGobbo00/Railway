@@ -138,7 +138,7 @@ public:
     void set_wait_count(int min);				// Imposta il countdown d'attesa (in qualsiasi situazione)
     int status() const;							// Ritorna lo stato del treno (0 movimento normale, 1 movimento nei pressi della stazione, 2 nel binario, 3 nel parcheggio, 4 capolinea)
     void set_status(int status);				// Imposta lo stato del treno
-    bool is_slowing();                          // Ritorna se il treno sta rallentando qualcuno
+    bool is_slowing() const;                          // Ritorna se il treno sta rallentando qualcuno
     void set_slowing(bool is_slowing);          // Impostare il caso in cui il treno stia rallentando qualcuno
     virtual ~Train();
 
