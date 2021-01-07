@@ -96,6 +96,8 @@ protected:
     double getMaxPPR() const;                   // Ricava la priorità massima fra i treni in parcheggio (ritorno)
     void removeParking(Train* t);               // Rimuove treno dal parcheggio (se presente)
     void removeParkingR(Train* t);              // Rimuove treno dal parcheggio (se presente) ritorno
+    int assignPlatform(Train* t);               // Funzione ausiliaria per assegnazione binari
+    int assignPlatformR(Train* t);              // Funzione ausiliaria per assegnazione binari (ritorno)
 };
 
 class Principal : public Station{
