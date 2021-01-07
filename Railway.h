@@ -91,8 +91,8 @@ protected:
     double getPriority(Train* t) const;             // Restituisce priorità treno
   	 bool busy() const;                              // Se stazione è piena in senso andata
   	 bool busyR() const;                             // Se stazione è piena in senso ritorno
-    double Station::getMaxPP() const;               // Ricava la priorità massima fra i treni in parcheggio
-    double Station::getMaxPPR() const;              // Ricava la priorità massima fra i treni in parcheggio (ritorno)
+    double getMaxPP() const;               // Ricava la priorità massima fra i treni in parcheggio
+    double getMaxPPR() const;              // Ricava la priorità massima fra i treni in parcheggio (ritorno)
 };
 
 class Principal : public Station{
