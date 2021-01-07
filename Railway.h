@@ -152,6 +152,7 @@ protected:
     virtual void delay_calc();
     virtual void arrived()=0;								// Funzione interna invocata dal treno stesso per annunciare il suo arrivo in una stazione
     virtual void calculate_normalMotion_status_delay();     // Funzione interna invocata quando bisogna calcolare il ritardo in base al tipo di treno
+    int changed_dilay();
 
     std::string train_num_;						// Numero del treno
     bool is_slowing_;                           // Controllo se il treno sta rallentando un altro treno
@@ -163,6 +164,7 @@ protected:
     Station* next_stat_;						// Puntatore alla prossima stazione di arrivo, è nullptr nel caso in cui sia al capolinea
     const std::vector<int> arrivals_; 			// Orari in cui io arrivo alle stazioni
     int delay_;									// anticipo = ritardo negativo
+    int old_delay_;
     int wait_count_;							// countdown d'attesa del treno prima che parta, viene assegnato dalla stazione
     int status_; 								// 0 Mov Normale, 1 Mov Staz, 2 Binario, 3 Park, 4 Fine corsa
     int time_arrival_next_stat_;                // Orario in cui il treno dovrebbe arrivare alla stazione (indice del vettore arrivals

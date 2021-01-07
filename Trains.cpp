@@ -44,10 +44,16 @@ enum stationRequest{
     to_platform = 0,
 };
 
+enum delayStatus{
+    aumentato = 1,
+    uguale = 0,
+    diminuito = -1
+};
+
 // ===== CLASSE TRAIN =====
 Train::Train(std::string number, bool rev, double max, Station* curr, std::vector<int> times, Railway* rail)
-        : train_num_{number}, is_slowing_{false}, reverse_{rev}, max_spd_{max}, curr_spd_{0}, curr_stat_{curr}, arrivals_{times}, delay_{0},
-        wait_count_{arrivals_[0]}, status_{platformStation}, time_arrival_next_stat_{0}, last_request_{invalid}, central_railw_{rail}
+        : train_num_{number}, is_slowing_{false}, reverse_{rev}, max_spd_{max/60}, curr_spd_{0}, curr_stat_{curr}, arrivals_{times}, delay_{0},
+        old_delay_{0}, wait_count_{arrivals_[0]}, status_{platformStation}, time_arrival_next_stat_{0}, last_request_{invalid}, central_railw_{rail}
 {
     curr_km_ = curr_stat_ -> distance();                                                                                                // Se il treno fa il percorso opposto allora ha il massimo dei km che verranno decrementati
     !reverse_ ? next_stat_ = curr_stat_ -> next_stat() : next_stat_ = curr_stat_ -> prev_stat();                                        // (Ripetizione di platformStation) La prossima stazione dipende se il treno va avanti o nella direzione opposta
@@ -56,10 +62,10 @@ Train::Train(std::string number, bool rev, double max, Station* curr, std::vecto
 void Train::advance_train() {                                                                                                           // Calcolo del km al prossimo minuto. Aggiorna stato
     switch (status_) {
         case normalMotion:                                                                                                                // Movimento Normale
-            !reverse_ ? curr_km_ += curr_spd_ / 60 : curr_km_ -= curr_spd_ / 60;                                                        // Avanzamento treno
-            if ((!reverse_ && curr_km_ >= next_stat_->distance() - 20) || (reverse_ && curr_km_ <= next_stat_->distance() + 20)) {      // Appena ha superato il limite di 20km (Non dovrebbe essere necessario currkm < next_station.distance)
-                if(curr_spd_ > 190/60)                                                                                   // Per evitare collisioni usciti dalla stazione appena prima del blocco delle partenze è necessario
-                    curr_spd_ = 190/60;                                                                                                    //  limitare la velocità dei treni il transdito a 190km/h
+            !reverse_ ? curr_km_ += curr_spd_ : curr_km_ -= curr_spd_;                                                        // Avanzamento treno
+            if ((!reverse_ && curr_km_ >= next_stat_->distance() - 20) || (reverse_ && curr_km_ <= next_stat_->distance() + 20)) {      // Appena supera i 20km
+                if(curr_spd_ > 190/60)                                                                                                  // Per evitare collisioni usciti dalla stazione appena prima del blocco
+                    curr_spd_ = 190/60;                                                                                                 //  delle partenze è necessario limitare la velocità dei treni il transdito a 190km/h
                 if((!reverse_ && curr_km_ < next_stat_->distance() - 5) || (reverse_ && curr_km_ > next_stat_->distance() + 5)) {       // Treno tra i 20km e i 5km prima
                     if (last_request_ == invalid) {                                                                                     // Il treno continua a chiedere cosa deve fare finchè non gli viene data una risposta esaustiva
                         delay_calc();
@@ -74,48 +80,36 @@ void Train::advance_train() {                                                   
                     }else{
                         if(last_request_ == to_platform)                                                                                // Se deve andare alla stazione rallenta a 80km/h
                             curr_spd_ = 80/60;
-//                        if(last_request_ == transit && curr_km_ >= next_stat_->distance())                                              // Se deve transitare e ha superato la stazione la prossima stazione sarà la successiva di quella che ha appena superato
-//                            curr_stat_ = curr_stat_->next_stat();                                                                       // Rendo cur_stat_ diverso da nullptr perchè così il caso dopo viene gestito correttamente
                         status_ = stationMotion;
                     }
-
-                    /*if(last_request_ != reject){
-                        if(last_request_ == to_platform)
-                            curr_spd_ = 80;
-                        if(last_request_ == transit)
-                            curr_stat_ = curr_stat_->next_stat();                                                                        // Faccio diventare curr_stat_ != nullptr per farlo avanzare quando passa in stationMotion
-                        status_ = stationMotion;
-                    }else{                                                                                                              // Richiesta di binario rifiutata = vai in parcheggio
-                        !reverse_ ? curr_km_ = next_stat_->distance() - 5 : curr_km_ = next_stat_->distance() + 5;                      // Appena sfora i +/-5km lo riporta indietro/avanti
-                        curr_spd_ = 0;
-                        status_ = park;
-                    }*/
                 }
             }
             break;
 
-        case stationMotion: //TODO: completare il reverse, valutare il caso transit                                                                              // Movimento stazione
-            if(!reverse_) {
-                curr_km_ += curr_spd_ / 60;                                                             // Avanzo con la velocità corrente (190 in caso di transito, 80 in caso di fermata)
-                if(curr_stat_ != nullptr) {                                                             // Se sono partito dalla stazione precedente
-                    if (curr_km_ > curr_stat_->distance() + 5) {                                        // Se sono dopo i 5km della stazione precedente posso andare al massimo
-                        curr_stat_ = nullptr;
-                        curr_spd_ = max_spd_;
-                        status_ = normalMotion;
-                    }                                                                                   // Avanza il giro successivo
-                }else {                                                                                 // Se curr_stat_ == nullptr vuol dire che sono in arrivo (e non sto partendo)
-                    if(last_request_ == to_platform) {
-                        if (curr_km_ >= next_stat_->distance()) {
-                            curr_spd_ = 0;
-                            curr_km_ = next_stat_->distance();
-//                            delay_ = central_railw_->curr_time() - arrivals_[time_arrival_next_stat_];
-                            wait_count_ = 5;
-                            status_ = platformStation;
-                            arrived();
-                        }
+        case stationMotion:                                                                                             // Movimento stazione
+            !reverse_ ? curr_km_ += curr_spd_
+                      : curr_km_ -= curr_spd_;;                                                                     // Avanzo con la velocità corrente (190 in caso di transito, 80 in caso di fermata)
+            if ((!reverse_ && curr_stat_ != nullptr || (reverse_ && curr_km_ < curr_stat_->distance() - 5))) {      // Se sono appena partito dalla stazione precedente
+                if (curr_km_ > curr_stat_->distance() + 5) {                                                        // Se sono dopo i 5km della stazione precedente posso andare al massimo
+                    curr_stat_ = nullptr;
+                    curr_spd_ = max_spd_;
+                    last_request_ = invalid;
+                    status_ = normalMotion;
+                }                                                                                                   // Altrimenti avanza ancora il giro successivo
+            } else {                                                                                                // Se curr_stat_ == nullptr vuol dire che sono in arrivo (e non sto partendo)
+                if (last_request_ == to_platform) {
+                    if ((!reverse_ && curr_km_ >= next_stat_->distance() ||
+                         (reverse_ && curr_km_ <= next_stat_->distance()))) {
+                        curr_spd_ = 0;
+                        curr_km_ = next_stat_->distance();
+                        wait_count_ = 5;
+                        status_ = platformStation;
+                        arrived();
                     }
-                    if(last_request_ == transit && curr_km_ >= next_stat_->distance())                                              // Se deve transitare e ha superato la stazione la prossima stazione sarà la successiva di quella che ha appena superato
-                            curr_stat_ = curr_stat_->next_stat();                                                                   // Rendo cur_stat_ diverso da nullptr perchè così il caso dopo viene gestito correttamente
+                }                                                                                                                                   // Se deve transitare e ha superato la stazione la prossima stazione
+                if ((last_request_ == transit) && (!reverse_ && curr_km_ >= next_stat_->distance()) || (reverse_ && next_stat_->distance())) {      //  sarà la successiva di quella che ha appena superato
+                    curr_stat_ = next_stat_;                                                                                                        // Rendo cur_stat_ diverso da nullptr perchè così il caso
+                    !reverse_ ? next_stat_ = next_stat_->next_stat() : next_stat_ = next_stat_->prev_stat();                                        //  dopo viene gestito correttamente
                 }
             }
             break;
@@ -125,11 +119,10 @@ void Train::advance_train() {                                                   
                 if((!reverse_ && curr_stat_ -> next_stat() != nullptr) || (reverse_ && curr_stat_ -> prev_stat() != nullptr)) {         // Se non sono a fine corsa
                     delay_calc();
                     if(curr_stat_->request_exit(this)) {
-                        curr_spd_ = 80;
+                        curr_spd_ = 80/60;
                         !reverse_ ? next_stat_ = curr_stat_->next_stat() : next_stat_ = curr_stat_->prev_stat();
                         status_ = stationMotion;
-                        //if((!reverse_ && curr_stat_ -> prev_stat() != nullptr)||(reverse_ && curr_stat_->next_stat() != nullptr)) // Se non sono all'inizio della mia corsa (inversa o non) non aumento l'indice
-                            time_arrival_next_stat_++;                                                                            //   del riferimento dell'orario
+                        time_arrival_next_stat_++;                                                                            //   del riferimento dell'orario
                     }else
                         delay_++; // Probabilmente non necessario
                 }else{                                                                                             // Se la stazione successiva è nullptr vuol dire che è al capolinea
@@ -155,10 +148,8 @@ void Train::advance_train() {                                                   
     }
 }
 
-void Train::delay_calc(){               // Essendo nella classe Train questa funzione verrà fatta dai treni che possono saltare le fermate, Regional ha un caso a parte
-    int old_delay = delay_;             // Ritardo di prima
-    std::string change;                 // Stringa per indicare se il ritardo è aumentato o diminuito
-
+void Train::delay_calc(){                                                                                               // Essendo nella classe Train questa funzione verrà fatta dai treni che possono saltare le fermate, Regional ha un caso a parte
+    old_delay_ = delay_;                                                                                                // Ritardo di prima
     switch (status_) {
         case normalMotion:
             calculate_normalMotion_status_delay();
@@ -169,36 +160,38 @@ void Train::delay_calc(){               // Essendo nella classe Train questa fun
             break;
 
         case platformStation:   // Quanto è in ritardo dal partire
-            delay_ = central_railw_->curr_time() - arrivals_[time_arrival_next_stat_] + 5;                                                          // Tempo corrente - tempo in cui dovevo arrivare
-            if((!reverse_ && curr_stat_ -> prev_stat() == nullptr)||(reverse_ && curr_stat_->next_stat() == nullptr))                               // Se sono all'inizio della mia corsa (inversa o non)
+            delay_ = central_railw_->curr_time() - arrivals_[time_arrival_next_stat_] + 5;                              // Tempo corrente - tempo in cui dovevo arrivare
+            if((!reverse_ && curr_stat_ -> prev_stat() == nullptr)||(reverse_ && curr_stat_->next_stat() == nullptr))   // Se sono all'inizio della mia corsa (inversa o non)
                 delay_ - 5;
             break;
 
         case park:
-            delay_ = central_railw_->curr_time() + 3.75 - arrivals_[time_arrival_next_stat_]; // Tempo corrente + il tempo che ci mette ad arrivare in stazione - il tempo a cui dovrebbe arrivare
+            delay_ = central_railw_->curr_time() + 3.75 - arrivals_[time_arrival_next_stat_];                           // Tempo corrente + il tempo che ci mette ad arrivare in stazione - il tempo a cui dovrebbe arrivare
             break;
     }
-    if(status_ != platformStation && old_delay != delay_){
-        old_delay < delay_ ? change = "aumentato" : change = "diminuito";
-        std::string print;
-        print = "Il ritardo del treno " + train_num_ + " e' " + change + " da " + std::to_string(old_delay) + " a " + std::to_string(delay_) + "\n";
-        central_railw_->append(print);
-    }
 }
+
+int Train::changed_dilay(){
+    if(status_ != platformStation && old_delay_ != delay_)
+        return old_delay_ < delay_ ? aumentato : diminuito;
+    else return uguale;
+}
+
 void Train::calculate_normalMotion_status_delay(){
     int station_to_skip = 0;            // Numero di stazioni prima di trovare quella in cui il treno si fermerà
     int normal_motion_distance = 0;     // Distanza che devo percorrere a max_spd_ per andare da una stazione alla successiva (non considerando i 5 km prima e dopo)
-    Station* station_stop = next_stat_; // Riferimento alla prossima stazione
+    int delay_due_to_station = 0;
+    Station* station_stop = next_stat_; // Riferimento alla prossima stazione (salvata nel treno! dopo station_stop punta alla stazione e quindi il reverse cambia il prev_stat() o il next_stat()!
     bool principal = false;             // Variabile per il ciclo while
 
-    while(!principal) {                                                                                          // Controllo finchè non trovo la stazione in cui dovrò fermarmi per calcolare il ritardo
-        if (nullptr == dynamic_cast<Principal *>(station_stop)) {
+    while(!principal) {                                                                                                     // Controllo finchè non trovo la stazione in cui dovrò fermarmi per calcolare il ritardo
+        if (nullptr == dynamic_cast<Principal*>(station_stop)) {
             if(!reverse_) {
-                normal_motion_distance += station_stop->next_stat()->distance() - station_stop->distance() - 25;  // Tutta la distanza tra una stazione e l'altra in cui posso andare a max_spd_
+                normal_motion_distance += station_stop->next_stat()->distance() - station_stop->distance() - 25;            // Tutta la distanza tra una stazione e l'altra in cui posso andare a max_spd_
                 station_stop = station_stop->next_stat();
             }
             else{
-                normal_motion_distance += abs(station_stop->prev_stat()->distance() - station_stop->distance()) - 25;  // Tutta la distanza tra una stazione e l'altra in cui posso andare a max_spd_
+                normal_motion_distance += abs(station_stop->prev_stat()->distance() - station_stop->distance()) - 25;   // Tutta la distanza tra una stazione e l'altra in cui posso andare a max_spd_
                 station_stop = station_stop->prev_stat();
             }
             station_to_skip++;
@@ -209,11 +202,14 @@ void Train::calculate_normalMotion_status_delay(){
      * Prima di arrivare ai -5km dalla stazione: tempo = spazio fino ai -5km dalla stazione / velocità corrente(190km/h)
      * Per ogni stazione (-5km -> +5km) 10km percorsi a 190km/h (3.17km/min). Il tempo per transitare su ogni stazione = 10km / 3.17km/min = 3.16min a stazione
      * Da una stazione alla succesiva avrò la distanza delle due stazioni - 5km dopo la prima stazione e -20km prima della seconda stazione dove posso andare a max_spd_
+     *
+     * Invoco ceil al posto di mettere i valori interi arrotondati per eccesso per poter capire meglio in fase di revisione del codice
      */
-    delay_ = (central_railw_->curr_time() + (abs(next_stat()->distance() - curr_km_) - 5) / curr_spd_+ 3.16 * station_to_skip + normal_motion_distance / max_spd_) - arrivals_[time_arrival_next_stat_];
+    station_to_skip != 0 ? delay_due_to_station = station_to_skip * ceil(3.16) : delay_due_to_station = ceil(3.75);                                                // Se è di transito ma la prossima stazione è una principale devo contare il tempo per fare i 5km a 80km/h
+    delay_ = (central_railw_->curr_time() + ceil((abs(next_stat()->distance() - curr_km_) - 5) / curr_spd_) + delay_due_to_station + normal_motion_distance / max_spd_) - arrivals_[time_arrival_next_stat_];
 }
 void Regional::calculate_normalMotion_status_delay(){
-    delay_ = central_railw_->curr_time() + 3.75 + (abs(next_stat()->distance() - curr_km_) - 5) /curr_spd_ - arrivals_[time_arrival_next_stat_];     // Tempo in cui arriverò dopo errer giunto in stazione - tempo d'arrivo stimato
+    delay_ = central_railw_->curr_time() + ceil(3.75) + ceil((abs(next_stat()->distance() - curr_km_) - 5) /curr_spd_) - arrivals_[time_arrival_next_stat_];     // Tempo in cui arriverò dopo errer giunto in stazione - tempo d'arrivo stimato
 }
 
 std::string Train::train_num() const {              // Numero del treno
@@ -277,7 +273,7 @@ Regional::Regional(std::string number, bool rev, double max, Station* curr, std:
 // ===== CLASSE FAST =====
 Fast::Fast(std::string number, bool rev, double max, Station* curr, std::vector<int> times, Railway* rail);
 //void Fast::arrived(){
-//
+// Il treno veloce
 // }								// Funzione interna invocata dal treno stesso per annunciare il suo arrivo in una stazione
 
 
@@ -285,7 +281,7 @@ Fast::Fast(std::string number, bool rev, double max, Station* curr, std::vector<
 // ===== CLASSE SUPERFAST =====
 SuperFast::SuperFast(std::string number, bool rev, double max, Station* curr, std::vector<int> times, Railway* rail);
 //void SuperFast::arrived(){
-//
+//Il treno alta velocita
 // }								// Funzione interna invocata dal treno stesso per annunciare il suo arrivo in una stazione
 
 
