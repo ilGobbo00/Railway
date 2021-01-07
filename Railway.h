@@ -70,9 +70,7 @@ public:
     virtual int request(Train* t) = 0; 			// (Interazione con stazione) -2: transito, -1: binario non disponibile (vai in park, chiedi binario di nuovo dopo), >=0 n. binario (ogni ciclo: partenze, richiesta e risposta)
     bool request_exit(Train* t);		            // (Con treno sui binari) TRUE: partenza consentita, FALSE: stazionamento
     void announce(Train* t) const;					// Il metodo comunica l'arrivo. Nel metodo: si restituisce al flusso generale il messaggio di treno arrivato in stazione.
-    void update();                              // AGGIUNTO 06-1 9:45 Metodo con cui "far passare il tempo" in stazione. Verrà invocato da Railway nella parte inziale d'ogni minuto, PRIMA di verifiche varie/avanzamento treni.
-
-
+    void update();                              // Metodo con cui "far passare il tempo" in stazione. Verrà invocato da Railway nella parte inziale d'ogni minuto, PRIMA di verifiche varie/avanzamento treni.
 
     virtual ~Station();
 
@@ -87,29 +85,27 @@ protected:
     int distance_;									// Distanza dalla stazione primaria
     Station* next_stat_;							// Punta alla stazione sucessiva per poterlo comunicare ai treni che dovranno partire
     Station* prev_stat_;							// Punta alla precedente per il reverse
-    int haltTimer_;								// Minuti di fermo stazione (caricato da partenze o transiti, quando >0 ferma partenze)
+    int haltTimer;								// Minuti di fermo stazione (caricato da partenze o transiti, quando >0 ferma partenze)
     Railway* central_railw_; 						// Per avere il tempo corrente mi serve il riferimento al rail
    
     double getPriority(Train* t) const;             // Restituisce priorità treno
   	 bool busy() const;                              // Se stazione è piena in senso andata
   	 bool busyR() const;                             // Se stazione è piena in senso ritorno
+    double getMaxPP() const;               // Ricava la priorità massima fra i treni in parcheggio
+    double getMaxPPR() const;              // Ricava la priorità massima fra i treni in parcheggio (ritorno)
 };
 
 class Principal : public Station{
 public:
     Principal(std::string name, int distance, Station* prev, Railway* rail);
-
     int answer(Train* t); 							// (Interazione con stazione) -1: binario non disponibile (vai in park, chiedi binario di nuovo dopo), >=0 n. binario (ogni ciclo: partenze, richiesta e risposta)
-
     ~Principal();
 };
 
 class Secondary : public Station{					// Il binario di transito è dato dal diverso comportamento delle stazioni di tipo Principal e Secondary
 public:                                         // (perchè nel secondo caso lasciamo passare il treno transito facendo aspettare gli altri)
     Secondary(std::string name, int distance, Station* prev, Railway* rail);
-
     int answer(Train* t); 							// (Interazione con stazione) -1: binario non disponibile (vai in park, chiedi binario di nuovo dopo), >=0 n. binario (ogni ciclo: partenze, richiesta e risposta)
-
     ~Secondary();
 };
 
