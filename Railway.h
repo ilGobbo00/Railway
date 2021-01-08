@@ -127,32 +127,30 @@ public:
 
     std::string train_num() const;				// Numero del treno
     bool reverse() const;						// Andata (false) /ritorno (true)
-    double max_spd() const;				// Massima velocità del treno, possibile controllo del tipo di treno
+    double max_spd() const;				        // Massima velocità del treno, possibile controllo del tipo di treno
     double curr_spd() const;					// Velocità corrente: solitamente massima, altrimenti velocità del treno davanti, altrimenti gli 80km/h
     void set_curr_spd(double val);				// Imposta velocità corrente
     double current_km() const;					// Distanza percosa dalla stazione iniziale (o finale nel caso di reverse)
-    void advance_train();				// Calcolo del km al prossimo minuto. Aggiorna stato
+    void advance_train();				        // Calcolo del km al prossimo minuto. Aggiorna stato
     Station* curr_stat() const;					// Ritorna il puntatore alla stazione dove risiede
     Station* next_stat() const;					// Ritorna il puntatore alla prossima stazione
-    const std::vector<int> & arrivals() const;		    // Ritorna il riferimento al vettore arrivals_ (non è detto che serva)
+    const std::vector<int> & arrivals() const;	// Ritorna il riferimento al vettore arrivals_ (non è detto che serva)
     int delay() const;							// Ritorna l'eventuale anticipo/ritardo
     int wait_count() const;						// Ritorna il countdown d'attesa del treno prima che parta, viene assegnato dalla stazione
     void set_wait_count(int min);				// Imposta il countdown d'attesa (in qualsiasi situazione)
     int status() const;							// Ritorna lo stato del treno (0 movimento normale, 1 movimento nei pressi della stazione, 2 nel binario, 3 nel parcheggio, 4 capolinea)
     void set_status(int status);				// Imposta lo stato del treno
-    bool is_slowing() const;                          // Ritorna se il treno sta rallentando qualcuno
+    bool is_slowing() const;                    // Ritorna se il treno sta rallentando qualcuno
     void set_slowing(bool is_slowing);          // Impostare il caso in cui il treno stia rallentando qualcuno
     virtual ~Train();
 
 protected:
     Train(std::string number, bool rev, double max, Station* curr, std::vector<int> times, Railway* rail);
 
-//    virtual void request() = 0;					// (richiedere binario sia banchina che transito) void perchè possono modificare le variabili membro
-//    virtual void request_exit() = 0;			// Richiede alla stazione il permesso di uscire dalla stessa (non è detto che serva, la priorità è data dalla stazione che fa uscire i treni dal parcheggio)
     virtual void delay_calc();
-    virtual void arrived()=0;								// Funzione interna invocata dal treno stesso per annunciare il suo arrivo in una stazione
-    virtual void calculate_normalMotion_status_delay();     // Funzione interna invocata quando bisogna calcolare il ritardo in base al tipo di treno
-    int changed_dilay();
+    virtual void communications();				// Funzione interna invocata dal treno stesso per annunciare il suo arrivo in una stazione
+    virtual void calc_specific_delay();         // Funzione interna invocata quando bisogna calcolare il ritardo in base al tipo di treno
+    std::string changed_delay();
 
     std::string train_num_;						// Numero del treno
     bool is_slowing_;                           // Controllo se il treno sta rallentando un altro treno
@@ -164,7 +162,7 @@ protected:
     Station* next_stat_;						// Puntatore alla prossima stazione di arrivo, è nullptr nel caso in cui sia al capolinea
     const std::vector<int> arrivals_; 			// Orari in cui io arrivo alle stazioni
     int delay_;									// anticipo = ritardo negativo
-    int old_delay_;
+    int old_delay_;                             // Variabile per il controllo della variazione del ritardo
     int wait_count_;							// countdown d'attesa del treno prima che parta, viene assegnato dalla stazione
     int status_; 								// 0 Mov Normale, 1 Mov Staz, 2 Binario, 3 Park, 4 Fine corsa
     int time_arrival_next_stat_;                // Orario in cui il treno dovrebbe arrivare alla stazione (indice del vettore arrivals
@@ -177,8 +175,8 @@ public:
     Regional(std::string number, bool rev, Station* curr, std::vector<int> times, Railway* rail);
     ~Regional();
 private:
-    void arrived();
-    void calculate_normalMotion_status_delay();
+    void specific_comm();
+    void calc_specific_delay();
 };
 
 class Fast : public Train{
@@ -186,7 +184,7 @@ public:
     Fast(std::string number, bool rev, Station* curr, std::vector<int> times, Railway* rail);
     ~Fast();
 private:
-    void arrived();
+    void specific_comm();
 };
 
 class SuperFast : public Train{
@@ -194,7 +192,7 @@ public:
     SuperFast(std::string number, bool rev, Station* curr, std::vector<int> times, Railway* rail);
     ~SuperFast();
 private:
-    void arrived();
+    void specific_comm();
 };
 
 #endif
