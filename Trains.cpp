@@ -11,6 +11,7 @@
 
 using std::cout;
 using std::vector;
+using std::string;
 
 enum trainState{
     normalMotion = 0,
@@ -52,8 +53,12 @@ void Train::advance_train() {                                                   
                 if((!reverse_ && curr_km_ < next_stat_->distance() - 5) || (reverse_ && curr_km_ > next_stat_->distance() + 5)) {       // Treno tra i 20km e i 5km prima
                     if (last_request_ == invalid) {                                                                                     // Il treno continua a chiedere cosa deve fare finchè non gli viene data una risposta esaustiva
                         delay_calc();
+                        communications();                                                                                               // 1. Segnalazione di un treno alla stazione (avviene una sola volta)
                         last_request_ = next_stat_->request(this);
-                        if(last_request_ >= 0) last_request_ = to_platform;                                                             // Se mi restituisce un binario pongo 0 = to_platform
+                        if(last_request_ >= 0) {
+                            plat_num_ = last_request_;                                                                                  // Mi salvo su che binario posso andare per la stampa
+                            last_request_ = to_platform;                                                                                // Se mi restituisce un binario pongo 0 = to_platform
+                        }
                     }
                 }else {                                                                                                                 // Treno dentro i 5km prima (non può essere last_request = invalid)
                     if(is_slowing_ || last_request_ == reject){                                                                         // Se è stato rifiutato o sta rallentando un treno ca nel parcheggio
@@ -62,6 +67,7 @@ void Train::advance_train() {                                                   
                         is_slowing_ ? wait_count_ = 5 : wait_count_ = 0;
                         status_ = park;
                     }else{
+                        // Il treno regionale 1234 delle ore xx:xx è in arrivo alla stazine di treviso con un ritardo/anticipo
                         if(last_request_ == to_platform)                                                                                // Se deve andare alla stazione rallenta a 80km/h
                             curr_spd_ = 80/60;
                         status_ = stationMotion;
@@ -87,9 +93,8 @@ void Train::advance_train() {                                                   
                         curr_km_ = next_stat_->distance();
                         wait_count_ = 5;
                         status_ = platformStation;
-                        communications();
-                    }else
-                        communications();
+                        communications();           // Communicazione arrivo al binario
+                    }
                 }                                                                                                                                   // Se deve transitare e ha superato la stazione la prossima stazione
                 if ((last_request_ == transit) && (!reverse_ && curr_km_ >= next_stat_->distance()) || (reverse_ && next_stat_->distance())) {      //  sarà la successiva di quella che ha appena superato
                     curr_stat_ = next_stat_;                                                                                                        // Rendo cur_stat_ diverso da nullptr perchè così il caso
@@ -107,6 +112,7 @@ void Train::advance_train() {                                                   
                         !reverse_ ? next_stat_ = curr_stat_->next_stat() : next_stat_ = curr_stat_->prev_stat();
                         status_ = stationMotion;
                         time_arrival_next_stat_++;                                                                  //   del riferimento dell'orario
+                        // Treno partito dal binario
                     }else
                         delay_++; // Probabilmente non necessario
                 }else{                                                                                              // Se la stazione successiva è nullptr vuol dire che è al capolinea
@@ -204,19 +210,52 @@ void Regional::calc_specific_delay(){
     delay_ = central_railw_->curr_time() + ceil(3.75) + ceil((abs(next_stat()->distance() - curr_km_) - 5) /curr_spd_) - arrivals_[time_arrival_next_stat_];     // Tempo in cui arriverò dopo errer giunto in stazione - tempo d'arrivo stimato
 }
 
-std::string Train::changed_delay(){
+int Train::changed_delay(){
     if(status_ != platformStation && old_delay_ != delay_)
-        return old_delay_ < delay_ ? "aumentato" : "diminuito";
-    else return NULL;
+        return old_delay_ < delay_ ? aumentato : diminuito;
+    else return uguale;
 }
 
 // ===== Communicazioni dei treni =====
 void Train::communications(){
-    /*
-     * switch(status){
-     * case platformStation
-     *      specific_comm
-     * */
+    string comm;
+    switch (status_) {
+        case normalMotion:
+            comm = "Il treno " + get_train_type() + " numero " + train_num_; // + " ha ricevuto l'ordine dalla stazione di " + next_stat_ -> station_name() + " di poter ";
+            switch (last_request_) {
+                case reject:
+                    comm += " ha ricevuto l'ordine dalla stazione di " + next_stat_ -> station_name() + " di poter andare al parcheggio\n";
+                    break;
+                case to_platform:
+                    comm +=  " delle ore " + std::to_string(arrivals_[time_arrival_next_stat_]) + " ha ricevuto l'ordine dalla stazione di " + next_stat_ -> station_name() + " di poter andare al binario n. " + std::to_string(plat_num_) + "\n";
+                    break;
+                case transit:
+                    comm += " ha ricevuto l'ordine dalla stazione di " + next_stat_ -> station_name() + " di poter transitare\n";
+                    break;
+                case invalid:                               // Prima communicazione, quando il treno ha appena superato i 20km
+                    int delay_status = changed_delay();
+                    comm += " è in arrivo alla stazione di " + next_stat_ -> station_name();
+                    if(old_delay_ != 0)
+                        old_delay_ > 0 ? comm += " con un ritardo di " + std::to_string(old_delay_) : comm += " con un anticipo di " + std::to_string(old_delay_);
+                    break;
+                default:
+                    throw std::logic_error("Invalid last request in communications\n");
+            }
+            break;
+        case stationMotion:
+            // se last_reqest == to_platform : Il treno regionale è in arrivo alla stazione di Treviso (con un ritardo previsto di delay_)
+            break;
+        case platformStation:
+            comm = "Il treno " + get_train_type() + " delle ore " + std::to_string(5)
+            break;
+        case park:
+            break;
+        case endReached:
+            break;
+        default:
+            throw std::logic_error("Invalid status in communication\n");
+    }
+    central_railw_ -> append(comm);
 }
 
 

@@ -150,7 +150,7 @@ protected:
     virtual void delay_calc();
     virtual void communications();				// Funzione interna invocata dal treno stesso per annunciare il suo arrivo in una stazione
     virtual void calc_specific_delay();         // Funzione interna invocata quando bisogna calcolare il ritardo in base al tipo di treno
-    std::string changed_delay();
+    int changed_delay();
 
     std::string train_num_;						// Numero del treno
     bool is_slowing_;                           // Controllo se il treno sta rallentando un altro treno
@@ -167,6 +167,7 @@ protected:
     int status_; 								// 0 Mov Normale, 1 Mov Staz, 2 Binario, 3 Park, 4 Fine corsa
     int time_arrival_next_stat_;                // Orario in cui il treno dovrebbe arrivare alla stazione (indice del vettore arrivals
     int last_request_;                          // Risposta dall'utlima richiesta (-2 transito, -1 rifiutata, -3 default, >=0 num binario)
+    int plat_num_;                              // Per la stampa del binario
     Railway* central_railw_; 					// Per avere il tempo corrente mi serve il riferimento al rail
 };
 
