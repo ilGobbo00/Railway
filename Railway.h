@@ -48,8 +48,8 @@ public:
     ~Railway();
 private:
     int curr_time_;							    // Tempo corrente
-    std::vector<Station*> stations_;		    // Vettore che contiene tutte le stazioni in sequenza line_description.txt
-    std::vector<Train*> trains_;			    // Vettore che contiene tutti i teni presenti in timetables.txt
+    std::vector<Station> stations_;		    // Vettore che contiene tutte le stazioni in sequenza line_description.txt
+    std::vector<Train> trains_;			    // Vettore che contiene tutti i teni presenti in timetables.txt
     std::string messages_;                      // Stringa per l'output a console
 };
 
