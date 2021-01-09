@@ -79,7 +79,7 @@ void Train::advance_train() {                                                   
             break;
 
         case stationMotion:                                                                                                             // Movimento stazione
-            !reverse_ ? curr_km_ += curr_spd_ : curr_km_ -= curr_spd_;;                                                                 // Avanzo con la velocità corrente (190 in caso di transito, 80 in caso di fermata)
+            !reverse_ ? curr_km_ += curr_spd_ : curr_km_ -= curr_spd_;                                                                 // Avanzo con la velocità corrente (190 in caso di transito, 80 in caso di fermata)
             if (curr_stat_ != nullptr) {                                                                                                // Se sono appena partito dalla stazione precedente
                 if ((!reverse_ && curr_km_ > curr_stat_->distance() + 5) || (reverse_ && curr_km_ < curr_stat_->distance() - 5)){       // Se sono dopo i 5km della stazione precedente posso andare al massimo
                     curr_stat_ = nullptr;
@@ -219,7 +219,7 @@ std::string Train::changed_delay(){
                 return to_return += " non e' più in orario, il suo ritardo e' aumentato di " + std::to_string(delay_) + " min\n";
             if (delay_ < 0)
                 return to_return += " non e' più in orario, il suo anticipo e' aumentato di " + std::to_string(delay_) + " min\n";
-            if (delay_ == 0) return "";
+            return "";
             // in orario prima e dopo
         }
 
@@ -250,6 +250,7 @@ std::string Train::changed_delay(){
                 return to_return += " non e' piu' in ritardo, ma in anticipo di " + std::to_string(abs(delay_)) + " min\n";
             return to_return += "non e' piu' in anticipo. Il treno è in orario\n";
         }
+        return "";
 }
 
 // ===== Communicazioni dei treni =====
