@@ -213,6 +213,7 @@ void Regional::calc_specific_delay(){
 }
 std::string Train::changed_delay(){
         std::string to_return = "Il treno numero " + train_num_ + "diretto verso la stazione " + next_stat_->station_name();
+        // Se prima era in orario
         if (old_delay_ == 0) {
             if (delay_ > 0)
                 return to_return += " non e' più in orario, il suo ritardo e' aumentato di " + std::to_string(delay_) + " min\n";
@@ -221,23 +222,29 @@ std::string Train::changed_delay(){
             if (delay_ == 0) return "";
             // in orario prima e dopo
         }
+
+        // Se prima era in anticipo
         if (old_delay_ < 0) {
             if (delay_ < 0) {
                 if (old_delay_ > delay_)
                     return to_return += " ha aumentato il suo anticipo di " + std::to_string(abs(delay_ - old_delay_)) + " min\n";
                 if (old_delay_ < delay_)
                     return to_return += " ha diminuito il suo anticipo di " + std::to_string(abs(old_delay_ - delay_)) + " min\n";
+                return "";
             }
             if (delay_ > 0)
                 return to_return += " non e' più in anticipo, ma in ritardo di " + std::to_string(delay_) + " min\n";
             return to_return += "non e' piu' in anticipo. Il treno è in orario\n";
         }
+
+        // Se prima era in ritardo
         if (old_delay_ > 0) {
             if (delay_ > 0) {
                 if (old_delay_ < delay_)
                     return to_return += " ha aumentato il suo ritardo di " + std::to_string(delay_ - old_delay_) + " min\n";
                 if (old_delay_ > delay_)
                     return to_return += " ha diminuito il suo ritardo di " + std::to_string(old_delay_ - delay_) + " min\n";
+                return "";
             }
             if (delay_ < 0)
                 return to_return += " non e' piu' in ritardo, ma in anticipo di " + std::to_string(abs(delay_)) + " min\n";
