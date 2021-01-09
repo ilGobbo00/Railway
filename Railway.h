@@ -71,7 +71,7 @@ public:
     virtual int request(Train* t) = 0; 			   // (Interazione con stazione) -2: transito, -1: binario non disponibile (vai in park, chiedi binario di nuovo dopo), >=0 n. binario (ogni ciclo: partenze, richiesta e risposta)
     bool request_exit(Train* t);		               // (Con treno sui binari) TRUE: partenza consentita, FALSE: stazionamento
     std::string update();                          // Metodo con cui "far passare il tempo" in stazione. Verrà invocato da Railway nella parte inziale d'ogni minuto, PRIMA di verifiche varie/avanzamento treni. Riporta aggiornamenti.
-    void deleteTrain(Train* t);                    // Chiamato da un treno al capolinea per essere rimosso dai binari
+    void delete_train(Train* t);                    // Chiamato da un treno al capolinea per essere rimosso dai binari
 
     virtual ~Station();
 
@@ -151,10 +151,11 @@ protected:
     virtual void delay_calc();
     virtual void communications();				// Funzione interna invocata dal treno stesso per annunciare il suo arrivo in una stazione
     virtual void calc_specific_delay();         // Funzione interna invocata quando bisogna calcolare il ritardo in base al tipo di treno
-    int changed_delay();
-    virtual std::string get_train_type() = 0;
+    std::string changed_delay();
+    virtual std::string get_train_type() const = 0;
 
     std::string train_num_;						// Numero del treno
+    std::string print_time()const;              // Stampa il tempo in formato xx:xx
     bool is_slowing_;                           // Controllo se il treno sta rallentando un altro treno
     bool reverse_;								// True per i treni in ritorno
     const double max_spd_;						// km/min
@@ -178,7 +179,7 @@ public:
     Regional(std::string number, bool rev, Station* curr, std::vector<int> times, Railway* rail);
     ~Regional();
 private:
-    std::string get_train_type();
+    std::string get_train_type()const;
     void calc_specific_delay();
 };
 
@@ -187,7 +188,7 @@ public:
     Fast(std::string number, bool rev, Station* curr, std::vector<int> times, Railway* rail);
     ~Fast();
 private:
-    std::string get_train_type();
+    std::string get_train_type()const;
 };
 
 class SuperFast : public Train{
@@ -195,7 +196,7 @@ public:
     SuperFast(std::string number, bool rev, Station* curr, std::vector<int> times, Railway* rail);
     ~SuperFast();
 private:
-    std::string get_train_type();
+    std::string get_train_type()const;
 };
 
 #endif
