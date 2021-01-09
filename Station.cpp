@@ -190,6 +190,19 @@ void Station::removeParkingR(Train* t){
     }
 }
 
+void Station::delete_train(Train* t){
+    //il treno t va cancellato dalla stazione
+    if(!t->reverse()){      //se treno va dritto
+        if(platforms[0] == t) platforms[0] = nullptr;
+        else platforms[1] = nullptr;
+    }
+    else{                   //se treno è in ritorno
+        if(platforms_reverse[0] == t) platforms_reverse[0] = nullptr;
+        else platforms_reverse[1] = nullptr;
+    }
+    announcements = announcements + "Il treno "+ t->train_num() +" ha terminato la sua corsa.\n";
+    ///  !!!---!!!---!!! SEGNAPOSTO: QUI VA CHIAMATO METODO RAILWAY PER ELIMINAZIONE TRENI !!!---!!!---!!!
+}
 //METODI CLASSI DERIVATE: Principal
 
 //IN UNA STAZIONE PRINCIPAL nessun treno transita! Tutti i treni devono fermarsi
