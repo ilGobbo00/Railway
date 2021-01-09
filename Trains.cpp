@@ -250,7 +250,7 @@ std::string Train::changed_delay(){
                 return to_return += " non e' piu' in ritardo, ma in anticipo di " + std::to_string(abs(delay_)) + " min\n";
             return to_return += "non e' piu' in anticipo. Il treno è in orario\n";
         }
-        return "";
+        throw std::logic_error("Error in changed_delay function, non return is called\n");
 }
 
 // ===== Communicazioni dei treni =====
