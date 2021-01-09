@@ -212,13 +212,13 @@ void Regional::calc_specific_delay(){
     delay_ = central_railw_->curr_time() + ceil(3.75) + ceil((abs(next_stat()->distance() - curr_km_) - 5) /curr_spd_) - arrivals_[time_arrival_next_stat_];     // Tempo in cui arriverò dopo errer giunto in stazione - tempo d'arrivo stimato
 }
 std::string Train::changed_delay(){
-    if(delay_ != 0 && old_delay_ != 0) {
         std::string to_return = "Il treno numero " + train_num_ + "diretto verso la stazione " + next_stat_->station_name();
         if (old_delay_ == 0) {
             if (delay_ > 0)
                 return to_return += " non e' più in orario, il suo ritardo e' aumentato di " + std::to_string(delay_) + " min\n";
             if (delay_ < 0)
                 return to_return += " non e' più in orario, il suo anticipo e' aumentato di " + std::to_string(delay_) + " min\n";
+            if (delay_ == 0) return "";
             // in orario prima e dopo
         }
         if (old_delay_ < 0) {
@@ -243,8 +243,6 @@ std::string Train::changed_delay(){
                 return to_return += " non e' piu' in ritardo, ma in anticipo di " + std::to_string(abs(delay_)) + " min\n";
             return to_return += "non e' piu' in anticipo. Il treno è in orario\n";
         }
-    }else
-        return "";
 }
 
 // ===== Communicazioni dei treni =====
