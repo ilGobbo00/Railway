@@ -68,8 +68,10 @@ void Train::advance_train() {                                                   
                         status_ = park;
                     }else{
                         // Il treno regionale 1234 delle ore xx:xx è in arrivo alla stazine di treviso con un ritardo/anticipo
-                        if(last_request_ == to_platform)                                                                                // Se deve andare alla stazione rallenta a 80km/h
-                            curr_spd_ = 80/60;
+                        if(last_request_ == to_platform) {                                                                                // Se deve andare alla stazione rallenta a 80km/h
+                            curr_spd_ = 80 / 60;
+                            communications();
+                        }
                         status_ = stationMotion;
                     }
                 }
@@ -210,10 +212,50 @@ void Regional::calc_specific_delay(){
     delay_ = central_railw_->curr_time() + ceil(3.75) + ceil((abs(next_stat()->distance() - curr_km_) - 5) /curr_spd_) - arrivals_[time_arrival_next_stat_];     // Tempo in cui arriverò dopo errer giunto in stazione - tempo d'arrivo stimato
 }
 
-int Train::changed_delay(){
-    if(status_ != platformStation && old_delay_ != delay_)
-        return old_delay_ < delay_ ? aumentato : diminuito;
-    else return uguale;
+std::string Train::changed_delay(){
+    std::string to_return = "Il treno numero " + train_num_ + "diretto verso la stazione " + next_stat_ -> station_name();
+    /*
+     * OLD NEW
+     *      -3  anticipo aumentato
+     *      -2  nessuna variazione
+     * 0   -1  anticipo diminuito
+     *       0  in orario
+     *       1  ritardo di 1 minuto
+     *
+     *       -1 anticipo di 1 minuto
+     *       0  in orario
+     * 0     1  nessuna variazione
+     *       2  ritardo aumentato
+     *
+     * */
+    if(old_delay_ == 0){
+        if(delay_ > 0)
+            return to_return += " non e' più in orario, il suo ritardo e' aumentato di " + std::to_string(delay_) + " min\n";
+        else
+            return to_return += " non e' più in orario, il suo anticipo e' aumentato di " + std::to_string(delay_) + " min\n";
+    }
+    if(old_delay_ < 0){
+        if(delay_ < 0) {
+            if (old_delay_ > delay_)
+                return to_return += " ha aumentato il suo anticipo di " + std::to_string(abs(delay_ - old_delay_)) + " min\n";
+            if (old_delay_ < delay_)
+                return to_return += " ha diminuito il suo anticipo di " + std::to_string(abs(old_delay_ - delay_)) + " min\n";
+        }
+        if(delay_ > 0)
+            return to_return += " non e' più in anticipo, ma in ritardo di " + std::to_string(delay_) + " min\n";
+        return to_return += "non e' piu' in anticipo. Il treno è in orario\n";
+    }
+    if(old_delay_ > 0){
+        if(delay_ > 0){
+            if (old_delay_ < delay_)
+                return to_return += " ha aumentato il suo ritardo di " + std::to_string(delay_ - old_delay_) + " min\n";
+            if (old_delay_ > delay_)
+                return to_return += " ha diminuito il suo ritardo di " + std::to_string(old_delay_ - delay_) + " min\n";
+        }
+        if(delay_ < 0)
+            return to_return += " non e' piu' in ritardo, ma in anticipo di " + std::to_string(abs(delay_)) + " min\n";
+        return to_return += "non e' piu' in anticipo. Il treno è in orario\n";
+    }
 }
 
 // ===== Communicazioni dei treni =====
@@ -227,19 +269,23 @@ void Train::communications(){
                     comm += " ha ricevuto l'ordine dalla stazione di " + next_stat_ -> station_name() + " di poter andare al parcheggio\n";
                     break;
                 case to_platform:
-                    comm +=  " delle ore " + std::to_string(arrivals_[time_arrival_next_stat_]) + " ha ricevuto l'ordine dalla stazione di " + next_stat_ -> station_name() + " di poter andare al binario n. " + std::to_string(plat_num_) + "\n";
+                    comm +=  " delle ore " + std::to_string(arrivals_[time_arrival_next_stat_]);
+                    if(delay_ != 0)
+                        delay_ > 0 ? comm += " con un ritardo di " + std::to_string(old_delay_)  : comm += " con un anticipo di " + std::to_string(old_delay_);
+                    comm += " sta arrivando alla stazione di " + next_stat_ -> station_name() + " al binario n. " + std::to_string(plat_num_) + "\n";
                     break;
                 case transit:
                     comm += " ha ricevuto l'ordine dalla stazione di " + next_stat_ -> station_name() + " di poter transitare\n";
                     break;
                 case invalid:                               // Prima communicazione, quando il treno ha appena superato i 20km
-                    int delay_status = changed_delay();
+//                    int delay_status = changed_delay();
                     comm += " è in arrivo alla stazione di " + next_stat_ -> station_name();
-                    if(old_delay_ != 0)
-                        old_delay_ > 0 ? comm += " con un ritardo di " + std::to_string(old_delay_) : comm += " con un anticipo di " + std::to_string(old_delay_);
+                    if(delay_ != 0)
+                        delay_ > 0 ? comm += " con un ritardo di " + std::to_string(old_delay_)  : comm += " con un anticipo di " + std::to_string(old_delay_);
+                    comm += "\n";
                     break;
-                default:
-                    throw std::logic_error("Invalid last request in communications\n");
+//                default:
+//                    throw std::logic_error("Invalid last request in communications\n");
             }
             break;
         case stationMotion:
@@ -312,27 +358,22 @@ void Train::set_status(int status){
 
 
 // ===== CLASSE REGIONAL =====
-Regional::Regional(std::string number, bool rev, Station* curr, std::vector<int> times, Railway* rail):{}
-void Regional::specific_comm(){}
-
-
-// il treno regionale numero x delle ore x
-// }								// Funzione interna invocata dal treno stesso per annunciare il suo arrivo in una stazione
-
+Regional::Regional(std::string number, bool rev, Station* curr, std::vector<int> times, Railway* rail) : Train(number, rev, 160/60, curr, times, rail){}
+std::string Regional::get_train_type(){
+    return "regionale";
+}
 
 // ===== CLASSE FAST =====
-Fast::Fast(std::string number, bool rev, Station* curr, std::vector<int> times, Railway* rail):{}
-void Fast::specific_comm(){}
-// Il treno veloce
-// }								// Funzione interna invocata dal treno stesso per annunciare il suo arrivo in una stazione
-
-
+Fast::Fast(std::string number, bool rev, Station* curr, std::vector<int> times, Railway* rail):Train(number, rev, 240/60, curr, times, rail){}
+std::string Fast::get_train_type(){
+    return "veloce";
+}
 
 // ===== CLASSE SUPERFAST =====
-SuperFast::SuperFast(std::string number, bool rev, Station* curr, std::vector<int> times, Railway* rail):{}
-void SuperFast::specific_comm(){}
-//Il treno alta velocita
-// }								// Funzione interna invocata dal treno stesso per annunciare il suo arrivo in una stazione
+SuperFast::SuperFast(std::string number, bool rev, Station* curr, std::vector<int> times, Railway* rail):Train(number, rev, 300/60, curr, times, rail){}
+std::string SuperFast::get_train_type(){
+    return "alta velocita'";
+}
 
 
 

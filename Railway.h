@@ -151,6 +151,7 @@ protected:
     virtual void communications();				// Funzione interna invocata dal treno stesso per annunciare il suo arrivo in una stazione
     virtual void calc_specific_delay();         // Funzione interna invocata quando bisogna calcolare il ritardo in base al tipo di treno
     int changed_delay();
+    virtual std::string get_train_type() = 0;
 
     std::string train_num_;						// Numero del treno
     bool is_slowing_;                           // Controllo se il treno sta rallentando un altro treno
@@ -176,7 +177,7 @@ public:
     Regional(std::string number, bool rev, Station* curr, std::vector<int> times, Railway* rail);
     ~Regional();
 private:
-    void specific_comm();
+    std::string get_train_type();
     void calc_specific_delay();
 };
 
@@ -185,7 +186,7 @@ public:
     Fast(std::string number, bool rev, Station* curr, std::vector<int> times, Railway* rail);
     ~Fast();
 private:
-    void specific_comm();
+    std::string get_train_type();
 };
 
 class SuperFast : public Train{
@@ -193,7 +194,7 @@ public:
     SuperFast(std::string number, bool rev, Station* curr, std::vector<int> times, Railway* rail);
     ~SuperFast();
 private:
-    void specific_comm();
+    std::string get_train_type();
 };
 
 #endif
