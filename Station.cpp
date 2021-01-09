@@ -80,6 +80,7 @@ bool Station::busyR() const{
 }
 
 bool Station::request_exit(Train* t){      // (Con treno sui binari) TRUE: partenza consentita, FALSE: stazionamento
+    //Questo metodo request_exit viene invocato dal treno SOLO quando il
     Train* otherTrain;
     int thisTrainIndex;
     if(!t->reverse()){  //se treno va dritto
@@ -92,8 +93,6 @@ bool Station::request_exit(Train* t){      // (Con treno sui binari) TRUE: parte
             otherTrain = platforms[0];
             thisTrainIndex = 1;
         }
-        //se è stazione capolinea: elimina treno
-        /// !!! DA IMPLEMENTARE SECONDO METODO RAILWAY !!!
         //non esce se timer>0 o se altro treno ha precedenza
         if(haltTimer>0 || getPriority(t) < getPriority(otherTrain) ) return false;
         else{   //se può uscire: imposta timer, libera binario, dai via libera
@@ -113,8 +112,6 @@ bool Station::request_exit(Train* t){      // (Con treno sui binari) TRUE: parte
             otherTrain = platforms_reverse[0];
             thisTrainIndex = 1;
         }
-        //se è stazione capolinea: elimina treno
-        /// !!! DA IMPLEMENTARE SECONDO METODO RAILWAY !!!
         //non esce se timer>0 o se altro treno ha precedenza
         if(haltTimerR>0 || getPriority(t) < getPriority(otherTrain) ) return false;
         else{   //se può uscire: imposta timer, libera binario, dai via libera
@@ -191,19 +188,25 @@ void Station::removeParkingR(Train* t){
 }
 
 void Station::delete_train(Train* t){
-    //il treno t va cancellato dalla stazione
-    if(!t->reverse()){      //se treno va dritto
-        if(platforms[0] == t) platforms[0] = nullptr;
-        else platforms[1] = nullptr;
+    //Se il treno è in stazione (quindi il suo puntatore curr_stat è diverso da nullptr): il treno t va cancellato dalla stazione
+    if(t->curr_stat() != nullptr){
+        if(!t->reverse()){      //se treno va dritto
+            if(platforms[0] == t) platforms[0] = nullptr;
+            else platforms[1] = nullptr;
+        }
+        else{                   //se treno è in ritorno
+            if(platforms_reverse[0] == t) platforms_reverse[0] = nullptr;
+            else platforms_reverse[1] = nullptr;
+        }
     }
-    else{                   //se treno è in ritorno
-        if(platforms_reverse[0] == t) platforms_reverse[0] = nullptr;
-        else platforms_reverse[1] = nullptr;
-    }
+    //Seguente parte va eseguita in ogni caso, anche se il treno non si trova in stazione
     announcements = announcements + "Il treno "+ t->train_num() +" ha terminato la sua corsa.\n";
     ///  !!!---!!!---!!! SEGNAPOSTO: QUI VA CHIAMATO METODO RAILWAY PER ELIMINAZIONE TRENI !!!---!!!---!!!
 }
 //METODI CLASSI DERIVATE: Principal
+
+Principal::Principal(std::string name, int distance, Station* prev, Railway* rail) : Station(name, distance, prev, rail) {}
+//la costruzione NON differisce in alcun parametro
 
 //IN UNA STAZIONE PRINCIPAL nessun treno transita! Tutti i treni devono fermarsi
 int Principal::request(Train* t){
@@ -217,15 +220,12 @@ int Principal::request(Train* t){
     else return assignPlatformR(t);                 //Se il treno è in RITORNO (reverse)
 }
 
-Principal::Principal(std::string name, int distance, Station* prev, Railway* rail) : Station(name, distance, prev, rail) {}
-//la costruzione NON differisce in alcun parametro
-
 //METODI CLASSI DERIVATE: Secondary
 
 Secondary::Secondary(std::string name, int distance, Station* prev, Railway* rail) : Station(name, distance, prev, rail) {}
 
 int Secondary::request(Train* t){
-    /// (Interazione con stazione) -2 deve transitare, -1: binario non disponibile (vai in park, chiedi binario di nuovo dopo), >=0 n. binario (ogni ciclo: partenze, richiesta e risposta)
+    /// (Interazione con stazione) -3 transito del capolinea, -2 deve transitare, -1: binario non disponibile (vai in park, chiedi binario di nuovo dopo), >=0 n. binario (ogni ciclo: partenze, richiesta e risposta)
     //  L'assegnazione binario è prevista SE E SOLO SE è istantaneamente previsto un binario libero
     //  In tutte le stazioni son previsti DUE binari per senso di marcia!
     //  SEQUENZA: Richiesta -> Verifica binario libero -> Verifica PRIORITA' (tipo treno poi ritardo) -> Eventuale assegnazione.
@@ -233,6 +233,7 @@ int Secondary::request(Train* t){
     if(!t->reverse()){  //Se il treno è in ANDATA
         //Se non è regionale: TRANSITO
         if(!dynamic_cast<Regional*>(t)){
+            if(next_stat_== nullptr) return -3;     //CASO LIMITE: TRANSITO DEL CAPOLINEA
             haltTimer = TRANSIT_DELAY;
             announcements = announcements + "Treno "+ t->train_num() +" in transito\n";
             return -2;
@@ -243,6 +244,7 @@ int Secondary::request(Train* t){
     else{    //! Se il treno è in RITORNO (reverse)
         //Se non è regionale: TRANSITO
         if(!dynamic_cast<Regional*>(t)){
+            if(prev_stat_== nullptr) return -3;     //CASO LIMITE: TRANSITO DEL CAPOLINEA
             haltTimerR = TRANSIT_DELAY;
             announcements = announcements + "Treno "+ t->train_num() +" in transito\n";
             return -2;
