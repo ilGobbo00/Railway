@@ -1,10 +1,15 @@
-cmake_minimum_required(VERSION 3.17)
-project(Railway)
+cmake_minimum_required(VERSION 2.8 FATAL_ERROR)
+project(Railway VERSION 1 LANGUAGES CXX)
 
-#add_library(Trains.cpp Railway.cpp Station.cpp Railway.h)
-set(CMAKE_CXX_FLAGS_RELEASE "-O2")
-add_executable(mainRailway.cpp Trains.cpp Railway.cpp Station.cpp Railway.h)
+add_library(components
+    Railway.h
+    Railway.cpp
+    Station.cpp
+    Trains.cpp
+)
 
-# Cose da fare:
+add_executable(main mainRailway.cpp)
 
-#  - Scrivere i parametri corretti come vuole Ghidoni
+target_link_libraries(main
+    components
+)
