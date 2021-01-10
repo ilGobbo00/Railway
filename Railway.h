@@ -70,8 +70,8 @@ public:
 
     virtual int request(Train* t) = 0; 			   // (Interazione con stazione) -2: transito, -1: binario non disponibile (vai in park, chiedi binario di nuovo dopo), >=0 n. binario (ogni ciclo: partenze, richiesta e risposta)
     bool request_exit(Train* t);		               // (Con treno sui binari) TRUE: partenza consentita, FALSE: stazionamento
-    std::string update();                          // Metodo con cui "far passare il tempo" in stazione. Verrà invocato da Railway nella parte inziale d'ogni minuto, PRIMA di verifiche varie/avanzamento treni. Riporta aggiornamenti.
-    void delete_train(Train* t);                    // Chiamato da un treno al capolinea per essere rimosso dai binari
+    void update();                                 // Metodo con cui "far passare il tempo" in stazione. Verrà invocato da Railway nella parte inziale d'ogni minuto, PRIMA di verifiche varie/avanzamento treni. Riporta aggiornamenti.
+    void delete_train(Train* t);                   // Chiamato da un treno al capolinea per essere rimosso dai binari
 
     virtual ~Station();
 
