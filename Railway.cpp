@@ -1,0 +1,200 @@
+#include "Railway.h"
+#include <fstream>
+#include <sstream>
+#include <math.h>
+
+using std::string;
+using std::ifstream;
+using std::istringstream;
+
+Railway::Railway(const string line_description, const string timetables) : curr_time_{ 0 }, stations_{}, trains_{}, messages_{""}
+{
+	ifstream lines_desc(line_description);
+	if (!lines_desc.is_open())
+	{
+		lines_desc.close();
+		throw ("Couldn't open" + line_description + " correctly!\n");
+	}
+
+	std::vector<Station> all_stations;
+	std::vector<bool> ok_all_stations;
+	string line1 = "";
+	string s_name = "";
+	int s_type = 0;
+	int s_dist1 = 0;
+	int s_prev_dist1 = 0;
+
+	std::getline(lines_desc, line1);
+	all_stations.push_back(Principal(line1, s_dist1, nullptr, this));
+	ok_all_stations.push_back(true);
+	stations_.push_back(Principal(line1, s_dist1, nullptr, this));
+
+	while (std::getline(lines_desc, line1))
+	{
+		s_name = line1.substr(0, line1.find_first_of('01') - 1);
+		s_type = stoi(line1.substr(line1.find_first_of('01'), 1));
+		s_dist1 = stoi(line1.substr(line1.find_first_of('01') + 2));
+		if (s_type == 0)
+			all_stations.push_back(Principal(s_name, s_dist1, &stations_.back(), this));
+		else
+			all_stations.push_back(Secondary(s_name, s_dist1, &stations_.back(), this));
+		if (s_dist1 - s_prev_dist1 >= 20)
+		{
+			s_prev_dist1 = s_dist1;
+			if (s_type == 0)
+				stations_.push_back(Principal(s_name, s_dist1, &stations_.back(), this));
+			else
+				stations_.push_back(Secondary(s_name, s_dist1, &stations_.back(), this));
+			ok_all_stations.push_back(true);
+		}
+		else
+			ok_all_stations.push_back(false);
+	}
+	lines_desc.close();
+
+	ifstream trains_desc(timetables);
+	if (!trains_desc.is_open())
+	{
+		trains_desc.close();
+		throw ("Couldn't open" + timetables + " correctly!\n");
+	}
+	string line2 = "";
+	istringstream t_stream;
+	int t_number = 0;
+	int t_rev = 0;
+	int t_type = 1;
+	std::vector<int> t_times;
+	while (std::getline(trains_desc, line2))
+	{
+		t_stream = istringstream(line2);
+		t_stream >> t_number;
+		t_stream >> t_rev;
+		t_stream >> t_type;
+		int t_time = 0;
+		int t_prev_time = 0;
+		int t_dist2 = 0;
+		int t_prev_dist2 = 0;
+		bool first = true;
+		if (t_type == 1)
+		{
+			if (t_rev == 0)
+			{
+				t_dist2 = 0;
+				t_prev_dist2 = 0;
+				for (int i = 0; i < all_stations.size(); i++)
+				{
+					if (ok_all_stations[i])
+					{
+						t_prev_dist2 = t_dist2;
+						t_dist2 = all_stations[i].distance();
+						t_prev_time = t_time;
+						if(t_stream >> t_time)
+							if (t_time - t_prev_time < static_cast<int>(ceil((t_dist2 - t_prev_dist2 - 10) / 160.0)) + 10)
+								t_time = static_cast<int>(ceil((t_dist2 - t_prev_dist2 - 10) / 160.0)) + 10;
+								//	append
+						else
+							t_time = (static_cast<int>(ceil((t_dist2 - t_prev_dist2 - 10) / 160.0)) + 10) + 10;
+						t_times.push_back(t_time);
+					}
+					else
+						t_stream.ignore(8, ' ');
+				}
+			}
+			else
+			{
+				t_dist2 = stations_.back().distance();
+				t_prev_dist2 = stations_.back().distance();
+				for (int i = all_stations.size()-1; i >= 0; i--)
+				{
+					if (ok_all_stations[i])
+					{
+						t_prev_dist2 = t_dist2;
+						t_dist2 = all_stations[i].distance();
+						t_prev_time = t_time;
+						if (t_stream >> t_time)
+							if (t_time - t_prev_time < static_cast<int>(ceil((t_dist2 - t_prev_dist2 - 10) / 160.0)) + 10)
+								t_time = static_cast<int>(ceil((t_dist2 - t_prev_dist2 - 10) / 160.0)) + 10;
+								//	append
+						else
+							t_time = (static_cast<int>(ceil((t_dist2 - t_prev_dist2 - 10) / 160.0)) + 10) + 10;
+						t_times.push_back(t_time);
+					}
+					else
+						t_stream.ignore(8, ' ');
+				}
+			}
+			if(t_times[0]<1440)
+				trains_.push_back(Regional(std::to_string(t_number), t_rev, (t_rev == 0 ? &stations_.front() : &stations_.back()), t_times, this));
+		}
+		else
+		{
+			int c_secondaries = 0;
+			if (t_rev == 0)
+			{
+				t_dist2 = 0;
+				t_prev_dist2 = 0;
+				for (int i = 0; i < all_stations.size(); i++)
+				{
+					if (Principal* s = dynamic_cast<Principal*>(&all_stations[i]))
+						if (ok_all_stations[i])
+						{
+							t_prev_dist2 = t_dist2;
+							t_dist2 = all_stations[i].distance();
+							t_prev_time = t_time;
+							int t_predicted = 0;
+							if (t_stream >> t_time)
+								t_predicted = static_cast<int>(ceil((c_secondaries * 25 < t_dist2 - t_prev_dist2 - 10) ? c_secondaries * 25 / 190.0 + (t_dist2 - t_prev_dist2 - (c_secondaries * 25) - 10) / (t_type==2?240.0:300.0) : (t_dist2 - t_prev_dist2 - 10) / 190.0)) + 10;
+							if (t_time - t_prev_time < t_predicted)
+								t_time = t_predicted;
+									//	append
+								else
+									t_time = t_predicted + 10;
+							t_times.push_back(t_time);
+							c_secondaries = 0;
+						}
+						else
+							t_stream.ignore(8, ' ');
+					else if (ok_all_stations[i])
+						c_secondaries++;
+				}
+			}
+			else
+			{
+				t_dist2 = stations_.back().distance();
+				t_prev_dist2 = stations_.back().distance();
+				for (int i = all_stations.size() - 1; i >= 0; i--)
+				{
+					if (Principal* s = dynamic_cast<Principal*>(&all_stations[i]))
+						if (ok_all_stations[i])
+						{
+							t_prev_dist2 = t_dist2;
+							t_dist2 = all_stations[i].distance();
+							t_prev_time = t_time;
+							int t_predicted = 0;
+							if (t_stream >> t_time)
+								t_predicted = static_cast<int>(ceil((c_secondaries * 25 < t_dist2 - t_prev_dist2 - 10) ? c_secondaries * 25 / 190.0 + (t_dist2 - t_prev_dist2 - (c_secondaries * 25) - 10) / (t_type == 2 ? 240.0 : 300.0) : (t_dist2 - t_prev_dist2 - 10) / 190.0)) + 10;
+							if (t_time - t_prev_time < t_predicted)
+								t_time = t_predicted;
+							//	append
+							else
+								t_time = t_predicted + 10;
+							t_times.push_back(t_time);
+							c_secondaries = 0;
+						}
+						else
+							t_stream.ignore(8, ' ');
+					else if (ok_all_stations[i])
+						c_secondaries++;
+				}
+			}
+			if (t_times[0] < 1440)
+				if(t_type == 2)
+					trains_.push_back(Fast(std::to_string(t_number), t_rev, (t_rev == 0 ? &stations_.front() : &stations_.back()), t_times, this));
+				else
+					trains_.push_back(SuperFast(std::to_string(t_number), t_rev, (t_rev == 0 ? &stations_.front() : &stations_.back()), t_times, this));
+		}
+		t_stream.clear();
+		t_times.clear();
+	}
+	trains_desc.close();
+}
