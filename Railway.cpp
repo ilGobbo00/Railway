@@ -282,6 +282,33 @@ void Railway::check_interaction()				// Controllo distanza (collisioni e sorpass
 			}
 		}
 	}
+	for (int i = 0; i < trains_rev_pts_.size() - 1; i++)
+	{
+		if ((trains_rev_pts_[i]->status() == 0 && trains_rev_pts_[i + 1]->status() == 0) && (abs(trains_rev_pts_[i]->current_km() - trains_rev_pts_[i + 1]->current_km()) < 10.0))
+		{
+			if (Regional* t1 = dynamic_cast<Regional*>(trains_rev_pts_[i]))
+			{
+				if (Fast* t1 = dynamic_cast<Fast*>(trains_rev_pts_[i + 1]))
+				{
+					trains_rev_pts_[i]->set_slowing(true);
+					trains_rev_pts_[i + 1]->set_curr_spd(trains_rev_pts_[i]->curr_spd());
+				}
+				else if (SuperFast* t1 = dynamic_cast<SuperFast*>(trains_rev_pts_[i + 1]))
+				{
+					trains_rev_pts_[i]->set_slowing(true);
+					trains_rev_pts_[i + 1]->set_curr_spd(trains_rev_pts_[i]->curr_spd());
+				}
+			}
+			else if (Fast* t1 = dynamic_cast<Fast*>(trains_rev_pts_[i]))
+			{
+				if (SuperFast* t1 = dynamic_cast<SuperFast*>(trains_rev_pts_[i + 1]))
+				{
+					trains_rev_pts_[i]->set_slowing(true);
+					trains_rev_pts_[i + 1]->set_curr_spd(trains_rev_pts_[i]->curr_spd());
+				}
+			}
+		}
+	}
 }
 
 int Railway::curr_time() const { return curr_time_; } // Ritorna il tempo corrente
