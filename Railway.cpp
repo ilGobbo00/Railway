@@ -91,15 +91,17 @@ Railway::Railway(const string line_description, const string timetables) : curr_
 						t_prev_dist2 = t_dist2;
 						t_dist2 = all_stations[i]->distance();
 						t_prev_time = t_time;
-						if(t_stream >> t_time)
+						if (t_stream >> t_time)
+						{
 							if (t_time - (t_prev_time + (static_cast<int>(t_times.size()) >= 2 ? 5 : 0)) < static_cast<int>(ceil((t_dist2 - t_prev_dist2 - 10) / (160.0 / 60))) + 10)
 							{
-								t_time = static_cast<int>(ceil((t_dist2 - t_prev_dist2 - 10) / (160.0 / 60))) + 10;
+								t_time = t_prev_time + static_cast<int>(ceil((t_dist2 - t_prev_dist2 - 10) / (160.0 / 60))) + 10;
 								if (!correction)
 									correction = true;
 							}
+						}
 						else
-							t_time = (static_cast<int>(ceil((t_dist2 - t_prev_dist2 - 10) / (160.0 / 60))) + 10) + 10;
+							t_time = t_prev_time + (static_cast<int>(ceil((t_dist2 - t_prev_dist2 - 10) / (160.0 / 60))) + 10) + 10;
 						t_times.push_back(t_time);
 					}
 					else
@@ -118,14 +120,16 @@ Railway::Railway(const string line_description, const string timetables) : curr_
 						t_dist2 = all_stations[i]->distance();
 						t_prev_time = t_time;
 						if (t_stream >> t_time)
-							if (t_time - (t_prev_time + (static_cast<int>(t_times.size()) >= 2 ? 5 : 0)) < static_cast<int>(ceil((t_dist2 - t_prev_dist2 - 10) / (160.0/60))) + 10)
+						{
+							if (t_time - (t_prev_time + (static_cast<int>(t_times.size()) >= 2 ? 5 : 0)) < static_cast<int>(ceil((t_dist2 - t_prev_dist2 - 10) / (160.0 / 60))) + 10)
 							{
-								t_time = static_cast<int>(ceil((t_dist2 - t_prev_dist2 - 10) / (160.0 / 60))) + 10;
+								t_time = t_prev_time + static_cast<int>(ceil((t_dist2 - t_prev_dist2 - 10) / (160.0 / 60))) + 10;
 								if (!correction)
 									correction = true;
 							}
+						}
 						else
-							t_time = (static_cast<int>(ceil((t_dist2 - t_prev_dist2 - 10) / (160.0 / 60))) + 10) + 10;
+							t_time = t_prev_time + (static_cast<int>(ceil((t_dist2 - t_prev_dist2 - 10) / (160.0 / 60))) + 10) + 10;
 						t_times.push_back(t_time);
 					}
 					else
@@ -159,12 +163,12 @@ Railway::Railway(const string line_description, const string timetables) : curr_
 							if (t_stream >> t_time)
 								if (t_time - (t_prev_time + (static_cast<int>(t_times.size()) >= 2 ? 5 : 0)) < t_predicted)
 								{
-									t_time = t_predicted;
+									t_time = t_prev_time + t_predicted;
 									if (!correction)
 										correction = true;
 								}
 							else
-								t_time = t_predicted + 10;
+								t_time = t_prev_time + t_predicted + 10;
 							t_times.push_back(t_time);
 							c_secondaries = 0;
 						}
@@ -191,12 +195,12 @@ Railway::Railway(const string line_description, const string timetables) : curr_
 							if (t_stream >> t_time)
 								if (t_time - (t_prev_time + (static_cast<int>(t_times.size()) >= 2 ? 5 : 0)) < t_predicted)
 								{
-									t_time = t_predicted;
+									t_time = t_prev_time + t_predicted;
 									if (!correction)
 										correction = true;
 								}
 							else
-								t_time = t_predicted + 10;
+								t_time = t_prev_time + t_predicted + 10;
 							t_times.push_back(t_time);
 							c_secondaries = 0;
 						}
