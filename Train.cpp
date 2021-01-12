@@ -272,7 +272,7 @@ void Train::communications(){
     string comm;
     switch (status_) {
         case normalMotion:
-            comm = "Il treno " + get_train_type() + " numero " + train_num_;
+            comm = "Il treno " + get_train_type() + " n. " + train_num_;
             switch (last_request_) {
                 case reject:
                     comm += " ha ricevuto l'ordine dalla stazione di " + next_stat_ -> station_name() + " di poter andare al parcheggio\n";
@@ -280,7 +280,7 @@ void Train::communications(){
                 case to_platform:
                     comm +=  " delle ore " + print_time();
                     if(delay_ != 0)
-                        delay_ > 0 ? comm += " con un ritardo di " + std::to_string(old_delay_)  : comm += " con un anticipo di " + std::to_string(old_delay_);
+                        delay_ > 0 ? comm += " con un ritardo di " + print_delay()  : comm += " con un anticipo di " + print_delay();
                     comm += " sta arrivando alla stazione di " + next_stat_ -> station_name() + " al binario n. " + std::to_string(plat_num_) + "\n";
                     break;
                 case transit:
@@ -289,7 +289,7 @@ void Train::communications(){
                 case invalid:                                                                                                                                       // Prima communicazione, quando il treno ha appena superato i 20km
                     comm += " e' in arrivo alla stazione di " + next_stat_ -> station_name();
                     if(delay_ != 0)
-                        delay_ > 0 ? comm += " con un ritardo di " + std::to_string(old_delay_)  : comm += " con un anticipo di " + std::to_string(old_delay_);
+                        delay_ > 0 ? comm += " con un ritardo di " + print_delay()  : comm += " con un anticipo di " + print_delay();
                     comm += "\n";
                     break;
             }
@@ -301,12 +301,12 @@ void Train::communications(){
             break;
 
         case platformStation:
-            comm = "Il treno " + get_train_type() + " delle ore " + print_time() + " e' arrivato alla stazione di " + curr_stat_ -> station_name();
+            comm = "Il treno " + get_train_type() + " n. " + train_num_ + " delle ore " + print_time() + " e' arrivato alla stazione di " + curr_stat_ -> station_name();
             if(delay_ != 0)
                 if(delay_ < 0)
-                    comm += " con un anticipo di " + std::to_string(abs(delay_)) + " min\n";
+                    comm += " con un anticipo di " + print_delay() + " min\n";
                 else
-                    comm += " con un ritardo di " + std::to_string(delay_) + " min\n";
+                    comm += " con un ritardo di " + print_delay() + " min\n";
             break;
 
         case park:
@@ -314,11 +314,11 @@ void Train::communications(){
             break;
 
         case endReached:
-            comm = "Il treno " + get_train_type() + " numero " + train_num_ + " e' giunto al capolinea";
+            comm = "Il treno " + get_train_type() + " n.     " + train_num_ + " e' giunto al capolinea";
             if(delay_ < 0)
-                comm += " con un anticipo di " + std::to_string(abs(delay_)) + " min\n";
+                comm += " con un anticipo di " + print_delay() + " min\n";
             if(delay_ > 0)
-                comm += " con un ritardo di " + std::to_string(delay_) + " min\n";
+                comm += " con un ritardo di " + print_delay() + " min\n";
             if(delay_ == 0)
                 comm += " in orario\n";
             break;
@@ -336,12 +336,26 @@ std::string Train::train_num() const {              // Numero del treno
     return train_num_;
 }
 std::string Train::print_time()const{
-    char formatted_time[5];
+    char formatted_time[6];
     int hh = (arrivals_[time_arrival_next_stat_] /60) %24;
     int mm = arrivals_[time_arrival_next_stat_] %60;
-    int result = sprintf_s (formatted_time, 5, "%.2d:%.2d", hh, mm);
+    int result = sprintf_s (formatted_time, 6, "%.2d:%.2d", hh, mm);
     return formatted_time;
 }
+
+std::string Train::print_delay()const{
+    int delay_to_stamp = abs(delay_);
+    char formatted_time[5];
+    int hh = (delay_to_stamp /60) %24;
+    int mm = delay_to_stamp %60;
+
+    if(hh == 0)
+        int result = sprintf_s (formatted_time, 5, "%.2d minuti", mm);
+    else
+        int result = sprintf_s (formatted_time, 5, "%.2d ore %.2d minuti", mm, hh);
+    return formatted_time;
+}
+
 bool Train::is_slowing() const{             // Ritorna se il treno sta rallentando qualcuno
     return is_slowing_;
 }

@@ -146,7 +146,6 @@ public:
     void set_status(int status);				// Imposta lo stato del treno
     bool is_slowing() const;                    // Ritorna se il treno sta rallentando qualcuno
     void set_slowing(bool is_slowing);          // Impostare il caso in cui il treno stia rallentando qualcuno
-    virtual ~Train();
 
 protected:
     Train(std::string number, bool rev, double max, Station* curr, std::vector<int> times, Railway* rail);
@@ -159,6 +158,7 @@ protected:
 
     std::string train_num_;						// Numero del treno
     std::string print_time()const;              // Stampa il tempo in formato xx:xx
+    std::string print_delay()const;             // Stampa il ritardo in formato xx ore xx minuti
     bool is_slowing_;                           // Controllo se il treno sta rallentando un altro treno
     bool reverse_;								// True per i treni in ritorno
     const double max_spd_;						// km/min
@@ -180,7 +180,6 @@ protected:
 class Regional : public Train{
 public:
     Regional(std::string number, bool rev, Station* curr, std::vector<int> times, Railway* rail);
-    ~Regional(){};
 private:
     std::string get_train_type()const;
     void calc_specific_delay();
@@ -189,7 +188,6 @@ private:
 class Fast : public Train{
 public:
     Fast(std::string number, bool rev, Station* curr, std::vector<int> times, Railway* rail);
-    ~Fast(){};
 private:
     std::string get_train_type()const;
 };
@@ -197,7 +195,6 @@ private:
 class SuperFast : public Train{
 public:
     SuperFast(std::string number, bool rev, Station* curr, std::vector<int> times, Railway* rail);
-    ~SuperFast(){};
 private:
     std::string get_train_type()const;
 };
