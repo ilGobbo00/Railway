@@ -220,11 +220,11 @@ void Train::calc_specific_delay() {
      * Invoco ceil al posto di mettere i valori interi arrotondati per eccesso per poter capire meglio in fase di revisione del codice
      */
     if (principal) {
-        station_to_skip != 0 ? delay_due_to_station = station_to_skip * (int)ceil(3.16) : delay_due_to_station = (int)ceil(3.75);                                              // Se e' di transito ma la prossima stazione e' una principale devo contare il tempo per fare i 5km a 80km/h
+        station_to_skip != 0 ? delay_due_to_station = station_to_skip * (int)ceil(3.16) : delay_due_to_station = (int)ceil(3.75);       // Trovo il tempo che mi serve per saltare tutte le stazioni dove transito
         delay_ = (central_railw_->curr_time() + (int)ceil((abs((int)ceil(next_stat_->distance() - curr_km_)) - 5) / curr_spd_) +
                   delay_due_to_station + (int)ceil(normal_motion_distance / max_spd_)) - arrivals_[time_arrival_next_stat_];
     }
-    else delay_ = 0;                                                                                                                           // (Per i non regionali) Se le prossime stazioni sono tutte secondarie non posso calcolare nessun ritardo
+    else delay_ = 0;                                                                                                                            // (Per i non regionali) Se le prossime stazioni sono tutte secondarie non posso calcolare nessun ritardo
 }
 void Regional::calc_specific_delay() {
     double time_five_km = 3.75;
@@ -232,11 +232,9 @@ void Regional::calc_specific_delay() {
     double time_distance_remaining;
     curr_spd_ != 0 ? time_distance_remaining = distance_remaining / curr_spd_ : time_distance_remaining = 0;
     int time_next  = arrivals_[time_arrival_next_stat_];
-    delay_ = round(central_railw_->curr_time() + time_five_km + time_distance_remaining) - time_next;
-//    delay_ = (int)round(central_railw_->curr_time() + time_five_km + distance_remaining / curr_spd_ - arrivals_[time_arrival_next_stat_]);                                          // Tempo in cui arriverò dopo errer giunto in stazione - tempo d'arrivo stimato
-//    delay_ = central_railw_->curr_time() + (int)ceil(3.75) + (int)ceil((abs((int)ceil(next_stat()->distance() - curr_km_)) - 5) / curr_spd_) - arrivals_[time_arrival_next_stat_];
+    delay_ = round(central_railw_->curr_time() + time_five_km + time_distance_remaining) - time_next;                   // Tempo in cui arriverò dopo errer giunto in stazione - tempo d'arrivo stimato
 }
-std::string Train::changed_delay() {
+std::string Train::changed_delay() {                                                                                                // Calcolo se ci sono state variazioni nel ritardo
     std::string to_return = "Il treno numero " + train_num_ + " diretto verso la stazione " + next_stat_->station_name();
     // Se prima era in orario
     if (old_delay_ == 0) {
@@ -279,10 +277,10 @@ std::string Train::changed_delay() {
 }
 
 // ===== Communicazioni dei treni =====
-void Train::communications() {
+void Train::communications() {                                                                                                                                  // Le comunicazioni variano in base allo stato
     string comm;
     switch (status_) {
-        case normalMotion:
+        case normalMotion:                                                                                                                                      // Comunicazioni al 20esimo chilometro prima della prossima stazione in base alla risposta ricevuta dalla stazione
             comm = "Il treno " + get_train_type() + " n." + train_num_;
             switch (last_request_) {
                 case reject:
@@ -297,7 +295,7 @@ void Train::communications() {
                 case transit:
                     comm += " ha ricevuto l'ordine dalla stazione di " + next_stat_->station_name() + " di poter transitare\n";
                     break;
-                case invalid:                                                                                                                                       // Prima communicazione, quando il treno ha appena superato i 20km
+                case invalid:                                                                                                                                               // Prima communicazione, quando il treno ha appena superato i 20km
                     comm += " e' in arrivo alla stazione di " + next_stat_->station_name();
                     if (delay_ != 0) {
                         delay_ > 0 ? comm += " con un ritardo di " + print_delay(false) : comm += " con un anticipo di " + print_delay(false);
@@ -309,12 +307,12 @@ void Train::communications() {
             }
             break;
 
-        case stationMotion:
+        case stationMotion:                                                                                                                                                 // Movimento nei pressi della stazione
             if (last_request_ == to_platform)
                 comm = changed_delay();
             break;
 
-        case platformStation:
+        case platformStation:                                                                                                                                               // Comunicazioni quando sono al binario
             comm = "Il treno " + get_train_type() + " n." + train_num_ + " delle ore " + print_time() + " e' arrivato alla stazione di " + curr_stat_->station_name();
             if (delay_ != 0) {
                 if (delay_ < 0)
@@ -351,14 +349,14 @@ void Train::communications() {
 std::string Train::train_num() const {              // Numero del treno
     return train_num_;
 }
-std::string Train::print_time()const {
+std::string Train::print_time()const {              // Stampa dell'orario in formato xx:xx
     char formatted_time[6];
     int hh = (arrivals_[time_arrival_next_stat_] / 60) % 24;
     int mm = arrivals_[time_arrival_next_stat_] % 60;
     int result = sprintf_s(formatted_time, 6, "%.2d:%.2d", hh, mm);
     return formatted_time;
 }
-std::string Train::print_delay(bool diff) const {
+std::string Train::print_delay(bool diff) const {               // Stampa del ritardo in formato hh ore mm minuti
     int delay_to_calculate = 0;
     if(diff)
         delay_to_calculate = abs(delay_ - old_delay_);
