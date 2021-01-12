@@ -42,17 +42,19 @@ void Station::update() {
 
 ///METODI "personali", usati solo internamente (liv. prot. comunque protected)
 
-//PER MECCANISMO PRIORITA' SI VEDA priorit‡.txt
-double Station::getPriority(Train* t) const {  //METODO PRIVATO: calcola priorit‡ treni
+//PER MECCANISMO PRIORITA' SI VEDA priorit√†.txt
+double Station::getPriority(Train* t) const {  //METODO PRIVATO: calcola priorit√† treni
 	//return int(t->max_spd()/100.0) + t->delay()/10000.0;
 	if (t == nullptr) return 0;
-	if (Regional* tr = dynamic_cast<Regional*>(t)) return 1.0 + t->delay() / 10000.0;
-	if (Fast* tr = dynamic_cast<Fast*>(t)) return 2.0 + t->delay() / 10000.0;
-	if (SuperFast* tr = dynamic_cast<SuperFast*>(t)) return 3.0 + t->delay() / 10000.0;
+	int trainDelay = t->delay();
+	if (trainDelay < 0) return -1;
+	if (Regional* tr = dynamic_cast<Regional*>(t)) return 1.0 + trainDelay / 10000.0;
+	if (Fast* tr = dynamic_cast<Fast*>(t)) return 2.0 + trainDelay / 10000.0;
+	if (SuperFast* tr = dynamic_cast<SuperFast*>(t)) return 3.0 + trainDelay / 10000.0;
 	else throw std::invalid_argument("\ngetPriority: CLASS CAST INVALIDO\n");
 }
 
-//Ritorna la massima priorit‡ parcheggiata: NON conto treni in anticipo! (salvo solo priorit‡ positive)
+//Ritorna la massima priorit√† parcheggiata: NON conto treni in anticipo! (salvo solo priorit√† positive)
 //Torna 0 con parcheggio vuoto O se il parcheggio contiene TUTTI treni in anticipo
 double Station::getMaxPP() const {
 	double maxp = 0;
@@ -96,7 +98,7 @@ bool Station::request_exit(Train* t) {      // (Con treno sui binari) TRUE: part
 		}
 		//non esce se timer>0 o se altro treno ha precedenza
 		if (haltTimer > 0 || getPriority(t) < getPriority(otherTrain)) return false;
-		else {   //se puÚ uscire: imposta timer, libera binario, dai via libera
+		else {   //se pu√≤ uscire: imposta timer, libera binario, dai via libera
 			haltTimer = DEPARTURE_DELAY;
 			platforms[thisTrainIndex] = nullptr;
 			announcements = announcements + "Il treno " + t->train_num() + " e' in partenza dalla stazione " + station_name() + " dal binario " + std::to_string(thisTrainIndex + 1) + "\n";
@@ -115,7 +117,7 @@ bool Station::request_exit(Train* t) {      // (Con treno sui binari) TRUE: part
 		}
 		//non esce se timer>0 o se altro treno ha precedenza
 		if (haltTimerR > 0 || getPriority(t) < getPriority(otherTrain)) return false;
-		else {   //se puÚ uscire: imposta timer, libera binario, dai via libera
+		else {   //se pu√≤ uscire: imposta timer, libera binario, dai via libera
 			haltTimerR = DEPARTURE_DELAY;
 			platforms_reverse[thisTrainIndex] = nullptr;
 			announcements = announcements + "Il treno " + t->train_num() + " e' in partenza dalla stazione " + station_name() + " dal binario " + std::to_string(thisTrainIndex + 1) + "\n";
@@ -136,11 +138,11 @@ void Station::removeParking(Train* t) {
 }
 
 int Station::assignPlatform(Train* t) {
-	//Se la stazione e' piena O c'e' un altro treno in attesa con priorit‡ maggiore O treno e' in anticipo (priorit‡ negativa) O il treno e' rallentatore
+	//Se la stazione e' piena O c'e' un altro treno in attesa con priorit√† maggiore O treno e' in anticipo (priorit√† negativa) O il treno e' rallentatore
 	if (busy() || getPriority(t) < getMaxPP() || t->is_slowing()) {
 		if (t->status() != PARKING_STATUS) {
-			park_.push_back(t);           ///Il treno viene messo in parcheggio SOLO se non lo e' gi‡!
-			announcements = announcements + "Treno " + t->train_num() + " andr‡ al parcheggio\n";
+			park_.push_back(t);           ///Il treno viene messo in parcheggio SOLO se non lo e' gi√†!
+			announcements = announcements + "Treno " + t->train_num() + " andr√† al parcheggio\n";
 		}
 		return -1;
 	}
@@ -158,11 +160,11 @@ int Station::assignPlatform(Train* t) {
 }
 
 int Station::assignPlatformR(Train* t) {
-	//Se la stazione e' piena O c'e' un altro treno in attesa con priorit‡ maggiore O treno e' in anticipo (priorit‡ negativa) O il treno e' rallentatore
+	//Se la stazione e' piena O c'e' un altro treno in attesa con priorit√† maggiore O treno e' in anticipo (priorit√† negativa) O il treno e' rallentatore
 	if (busyR() || getPriority(t) < getMaxPPR() || t->is_slowing()) {
 		if (t->status() != PARKING_STATUS) {
-			park_reverse_.push_back(t);   ///Il treno viene messo in parcheggio SOLO se non lo e' gi‡!
-			announcements = announcements + "Treno " + t->train_num() + " andr‡ al parcheggio\n";
+			park_reverse_.push_back(t);   ///Il treno viene messo in parcheggio SOLO se non lo e' gi√†!
+			announcements = announcements + "Treno " + t->train_num() + " andr√† al parcheggio\n";
 		}
 		return -1;
 	}
