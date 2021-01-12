@@ -5,6 +5,7 @@
 
 #include "Railway.h"
 #include <math.h>
+#include <stdio.h>
 
 using std::cout;
 using std::vector;
@@ -118,7 +119,7 @@ void Train::advance_train() {                                                   
                         curr_spd_ = 80/60.0;                                                                                        //  Imposto la velocita' limitata a 80km/h
                         !reverse_ ? next_stat_ = curr_stat_->next_stat() : next_stat_ = curr_stat_->prev_stat();                    //  Faccio avanzare il treno nella giusta direzione
                         status_ = stationMotion;                                                                                    //  Movimento nei pressi della staizone
-                        if(time_arrival_next_stat_ < arrivals_.size()-1)
+                        if(time_arrival_next_stat_ < static_cast<int>(arrivals_.size())-1)
                             time_arrival_next_stat_++;                                                                              //  Aumento l'indice del riferimento dell'orario
                     }
                 }else
@@ -171,7 +172,7 @@ void Train::delay_calc(){                                                       
         case platformStation:                                                                                           // Quanto è in ritardo dal partire
             delay_ = central_railw_->curr_time() - arrivals_[time_arrival_next_stat_] + 5;                              // Tempo corrente - tempo in cui dovevo arrivare
             if((!reverse_ && curr_stat_ -> prev_stat() == nullptr)||(reverse_ && curr_stat_->next_stat() == nullptr))   // Se sono all'inizio della mia corsa (inversa o non)
-                delay_ - 5;
+                delay_ -= 5;
             break;
 
         case park:
@@ -338,7 +339,7 @@ std::string Train::print_time()const{
     char formatted_time[5];
     int hh = (arrivals_[time_arrival_next_stat_] /60) %24;
     int mm = arrivals_[time_arrival_next_stat_] %60;
-    int result = std::sprintf (formatted_time, "%.2d:%.2d", hh, mm);
+    int result = sprintf_s (formatted_time, 5, "%.2d:%.2d", hh, mm);
     return formatted_time;
 }
 bool Train::is_slowing() const{             // Ritorna se il treno sta rallentando qualcuno
