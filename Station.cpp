@@ -101,7 +101,7 @@ bool Station::request_exit(Train* t) {      // (Con treno sui binari) TRUE: part
 		else {   //se può uscire: imposta timer, libera binario, dai via libera
 			haltTimer = DEPARTURE_DELAY;
 			platforms[thisTrainIndex] = nullptr;
-			announcements = announcements + "Il treno " + t->train_num() + " e' in partenza dalla stazione " + station_name() + " dal binario " + std::to_string(thisTrainIndex + 1) + "\n";
+			announcements = announcements + "Il treno n." + t->train_num() + " e' in partenza dalla stazione " + station_name() + " dal binario " + std::to_string(thisTrainIndex + 1) + "\n";
 			return true;
 		}
 	}
