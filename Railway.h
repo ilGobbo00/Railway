@@ -74,7 +74,7 @@ public:
     void update();                                 // Metodo con cui "far passare il tempo" in stazione. Verrà invocato da Railway nella parte inziale d'ogni minuto, PRIMA di verifiche varie/avanzamento treni. Riporta aggiornamenti.
     void delete_train(Train* t);                   // Chiamato da un treno al capolinea per essere rimosso dai binari
 
-	virtual ~Station() {};
+	virtual ~Station(){};
 
 protected:
     Station(std::string name, int distance, Station* prev, Railway* rail);
@@ -106,14 +106,14 @@ class Principal : public Station{
 public:
     Principal(std::string name, int distance, Station* prev, Railway* rail);
     int request(Train* t); 							// (Interazione con stazione) -1: binario non disponibile (vai in park, chiedi binario di nuovo dopo), >=0 n. binario (ogni ciclo: partenze, richiesta e risposta)
-	~Principal() {};
+	~Principal(){};
 };
 
 class Secondary : public Station{					// Il binario di transito è dato dal diverso comportamento delle stazioni di tipo Principal e Secondary
 public:                                         // (perchè nel secondo caso lasciamo passare il treno transito facendo aspettare gli altri)
     Secondary(std::string name, int distance, Station* prev, Railway* rail);
     int request(Train* t); 							// (Interazione con stazione) -1: binario non disponibile (vai in park, chiedi binario di nuovo dopo), >=0 n. binario (ogni ciclo: partenze, richiesta e risposta)
-	~Secondary() {};
+	~Secondary(){};
 };
 
 
@@ -142,7 +142,7 @@ public:
     void set_status(int status);				// Imposta lo stato del treno
     bool is_slowing() const;                    // Ritorna se il treno sta rallentando qualcuno
     void set_slowing(bool is_slowing);          // Impostare il caso in cui il treno stia rallentando qualcuno
-	virtual ~Train() {};
+	virtual ~Train(){};
 
 protected:
     Train(std::string number, bool rev, double max, Station* curr, std::vector<int> times, Railway* rail);
@@ -154,7 +154,8 @@ protected:
     virtual std::string get_train_type() const = 0;
 
     std::string train_num_;						// Numero del treno
-    std::string print_time()const;              // Stampa il tempo in formato xx:xx
+    std::string print_time() const;             // Stampa il tempo in formato xx:xx
+    std::string print_delay() const;            // Stampa il ritardo in formato xxh xxm
     bool is_slowing_;                           // Controllo se il treno sta rallentando un altro treno
     bool reverse_;								// True per i treni in ritorno
     const double max_spd_;						// km/min
@@ -176,7 +177,7 @@ protected:
 class Regional : public Train{
 public:
     Regional(std::string number, bool rev, Station* curr, std::vector<int> times, Railway* rail);
-	~Regional() {};
+	~Regional(){};
 private:
     std::string get_train_type()const;
     void calc_specific_delay();
@@ -185,7 +186,7 @@ private:
 class Fast : public Train{
 public:
     Fast(std::string number, bool rev, Station* curr, std::vector<int> times, Railway* rail);
-    ~Fast() {};
+    ~Fast(){};
 private:
     std::string get_train_type()const;
 };
