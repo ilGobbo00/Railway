@@ -61,7 +61,7 @@ Railway::Railway(const string line_description, const string timetables) : curr_
 	}
 	string line2 = "";
 	istringstream t_stream;
-	int t_number = 0;
+	string t_number = "";
 	int t_rev = 0;
 	int t_type = 1;
 	std::vector<int> t_times;
@@ -69,7 +69,8 @@ Railway::Railway(const string line_description, const string timetables) : curr_
 	while (std::getline(trains_desc, line2))
 	{
 		t_stream = istringstream(line2);
-		t_stream >> t_number;
+		t_number = line2.substr(0, line2.find(' '));
+	    t_stream.ignore(8, ' ');
 		t_stream >> t_rev;
 		t_stream >> t_type;
 		int t_time = 0;
@@ -91,14 +92,14 @@ Railway::Railway(const string line_description, const string timetables) : curr_
 						t_dist2 = all_stations[i]->distance();
 						t_prev_time = t_time;
 						if(t_stream >> t_time)
-							if (t_time - (t_prev_time + (static_cast<int>(t_times.size()) >= 2 ? 5 : 0)) < static_cast<int>(ceil((t_dist2 - t_prev_dist2 - 10) / 160.0)) + 10)
+							if (t_time - (t_prev_time + (static_cast<int>(t_times.size()) >= 2 ? 5 : 0)) < static_cast<int>(ceil((t_dist2 - t_prev_dist2 - 10) / (160.0 / 60))) + 10)
 							{
-								t_time = static_cast<int>(ceil((t_dist2 - t_prev_dist2 - 10) / 160.0)) + 10;
+								t_time = static_cast<int>(ceil((t_dist2 - t_prev_dist2 - 10) / (160.0 / 60))) + 10;
 								if (!correction)
 									correction = true;
 							}
 						else
-							t_time = (static_cast<int>(ceil((t_dist2 - t_prev_dist2 - 10) / 160.0)) + 10) + 10;
+							t_time = (static_cast<int>(ceil((t_dist2 - t_prev_dist2 - 10) / (160.0 / 60))) + 10) + 10;
 						t_times.push_back(t_time);
 					}
 					else
@@ -117,14 +118,14 @@ Railway::Railway(const string line_description, const string timetables) : curr_
 						t_dist2 = all_stations[i]->distance();
 						t_prev_time = t_time;
 						if (t_stream >> t_time)
-							if (t_time - (t_prev_time + (static_cast<int>(t_times.size()) >= 2 ? 5 : 0)) < static_cast<int>(ceil((t_dist2 - t_prev_dist2 - 10) / 160.0)) + 10)
+							if (t_time - (t_prev_time + (static_cast<int>(t_times.size()) >= 2 ? 5 : 0)) < static_cast<int>(ceil((t_dist2 - t_prev_dist2 - 10) / (160.0/60))) + 10)
 							{
-								t_time = static_cast<int>(ceil((t_dist2 - t_prev_dist2 - 10) / 160.0)) + 10;
+								t_time = static_cast<int>(ceil((t_dist2 - t_prev_dist2 - 10) / (160.0 / 60))) + 10;
 								if (!correction)
 									correction = true;
 							}
 						else
-							t_time = (static_cast<int>(ceil((t_dist2 - t_prev_dist2 - 10) / 160.0)) + 10) + 10;
+							t_time = (static_cast<int>(ceil((t_dist2 - t_prev_dist2 - 10) / (160.0 / 60))) + 10) + 10;
 						t_times.push_back(t_time);
 					}
 					else
@@ -133,7 +134,7 @@ Railway::Railway(const string line_description, const string timetables) : curr_
 			}
 			if (t_times[0] < 1440)
 			{
-				trains_.push_back(new Regional(std::to_string(t_number), t_rev, (t_rev == 0 ? stations_.front() : stations_.back()), t_times, this));
+				trains_.push_back(new Regional(t_number, t_rev, (t_rev == 0 ? stations_.front() : stations_.back()), t_times, this));
 				if (correction)
 					append(string("Correzione timetable del treno " + t_number));
 			}
@@ -148,12 +149,13 @@ Railway::Railway(const string line_description, const string timetables) : curr_
 				for (size_t i = 0; i < all_stations.size(); i++)
 				{
 					if (Principal* s = dynamic_cast<Principal*>(all_stations[i]))
+					{ 
 						if (ok_all_stations[i])
 						{
 							t_prev_dist2 = t_dist2;
 							t_dist2 = all_stations[i]->distance();
 							t_prev_time = t_time;
-							int t_predicted = static_cast<int>(ceil((c_secondaries * 25 < t_dist2 - t_prev_dist2 - 10) ? c_secondaries * 25 / 190.0 + (t_dist2 - t_prev_dist2 - (c_secondaries * 25) - 10) / (t_type == 2 ? 240.0 : 300.0) : (t_dist2 - t_prev_dist2 - 10) / 190.0)) + 10;
+							int t_predicted = static_cast<int>(ceil((c_secondaries * 25 < t_dist2 - t_prev_dist2 - 10) ? c_secondaries * 25 / (190.0 / 60) + (t_dist2 - t_prev_dist2 - (c_secondaries * 25) - 10) / ((t_type == 2 ? 240.0 : 300.0) / 60) : (t_dist2 - t_prev_dist2 - 10) / (190.0 / 60))) + 10;
 							if (t_stream >> t_time)
 								if (t_time - (t_prev_time + (static_cast<int>(t_times.size()) >= 2 ? 5 : 0)) < t_predicted)
 								{
@@ -168,6 +170,7 @@ Railway::Railway(const string line_description, const string timetables) : curr_
 						}
 						else
 							t_stream.ignore(8, ' ');
+					}
 					else if (ok_all_stations[i])
 						c_secondaries++;
 				}
@@ -184,7 +187,7 @@ Railway::Railway(const string line_description, const string timetables) : curr_
 							t_prev_dist2 = t_dist2;
 							t_dist2 = all_stations[i]->distance();
 							t_prev_time = t_time;
-							int t_predicted = static_cast<int>(ceil((c_secondaries * 25 < t_dist2 - t_prev_dist2 - 10) ? c_secondaries * 25 / 190.0 + (t_dist2 - t_prev_dist2 - (c_secondaries * 25) - 10) / (t_type == 2 ? 240.0 : 300.0) : (t_dist2 - t_prev_dist2 - 10) / 190.0)) + 10;
+							int t_predicted = static_cast<int>(ceil((c_secondaries * 25 < t_dist2 - t_prev_dist2 - 10) ? c_secondaries * 25 / (190.0 / 60) + (t_dist2 - t_prev_dist2 - (c_secondaries * 25) - 10) / ((t_type == 2 ? 240.0 : 300.0) / 60) : (t_dist2 - t_prev_dist2 - 10) / (190.0 / 60))) + 10;
 							if (t_stream >> t_time)
 								if (t_time - (t_prev_time + (static_cast<int>(t_times.size()) >= 2 ? 5 : 0)) < t_predicted)
 								{
@@ -206,9 +209,9 @@ Railway::Railway(const string line_description, const string timetables) : curr_
 			if (t_times[0] < 1440)
 			{
 				if (t_type == 2)
-					trains_.push_back(new Fast(std::to_string(t_number), t_rev, (t_rev == 0 ? stations_.front() : stations_.back()), t_times, this));
+					trains_.push_back(new Fast(t_number, t_rev, (t_rev == 0 ? stations_.front() : stations_.back()), t_times, this));
 				else
-					trains_.push_back(new SuperFast(std::to_string(t_number), t_rev, (t_rev == 0 ? stations_.front() : stations_.back()), t_times, this));
+					trains_.push_back(new SuperFast(t_number, t_rev, (t_rev == 0 ? stations_.front() : stations_.back()), t_times, this));
 				if (correction)
 					append(string("Correzione timetable del treno " + t_number));
 			}
@@ -263,7 +266,7 @@ void Railway::check_interaction()				// Controllo distanza (collisioni e sorpass
 {
 	sort_trains_pts();
 	sort_trains_rev_pts();
-	for (size_t i = 0; i < trains_pts_.size()-1; i++)
+	for (size_t i = 0; i < static_cast<int>(trains_pts_.size())-1; i++)
 	{
 		if ((trains_pts_[i]->status() == 0 && trains_pts_[i + 1]->status() == 0) && (abs(trains_pts_[i]->current_km() - trains_pts_[i + 1]->current_km()) < 10.0))
 		{
@@ -290,7 +293,7 @@ void Railway::check_interaction()				// Controllo distanza (collisioni e sorpass
 			}
 		}
 	}
-	for (size_t i = 0; i < trains_rev_pts_.size() - 1; i++)
+	for (int i = 0; i < static_cast<int>(trains_rev_pts_.size())-1; i++)
 	{
 		if ((trains_rev_pts_[i]->status() == 0 && trains_rev_pts_[i + 1]->status() == 0) && (abs(trains_rev_pts_[i]->current_km() - trains_rev_pts_[i + 1]->current_km()) < 10.0))
 		{
@@ -321,7 +324,7 @@ void Railway::check_interaction()				// Controllo distanza (collisioni e sorpass
 
 int Railway::curr_time() const { return curr_time_; } // Ritorna il tempo corrente
 
-void Railway::append(std::string msg) { messages_ += msg + "\n"; } // Funzione per aggiungere contenuto in coda alla stringa di output della Railway
+void Railway::append(std::string msg) { if(msg != "") messages_ += msg + "\n"; } // Funzione per aggiungere contenuto in coda alla stringa di output della Railway
 
 void Railway::printout()						// Funzione di stampa della stringa di output messages_ (svuota la stringa dopo averla restituita)
 {
