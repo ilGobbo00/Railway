@@ -93,15 +93,15 @@ Railway::Railway(const string line_description, const string timetables) : curr_
 						t_prev_time = t_time;
 						if (t_stream >> t_time)
 						{
-							if (t_time - (t_prev_time + (static_cast<int>(t_times.size()) >= 2 ? 5 : 0)) < static_cast<int>(ceil((t_dist2 - t_prev_dist2 - 10) / (160.0 / 60))) + 10)
+							if (t_times.size() > 0 && (t_time - (t_prev_time + (static_cast<int>(t_times.size()) >= 2 ? 5 : 0)) < static_cast<int>(ceil((t_dist2 - t_prev_dist2 - 10) / (160.0 / 60))) + 10))
 							{
-								t_time = t_prev_time + static_cast<int>(ceil((t_dist2 - t_prev_dist2 - 10) / (160.0 / 60))) + 10;
+								t_time = t_prev_time + static_cast<int>(ceil((t_dist2 - t_prev_dist2 - 10) / (160.0 / 60))) + 10 + (static_cast<int>(t_times.size()) >= 2 ? 5 : 0);
 								if (!correction)
 									correction = true;
 							}
 						}
 						else
-							t_time = t_prev_time + (static_cast<int>(ceil((t_dist2 - t_prev_dist2 - 10) / (160.0 / 60))) + 10) + 10;
+							t_time = t_prev_time + (static_cast<int>(ceil((t_dist2 - t_prev_dist2 - 10) / (160.0 / 60))) + 10) + 10 + (static_cast<int>(t_times.size()) >= 2 ? 5 : 0);
 						t_times.push_back(t_time);
 					}
 					else
@@ -121,15 +121,15 @@ Railway::Railway(const string line_description, const string timetables) : curr_
 						t_prev_time = t_time;
 						if (t_stream >> t_time)
 						{
-							if (t_time - (t_prev_time + (static_cast<int>(t_times.size()) >= 2 ? 5 : 0)) < static_cast<int>(ceil((t_dist2 - t_prev_dist2 - 10) / (160.0 / 60))) + 10)
+							if (t_times.size() > 0 && (t_time - (t_prev_time + (static_cast<int>(t_times.size()) >= 2 ? 5 : 0)) < static_cast<int>(ceil((t_dist2 - t_prev_dist2 - 10) / (160.0 / 60))) + 10))
 							{
-								t_time = t_prev_time + static_cast<int>(ceil((t_dist2 - t_prev_dist2 - 10) / (160.0 / 60))) + 10;
+								t_time = t_prev_time + static_cast<int>(ceil((t_dist2 - t_prev_dist2 - 10) / (160.0 / 60))) + 10 + (static_cast<int>(t_times.size()) >= 2 ? 5 : 0);
 								if (!correction)
 									correction = true;
 							}
 						}
 						else
-							t_time = t_prev_time + (static_cast<int>(ceil((t_dist2 - t_prev_dist2 - 10) / (160.0 / 60))) + 10) + 10;
+							t_time = t_prev_time + (static_cast<int>(ceil((t_dist2 - t_prev_dist2 - 10) / (160.0 / 60))) + 10) + 10 + (static_cast<int>(t_times.size()) >= 2 ? 5 : 0);
 						t_times.push_back(t_time);
 					}
 					else
@@ -161,9 +161,9 @@ Railway::Railway(const string line_description, const string timetables) : curr_
 							t_prev_time = t_time;
 							int t_predicted = static_cast<int>(ceil((c_secondaries * 25 < t_dist2 - t_prev_dist2 - 10) ? c_secondaries * 25 / (190.0 / 60) + (t_dist2 - t_prev_dist2 - (c_secondaries * 25) - 10) / ((t_type == 2 ? 240.0 : 300.0) / 60) : (t_dist2 - t_prev_dist2 - 10) / (190.0 / 60))) + 10;
 							if (t_stream >> t_time)
-								if (t_time - (t_prev_time + (static_cast<int>(t_times.size()) >= 2 ? 5 : 0)) < t_predicted)
+								if (t_times.size() > 0 && (t_time - (t_prev_time + (static_cast<int>(t_times.size()) >= 2 ? 5 : 0)) < t_predicted))
 								{
-									t_time = t_prev_time + t_predicted;
+									t_time = t_prev_time + t_predicted + (static_cast<int>(t_times.size()) >= 2 ? 5 : 0);
 									if (!correction)
 										correction = true;
 								}
@@ -193,9 +193,9 @@ Railway::Railway(const string line_description, const string timetables) : curr_
 							t_prev_time = t_time;
 							int t_predicted = static_cast<int>(ceil((c_secondaries * 25 < t_dist2 - t_prev_dist2 - 10) ? c_secondaries * 25 / (190.0 / 60) + (t_dist2 - t_prev_dist2 - (c_secondaries * 25) - 10) / ((t_type == 2 ? 240.0 : 300.0) / 60) : (t_dist2 - t_prev_dist2 - 10) / (190.0 / 60))) + 10;
 							if (t_stream >> t_time)
-								if (t_time - (t_prev_time + (static_cast<int>(t_times.size()) >= 2 ? 5 : 0)) < t_predicted)
+								if (t_times.size() > 0 && (t_time - (t_prev_time + (static_cast<int>(t_times.size()) >= 2 ? 5 : 0)) < t_predicted))
 								{
-									t_time = t_prev_time + t_predicted;
+									t_time = t_prev_time + t_predicted + (static_cast<int>(t_times.size()) >= 2 ? 5 : 0);
 									if (!correction)
 										correction = true;
 								}
@@ -242,7 +242,7 @@ Railway::~Railway()
 		delete trains_[i];
 }
 
-void Railway::advance_time()					// Fa avanzare il tempo e restituisce una concatenazione di stringhe che indica ciò che è successo nel minuto precedente
+void Railway::advance_time()					// Fa avanzare il tempo e restituisce una concatenazione di stringhe che indica ciÃ² che Ã¨ successo nel minuto precedente
 {
 	for (size_t i = 0; i < stations_.size(); i++)
 		stations_[i]->update();
