@@ -14,7 +14,6 @@
 - Dalle stazioni i treni partono differenziati di almeno 5 min, per garantire la distanza fra i treni.
 - Per calcolare il ritardo: in base a dove il treno si trova calcola il tempo ipotetico a cui arriverà - in tempo d'arrivo segnato da timetables. Se il treno è in banchina il ritardo sarà l'orario corrente
     meno l'orario a cui doveva partire considerando i 5minuti per i passeggeri. Se non ci sono altre fermate e il treno è in viaggio (caso tranisto) sarà sempre in orario
-
  */
 
 #ifndef Railway_h
@@ -69,7 +68,6 @@ public:
     std::string station_name() const;		        // Restituisce il nome della stazione
     std::string announcements;                      // Stringa per comunicazioni
     int distance() const;						    // Restituisce la distanza della stazione dall'origine
-    int getHaltTimer() const;					    // Restituisce il numero di minuti trascorsi dall'ultima partenza della stazione
     Station* next_stat() const;					    // Restituisce il puntatore alla prossima stazione
     Station* prev_stat() const;					    // Restituisce il puntatore alla stazione precedente (usato per i treni reverse)
 
