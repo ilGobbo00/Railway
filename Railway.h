@@ -1,19 +1,19 @@
 // Header
 
 /*
-- Il sistema centrale si accorge delle collisioni perchË Ë lui che ha accesso a tutti i treni e va a modificare la velocit‡ del treno da rallentare a meno che uno dei due non is trovi in prossimit‡
-   della stazione (zona lenta). Il treno che causa il ritardo verr‡ impostato nello stato "Rallentamento"  con cui andr‡ obbligatoriamente a sostare 5 min in parcheggio per far avvenire sorpasso.
-- Se il treno (che deve caricare/scaricare passeggeri) durante l'andatura di crocera supera la piazzola di sosta nel minuto il treno verr‡ riportato alla piazzola per poi riprendere a 80 km/h nel minuto successivo
+- Il sistema centrale si accorge delle collisioni perch√® √® lui che ha accesso a tutti i treni e va a modificare la velocit√† del treno da rallentare a meno che uno dei due non is trovi in prossimit√†
+   della stazione (zona lenta). Il treno che causa il ritardo verr√† impostato nello stato "Rallentamento"  con cui andr√† obbligatoriamente a sostare 5 min in parcheggio per far avvenire sorpasso.
+- Se il treno (che deve caricare/scaricare passeggeri) durante l'andatura di crocera supera la piazzola di sosta nel minuto il treno verr√† riportato alla piazzola per poi riprendere a 80 km/h nel minuto successivo
 - Le partenze dei treni vengono svolte prima del passaggio dei treni dal parcheggio alla stazione
-- Prima di far andare un treno in arrivo (prima dei 5km) in un binario libero devo assicurarmi che non ci sia un treno della piazzola che stia uscendo per andare su un binario libero: gestito dall'assegnazione dei binari, che viene effettuata al -20∞ km e successivamente al -5∞
-- I treni vanno sempre a cannone, l'anticipo Ë compensato aspettando in piazzola
-- Il criterio per far partire i treni in piazzola Ë tipo di treno e poi il ritardo
-- Ai 20km si effettua l'assegnazione del binario valutando l'occupazione istantanea della stazione. In caso non fosse disponibile alcun binario O ci fosse in parcheggio un treno con priorit‡ maggiore O il treno fosse in anticipo
-   il treno verr‡ fatto andare in parcheggio. (casistica gestista dal metodo request() della stazione chiamato dal treno)
-- Ai 20km i treni transito verificano che la stazione a cui si avvicinano abbia il binario transito: in caso questo fosse presente, la stazione deve impedire la partenza di treni passeggeri per 7 minuti. Se bin transito non Ë presente, non Ë necessario.
+- Prima di far andare un treno in arrivo (prima dei 5km) in un binario libero devo assicurarmi che non ci sia un treno della piazzola che stia uscendo per andare su un binario libero: gestito dall'assegnazione dei binari, che viene effettuata al -20¬∞ km e successivamente al -5¬∞
+- I treni vanno sempre a cannone, l'anticipo √® compensato aspettando in piazzola
+- Il criterio per far partire i treni in piazzola √® tipo di treno e poi il ritardo
+- Ai 20km si effettua l'assegnazione del binario valutando l'occupazione istantanea della stazione. In caso non fosse disponibile alcun binario O ci fosse in parcheggio un treno con priorit√† maggiore O il treno fosse in anticipo
+   il treno verr√† fatto andare in parcheggio. (casistica gestista dal metodo request() della stazione chiamato dal treno)
+- Ai 20km i treni transito verificano che la stazione a cui si avvicinano abbia il binario transito: in caso questo fosse presente, la stazione deve impedire la partenza di treni passeggeri per 7 minuti. Se bin transito non √® presente, non √® necessario.
 - Dalle stazioni i treni partono differenziati di almeno 5 min, per garantire la distanza fra i treni.
 - Per calcolare il ritardo: ogni treno quando arriva al parcheggio o alla banchina fa la sottrazione tra il tempo in cui doveva arrivare e quello effettivo del sistema
-- Ai cambi di velocit‡ (ai 5km) si taglia il minuto (si approssima al km intero dove viene cambiata la velocit‡)
+- Ai cambi di velocit√† (ai 5km) si taglia il minuto (si approssima al km intero dove viene cambiata la velocit√†)
 - Nessun controllo sulla distanza tra treni che sono compresi nel parcheggio
 */
 
@@ -36,7 +36,7 @@ public:
 	Railway(const Railway& r) = delete;					                        //
 	Railway& operator=(const Railway& r) = delete;		                        // Construttori e assegnamenti disattivati
 
-	void advance_time();					// Fa avanzare il tempo e restituisce una concatenazione di stringhe che indica ciÚ che Ë successo nel minuto precedente
+	void advance_time();					// Fa avanzare il tempo e restituisce una concatenazione di stringhe che indica ci√≤ che √® successo nel minuto precedente
 	bool is_completed() const;				// Controllo se tutti i treni sono arrivati a destinazione finale (se si termina il programma) (tutti status 4, e tutti con next_stat_ = nullptr)
 	void check_interaction();				// Controllo distanza (collisioni e sorpasso)
 	int curr_time() const;					// Ritorna il tempo corrente
@@ -51,8 +51,8 @@ private:
 	int curr_time_;							// Tempo corrente
 	std::vector<Station*> stations_;			// Vettore che contiene tutte le stazioni in sequenza line_description.txt
 	std::vector<Train*> trains_;				// Vettore che contiene tutti i teni presenti in timetables.txt
-	std::vector<Train*> trains_pts_;			// Vettore che contiene i puntatori ai treni ordinati partendo dal pi˘ lontano dall'origine
-	std::vector<Train*> trains_rev_pts_;		// Vettore che contiene i puntatori ai treni di ritorno ordinati partendo dal pi˘ lontano dal capolinea
+	std::vector<Train*> trains_pts_;			// Vettore che contiene i puntatori ai treni ordinati partendo dal pi√π lontano dall'origine
+	std::vector<Train*> trains_rev_pts_;		// Vettore che contiene i puntatori ai treni di ritorno ordinati partendo dal pi√π lontano dal capolinea
 	std::string messages_;					// Stringa per l'output a console
 };
 
@@ -60,19 +60,21 @@ private:
 class Station{
 public:
     Station(const Station& s) = delete;				//
-    Station& operator=(const Station& s) = delete;	// Construttori e assegnamenti disattivati
+    Station& operator=(const Station& s) = delete;	// Construttori e assegnamenti
+    Station(Station&& s) = delete;				    // disattivati
+    Station& operator=(Station&& s) = delete;		//
 
-    std::string station_name() const;				   // Restituisce il nome della stazione
-    std::string announcements;                     // Stringa per comunicazioni
-    int distance() const;							      // Restituisce la distanza della stazione dall'origine
-    int getHaltTimer() const;						      // Restituisce il numero di minuti trascorsi dall'ultima partenza della stazione
-    Station* next_stat() const;						   // Restituisce il puntatore alla prossima stazione
-    Station* prev_stat() const;						   // Restituisce il puntatore alla stazione precedente (usato per i treni reverse)
+    std::string station_name() const;			    // Restituisce il nome della stazione
+    std::string announcements;                      // Stringa per comunicazioni
+    int distance() const;						    // Restituisce la distanza della stazione dall'origine
+    int getHaltTimer() const;					    // Restituisce il numero di minuti trascorsi dall'ultima partenza della stazione
+    Station* next_stat() const;					    // Restituisce il puntatore alla prossima stazione
+    Station* prev_stat() const;					    // Restituisce il puntatore alla stazione precedente (usato per i treni reverse)
 
-    virtual int request(Train* t) = 0; 			   // (Interazione con stazione) -2: transito, -1: binario non disponibile (vai in park, chiedi binario di nuovo dopo), >=0 n. binario (ogni ciclo: partenze, richiesta e risposta)
-    bool request_exit(Train* t);		               // (Con treno sui binari) TRUE: partenza consentita, FALSE: stazionamento
-    void update();                                 // Metodo con cui "far passare il tempo" in stazione. Verr‡ invocato da Railway nella parte inziale d'ogni minuto, PRIMA di verifiche varie/avanzamento treni. Riporta aggiornamenti.
-    void delete_train(Train* t);                   // Chiamato da un treno al capolinea per essere rimosso dai binari
+    virtual int request(Train* t) = 0; 			    // (Interazione con stazione) -2: transito, -1: binario non disponibile (vai in park, chiedi binario di nuovo dopo), >=0 n. binario (ogni ciclo: partenze, richiesta e risposta)
+    bool request_exit(Train* t);		            // (Con treno sui binari) TRUE: partenza consentita, FALSE: stazionamento
+    void update();                                  // Metodo con cui "far passare il tempo" in stazione. Verr√† invocato da Railway nella parte inziale d'ogni minuto, PRIMA di verifiche varie/avanzamento treni. Riporta aggiornamenti.
+    void delete_train(Train* t);                    // Chiamato da un treno al capolinea per essere rimosso dai binari
 
 	virtual ~Station() {};
 
@@ -81,25 +83,25 @@ protected:
 
     std::string station_name_;						// Nome della stazione
     std::vector<Train*> platforms;					// Binari passeggeri e transito andata LUNGHEZZA FISSA DEFINITA IN COSTRUTTORE
-    std::vector<Train*> platforms_reverse;		// Binari passeggeri e transito ritorno LUNGHEZZA FISSA DEFINITA IN COSTRUTTORE
+    std::vector<Train*> platforms_reverse;		    // Binari passeggeri e transito ritorno LUNGHEZZA FISSA DEFINITA IN COSTRUTTORE
     std::vector<Train*> park_;						// (Binari) Parcheggio andata
     std::vector<Train*> park_reverse_;				// (Binari) Parcheggio ritorno
-    int distance_;									   // Distanza dalla stazione primaria
-    Station* next_stat_;							   // Punta alla stazione sucessiva per poterlo comunicare ai treni che dovranno partire
-    Station* prev_stat_;							   // Punta alla precedente per il reverse
-    int haltTimer;								      // Minuti di fermo stazione (caricato da partenze o transiti, quando >0 ferma partenze)
-    int haltTimerR;								      // Minuti di fermo stazione (caricato da partenze o transiti, quando >0 ferma partenze) ritorno
-    Railway* central_railw_; 						   // Per avere il tempo corrente mi serve il riferimento al rail
-   
-    double getPriority(Train* t) const;         // Restituisce priorit‡ treno
-  	 bool busy() const;                          // Se stazione Ë piena in senso andata
-  	 bool busyR() const;                         // Se stazione Ë piena in senso ritorno
-    double getMaxPP() const;                    // Ricava la priorit‡ massima fra i treni in parcheggio
-    double getMaxPPR() const;                   // Ricava la priorit‡ massima fra i treni in parcheggio (ritorno)
-    void removeParking(Train* t);               // Rimuove treno dal parcheggio (se presente)
-    void removeParkingR(Train* t);              // Rimuove treno dal parcheggio (se presente) ritorno
-    int assignPlatform(Train* t);               // Funzione ausiliaria per assegnazione binari
-    int assignPlatformR(Train* t);              // Funzione ausiliaria per assegnazione binari (ritorno)
+    int distance_;								    // Distanza dalla stazione primaria
+    Station* next_stat_;						    // Punta alla stazione sucessiva per poterlo comunicare ai treni che dovranno partire
+    Station* prev_stat_;						    // Punta alla precedente per il reverse
+    int haltTimer;								    // Minuti di fermo stazione (caricato da partenze o transiti, quando >0 ferma partenze)
+    int haltTimerR;								    // Minuti di fermo stazione (caricato da partenze o transiti, quando >0 ferma partenze) ritorno
+    Railway* central_railw_; 					    // Per avere il tempo corrente mi serve il riferimento al rail
+
+    double getPriority(Train* t) const;             // Restituisce priorit√† treno
+    bool busy() const;                             // Se stazione √® piena in senso andata
+    bool busyR() const;                            // Se stazione √® piena in senso ritorno
+    double getMaxPP() const;                        // Ricava la priorit√† massima fra i treni in parcheggio
+    double getMaxPPR() const;                       // Ricava la priorit√† massima fra i treni in parcheggio (ritorno)
+    void removeParking(Train* t);                   // Rimuove treno dal parcheggio (se presente)
+    void removeParkingR(Train* t);                  // Rimuove treno dal parcheggio (se presente) ritorno
+    int assignPlatform(Train* t);                   // Funzione ausiliaria per assegnazione binari
+    int assignPlatformR(Train* t);                  // Funzione ausiliaria per assegnazione binari (ritorno)
 };
 
 class Principal : public Station{
@@ -109,8 +111,8 @@ public:
 	~Principal() {};
 };
 
-class Secondary : public Station{					// Il binario di transito Ë dato dal diverso comportamento delle stazioni di tipo Principal e Secondary
-public:                                         // (perchË nel secondo caso lasciamo passare il treno transito facendo aspettare gli altri)
+class Secondary : public Station{					// Il binario di transito √® dato dal diverso comportamento delle stazioni di tipo Principal e Secondary
+public:                                             // (perch√® nel secondo caso lasciamo passare il treno transito facendo aspettare gli altri)
     Secondary(std::string name, int distance, Station* prev, Railway* rail);
     int request(Train* t); 							// (Interazione con stazione) -1: binario non disponibile (vai in park, chiedi binario di nuovo dopo), >=0 n. binario (ogni ciclo: partenze, richiesta e risposta)
 	~Secondary() {};
@@ -123,18 +125,20 @@ public:                                         // (perchË nel secondo caso lasc
 class Train{
 public:
     Train(const Train& t) = delete;				//
-    Train& operator=(const Train& t) = delete;	// Construttori e assegnamenti disattivati
+    Train& operator=(const Train& t) = delete;	// Construttori e assegnamenti
+    Train(Train&& t) = delete;					// disattivati
+    Train& operator=(Train&& t) = delete;		//
 
     std::string train_num() const;				// Numero del treno
     bool reverse() const;						// Andata (false) /ritorno (true)
-    double max_spd() const;				        // Massima velocit‡ del treno, possibile controllo del tipo di treno
-    double curr_spd() const;					// Velocit‡ corrente: solitamente massima, altrimenti velocit‡ del treno davanti, altrimenti gli 80km/h
-    void set_curr_spd(double val);				// Imposta velocit‡ corrente
+    double max_spd() const;				        // Massima velocit√† del treno, possibile controllo del tipo di treno
+    double curr_spd() const;					// Velocit√† corrente: solitamente massima, altrimenti velocit√† del treno davanti, altrimenti gli 80km/h
+    void set_curr_spd(double val);				// Imposta velocit√† corrente
     double current_km() const;					// Distanza percosa dalla stazione iniziale (o finale nel caso di reverse)
     void advance_train();				        // Calcolo del km al prossimo minuto. Aggiorna stato
     Station* curr_stat() const;					// Ritorna il puntatore alla stazione dove risiede
     Station* next_stat() const;					// Ritorna il puntatore alla prossima stazione
-    const std::vector<int> & arrivals() const;	// Ritorna il riferimento al vettore arrivals_ (non Ë detto che serva)
+    const std::vector<int> & arrivals() const;	// Ritorna il riferimento al vettore arrivals_ (non √® detto che serva)
     int delay() const;							// Ritorna l'eventuale anticipo/ritardo
     int wait_count() const;						// Ritorna il countdown d'attesa del treno prima che parta, viene assegnato dalla stazione
     void set_wait_count(int min);				// Imposta il countdown d'attesa (in qualsiasi situazione)
@@ -155,13 +159,14 @@ protected:
 
     std::string train_num_;						// Numero del treno
     std::string print_time()const;              // Stampa il tempo in formato xx:xx
+    std::string print_delay()const;             // Stampa il ritardo in formato xx ore xx minuti
     bool is_slowing_;                           // Controllo se il treno sta rallentando un altro treno
     bool reverse_;								// True per i treni in ritorno
     const double max_spd_;						// km/min
     double curr_spd_;							// km/min
     double curr_km_;							// Distanza percosa dalla stazione iniziale (o finale nel caso di reverse)
-    Station* curr_stat_;						// nullptr quando parte dalla stazione (e quindi sta viaggiando) oppure Ë nel parcheggio
-    Station* next_stat_;						// Puntatore alla prossima stazione di arrivo, Ë nullptr nel caso in cui sia al capolinea
+    Station* curr_stat_;						// nullptr quando parte dalla stazione (e quindi sta viaggiando) oppure √® nel parcheggio
+    Station* next_stat_;						// Puntatore alla prossima stazione di arrivo, √® nullptr nel caso in cui sia al capolinea
     const std::vector<int> arrivals_; 			// Orari in cui io arrivo alle stazioni
     int delay_;									// anticipo = ritardo negativo
     int old_delay_;                             // Variabile per il controllo della variazione del ritardo
@@ -199,3 +204,14 @@ private:
 };
 
 #endif
+
+
+
+
+
+
+
+
+
+
+
