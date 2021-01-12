@@ -32,30 +32,30 @@ class Train;
 // ===== SISTEMA CENTRALE ===== GIULIO REBECCHI
 class Railway {
 public:
-	Railway(const std::string line_description, const std::string timetables);	// Crea i vettori stations_ e trains_
-	Railway(const Railway& r) = delete;					                        //
-	Railway& operator=(const Railway& r) = delete;		                        // Construttori e assegnamenti
-	Railway(Railway&& r) = delete;										        // disattivati
-	Railway& operator=(Railway&& r) = delete;					                //
+    Railway(const std::string line_description, const std::string timetables);	// Crea i vettori stations_ e trains_
+    Railway(const Railway& r) = delete;					                        //
+    Railway& operator=(const Railway& r) = delete;		                        // Construttori e assegnamenti
+    Railway(Railway&& r) = delete;										        // disattivati
+    Railway& operator=(Railway&& r) = delete;					                //
 
-	void advance_time();					// Fa avanzare il tempo e restituisce una concatenazione di stringhe che indica ciò che è successo nel minuto precedente
-	bool is_completed() const;				// Controllo se tutti i treni sono arrivati a destinazione finale (se si termina il programma) (tutti status 4, e tutti con next_stat_ = nullptr)
-	void check_interaction();				// Controllo distanza (collisioni e sorpasso)
-	int curr_time() const;					// Ritorna il tempo corrente
-	void append(std::string msg);			// Funzione per aggiungere contenuto in coda alla stringa di output della Railway
-	void printout();						// Funzione di stampa della stringa di output messages_ (svuota la stringa dopo averla restituita)
+    void advance_time();					    // Fa avanzare il tempo e restituisce una concatenazione di stringhe che indica ciò che è successo nel minuto precedente
+    bool is_completed() const;				    // Controllo se tutti i treni sono arrivati a destinazione finale (se si termina il programma) (tutti status 4, e tutti con next_stat_ = nullptr)
+    void check_interaction();				    // Controllo distanza (collisioni e sorpasso)
+    int curr_time() const;					    // Ritorna il tempo corrente
+    void append(std::string msg);			    // Funzione per aggiungere contenuto in coda alla stringa di output della Railway
+    void printout();						    // Funzione di stampa della stringa di output messages_ (svuota la stringa dopo averla restituita)
 
-	~Railway();
+    ~Railway();
 private:
-	void sort_trains_pts();					    // riordina trains_pt e trains_rev_pt
-	void sort_trains_rev_pts();					// riordina trains_pt e trains_rev_pt
+    void sort_trains_pts();					    // riordina trains_pt e trains_rev_pt
+    void sort_trains_rev_pts();					// riordina trains_pt e trains_rev_pt
 
-	int curr_time_;							    // Tempo corrente
-	std::vector<Station> stations_;			    // Vettore che contiene tutte le stazioni in sequenza line_description.txt
-	std::vector<Train> trains_;				    // Vettore che contiene tutti i teni presenti in timetables.txt
-	std::vector<Train*> trains_pts_;			// Vettore che contiene i puntatori ai treni ordinati partendo dal più lontano dall'origine
-	std::vector<Train*> trains_rev_pts_;		// Vettore che contiene i puntatori ai treni di ritorno ordinati partendo dal più lontano dal capolinea
-	std::string messages_;					    // Stringa per l'output a console
+    int curr_time_;							    // Tempo corrente
+    std::vector<Station> stations_;			    // Vettore che contiene tutte le stazioni in sequenza line_description.txt
+    std::vector<Train> trains_;				    // Vettore che contiene tutti i teni presenti in timetables.txt
+    std::vector<Train*> trains_pts_;			// Vettore che contiene i puntatori ai treni ordinati partendo dal più lontano dall'origine
+    std::vector<Train*> trains_rev_pts_;		// Vettore che contiene i puntatori ai treni di ritorno ordinati partendo dal più lontano dal capolinea
+    std::string messages_;					    // Stringa per l'output a console
 };
 
 // ===== STAZIONI ===== DIEGO SPINOSA
@@ -94,10 +94,10 @@ protected:
     int haltTimer;								    // Minuti di fermo stazione (caricato da partenze o transiti, quando >0 ferma partenze)
     int haltTimerR;								    // Minuti di fermo stazione (caricato da partenze o transiti, quando >0 ferma partenze) ritorno
     Railway* central_railw_; 					    // Per avere il tempo corrente mi serve il riferimento al rail
-   
+
     double getPriority(Train* t) const;             // Restituisce priorità treno
-  	 bool busy() const;                             // Se stazione è piena in senso andata
-  	 bool busyR() const;                            // Se stazione è piena in senso ritorno
+    bool busy() const;                             // Se stazione è piena in senso andata
+    bool busyR() const;                            // Se stazione è piena in senso ritorno
     double getMaxPP() const;                        // Ricava la priorità massima fra i treni in parcheggio
     double getMaxPPR() const;                       // Ricava la priorità massima fra i treni in parcheggio (ritorno)
     void removeParking(Train* t);                   // Rimuove treno dal parcheggio (se presente)
@@ -182,7 +182,7 @@ protected:
 class Regional : public Train{
 public:
     Regional(std::string number, bool rev, Station* curr, std::vector<int> times, Railway* rail);
-    ~Regional();
+    ~Regional(){};
 private:
     std::string get_train_type()const;
     void calc_specific_delay();
@@ -191,7 +191,7 @@ private:
 class Fast : public Train{
 public:
     Fast(std::string number, bool rev, Station* curr, std::vector<int> times, Railway* rail);
-    ~Fast();
+    ~Fast(){};
 private:
     std::string get_train_type()const;
 };
@@ -199,7 +199,7 @@ private:
 class SuperFast : public Train{
 public:
     SuperFast(std::string number, bool rev, Station* curr, std::vector<int> times, Railway* rail);
-    ~SuperFast();
+    ~SuperFast(){};
 private:
     std::string get_train_type()const;
 };
