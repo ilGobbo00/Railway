@@ -41,8 +41,9 @@ void Train::advance_train() {                                                   
         case normalMotion:                                                                                                              // Movimento Normale
             !reverse_ ? curr_km_ += curr_spd_ : curr_km_ -= curr_spd_;                                                                  // Avanzamento treno
             if ((!reverse_ && curr_km_ >= next_stat_->distance() - 20) || (reverse_ && curr_km_ <= next_stat_->distance() + 20)) {      // Appena supera i 20km
-                if(curr_spd_ > 190/60.0)                                                                                                // Per evitare collisioni usciti dalla stazione appena prima del blocco
-                    curr_spd_ = 190/60.0;                                                                                               //  delle partenze è necessario limitare la velocità dei treni il transdito a 190km/h
+                if(last_request_ == transit)
+                    if(curr_spd_ > 190/60.0)                                                                                            // Per evitare collisioni usciti dalla stazione appena prima del blocco
+                        curr_spd_ = 190/60.0;                                                                                           //  delle partenze è necessario limitare la velocità dei treni il transdito a 190km/h
                 if((!reverse_ && curr_km_ < next_stat_->distance() - 5) || (reverse_ && curr_km_ > next_stat_->distance() + 5)) {       // Treno tra i 20km e i 5km prima
                     if (last_request_ == invalid) {                                                                                     // Il treno continua a chiedere cosa deve fare finchè non gli viene data una risposta esaustiva
                         if(next_stat_ -> next_stat() != nullptr) {                                                                      // Se non sono al capolinea
