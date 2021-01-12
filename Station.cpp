@@ -45,9 +45,9 @@ void Station::update(){
 //PER MECCANISMO PRIORITA' SI VEDA priorità.txt
 double Station::getPriority(Train* t) const{  //METODO PRIVATO: calcola priorità treni
     //return int(t->max_spd()/100.0) + t->delay()/10000.0;
-    if(dynamic_cast<Regional*>(t)) return 1.0 + t->delay()/10000.0;
-    if(dynamic_cast<Fast*>(t)) return 2.0 + t->delay()/10000.0;
-    if(dynamic_cast<SuperFast*>(t)) return 3.0 + t->delay()/10000.0;
+    if (Regional* tr = dynamic_cast<Regional*>(t)) return 1.0 + t->delay() / 10000.0;
+	if (Fast* tr = dynamic_cast<Fast*>(t)) return 2.0 + t->delay() / 10000.0;
+	if (SuperFast* tr = dynamic_cast<SuperFast*>(t)) return 3.0 + t->delay() / 10000.0;
     else throw std::invalid_argument("\ngetPriority: CLASS CAST INVALIDO\n");
 }
 
