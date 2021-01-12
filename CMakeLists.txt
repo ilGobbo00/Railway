@@ -1,5 +1,5 @@
 cmake_minimum_required(VERSION 2.8 FATAL_ERROR)
-project(Railway VERSION 1 LANGUAGES CXX)
+project(Railway LANGUAGES CXX)
 
 add_library(components
     Railway.h
