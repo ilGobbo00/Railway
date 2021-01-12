@@ -138,10 +138,6 @@ Railway::Railway(const string line_description, const string timetables) : curr_
 			}
 			if (t_times[0] < 1440)
 			{
-				for (size_t i = 0; i < t_times.size(); i++)
-				{
-					cout << t_times[i] << " ";
-				}
 				trains_.push_back(new Regional(t_number, t_rev, (t_rev == 0 ? stations_.front() : stations_.back()), t_times, this));
 				if (correction)
 					append(string("Correzione timetable del treno " + t_number));
