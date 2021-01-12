@@ -142,7 +142,7 @@ int Station::assignPlatform(Train* t) {
 	if (busy() || getPriority(t) < getMaxPP() || t->is_slowing()) {
 		if (t->status() != PARKING_STATUS) {
 			park_.push_back(t);           ///Il treno viene messo in parcheggio SOLO se non lo e' già!
-			announcements = announcements + "Treno " + t->train_num() + " andrà al parcheggio\n";
+			announcements = announcements + "Treno " + t->train_num() + " andra' al parcheggio\n";
 		}
 		return -1;
 	}
@@ -164,7 +164,7 @@ int Station::assignPlatformR(Train* t) {
 	if (busyR() || getPriority(t) < getMaxPPR() || t->is_slowing()) {
 		if (t->status() != PARKING_STATUS) {
 			park_reverse_.push_back(t);   ///Il treno viene messo in parcheggio SOLO se non lo e' già!
-			announcements = announcements + "Treno " + t->train_num() + " andrà al parcheggio\n";
+			announcements = announcements + "Treno " + t->train_num() + " andra' al parcheggio\n";
 		}
 		return -1;
 	}
