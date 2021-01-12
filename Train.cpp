@@ -248,7 +248,7 @@ std::string Train::changed_delay(){
             }
             if (delay_ > 0)
                 return to_return += " non e' più in anticipo, ma in ritardo di " + std::to_string(delay_) + " min\n";
-            return to_return += "non e' piu' in anticipo. Il treno è in orario\n";
+            return to_return += "non e' piu' in anticipo. Il treno e' in orario\n";
         }
 
         // Se prima era in ritardo
@@ -262,7 +262,7 @@ std::string Train::changed_delay(){
             }
             if (delay_ < 0)
                 return to_return += " non e' piu' in ritardo, ma in anticipo di " + std::to_string(abs(delay_)) + " min\n";
-            return to_return += "non e' piu' in anticipo. Il treno è in orario\n";
+            return to_return += "non e' piu' in anticipo. Il treno e' in orario\n";
         }
         throw std::logic_error("Error in changed_delay function, non return is called\n");
 }
@@ -287,7 +287,7 @@ void Train::communications(){
                     comm += " ha ricevuto l'ordine dalla stazione di " + next_stat_ -> station_name() + " di poter transitare\n";
                     break;
                 case invalid:                                                                                                                                       // Prima communicazione, quando il treno ha appena superato i 20km
-                    comm += " è in arrivo alla stazione di " + next_stat_ -> station_name();
+                    comm += " e' in arrivo alla stazione di " + next_stat_ -> station_name();
                     if(delay_ != 0)
                         delay_ > 0 ? comm += " con un ritardo di " + std::to_string(old_delay_)  : comm += " con un anticipo di " + std::to_string(old_delay_);
                     comm += "\n";
