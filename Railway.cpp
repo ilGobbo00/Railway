@@ -1,7 +1,7 @@
 #include "Railway.h"
 #include <fstream>
 #include <sstream>
-#include <math.h>
+#include <cmath>
 
 using std::cout;
 using std::string;
