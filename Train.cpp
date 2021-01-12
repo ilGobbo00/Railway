@@ -33,6 +33,7 @@ Train::Train(std::string number, bool rev, double max, Station* curr, std::vecto
         : train_num_{number}, is_slowing_{false}, reverse_{rev}, max_spd_{max/60}, curr_spd_{0}, curr_stat_{curr}, arrivals_{times}, delay_{0},
         old_delay_{0}, wait_count_{arrivals_[0]}, status_{platformStation}, time_arrival_next_stat_{0}, last_request_{invalid}, central_railw_{rail}
 {
+
     curr_km_ = curr_stat_ -> distance();                                                                                                // Se il treno fa il percorso opposto allora ha il massimo dei km che verranno decrementati
     !reverse_ ? next_stat_ = curr_stat_ -> next_stat() : next_stat_ = curr_stat_ -> prev_stat();                                        // (Ripetizione di platformStation) La prossima stazione dipende se il treno va avanti o nella direzione opposta
 }
@@ -134,7 +135,7 @@ void Train::advance_train() {                                                   
 
         case park:                                                                  // Parcheggio
             if(is_slowing_){
-                wait_count_ > 0 ? wait_count_-- : is_slowing_ = false;              // Se sto rallentando
+                wait_count_ > 0 ? wait_count_-- : is_slowing_ = false;              // Se sto rallentando un treno dietro
             }else{
                 delay_calc();
                 last_request_ = next_stat_ -> request(this);

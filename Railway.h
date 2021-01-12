@@ -146,6 +146,7 @@ public:
     void set_status(int status);				// Imposta lo stato del treno
     bool is_slowing() const;                    // Ritorna se il treno sta rallentando qualcuno
     void set_slowing(bool is_slowing);          // Impostare il caso in cui il treno stia rallentando qualcuno
+    virtual ~Train();
 
 protected:
     Train(std::string number, bool rev, double max, Station* curr, std::vector<int> times, Railway* rail);
