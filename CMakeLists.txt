@@ -1,5 +1,6 @@
 cmake_minimum_required(VERSION 2.8 FATAL_ERROR)
 set(CMAKE_CXX_FLAGS_RELEASE "-O2")
+set(CMAKE_CXX_STANDARD 11)
 
 project(Railway LANGUAGES CXX)
 
