@@ -334,9 +334,11 @@ void Railway::printout()						// Funzione di stampa della stringa di output mess
 {
 	if (messages_ != "")
 	{
+        char formatted_time[6];
 		int hour = (curr_time_ / 60) % 24;
 		int mins = curr_time_ % 60;
-		string print = "---RAILWAY SYSTEM---\t[" + std::to_string(hour) + ":" + std::to_string(mins) + "]\n" + messages_;
+        int result = sprintf_s(formatted_time, 6, "%.2d:%.2d", hour, mins);
+        string print = "---RAILWAY SYSTEM---\t[" + (string)formatted_time + "]\n" + messages_;
 		messages_ = "";
 		cout << print;
 	}

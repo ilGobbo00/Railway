@@ -155,7 +155,7 @@ protected:
 
     std::string train_num_;						// Numero del treno
     std::string print_time() const;             // Stampa il tempo in formato xx:xx
-    std::string print_delay() const;            // Stampa il ritardo in formato xxh xxm
+    std::string print_delay(bool diff) const;   // Stampa il ritardo in formato xxh xxm
     bool is_slowing_;                           // Controllo se il treno sta rallentando un altro treno
     bool reverse_;								// True per i treni in ritorno
     const double max_spd_;						// km/min
