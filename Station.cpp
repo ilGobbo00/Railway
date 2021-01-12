@@ -27,8 +27,6 @@ std::string Station::station_name() const { return station_name_; }		// Restitui
 
 int Station::distance() const { return distance_; }						// Restituisce la distanza della stazione dall'origine
 
-int Station::getHaltTimer() const { return haltTimer; }				// Restituisce il numero di minuti trascorsi dall'ultima partenza della stazione
-
 Station* Station::next_stat() const { return next_stat_; }				// Restituisce il puntatore alla prossima stazione
 
 Station* Station::prev_stat() const { return prev_stat_; }				// Restituisce il puntatore alla stazione precedente (usato per i treni reverse)

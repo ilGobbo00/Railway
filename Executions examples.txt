@@ -1,0 +1,1439 @@
+# ESEMPIO 01
+--- RAILWAY ---
+---RAILWAY SYSTEM---    [00:00]
+Correzione timetable del treno 0420
+---RAILWAY SYSTEM---    [05:31]
+Il treno n.0420 e' in partenza dalla stazione TRIESTE CENTRALE dal binario 2
+
+---RAILWAY SYSTEM---    [05:35]
+Il treno regionale n.0420 ha ricevuto l'ordine dalla stazione di MONFALCONE di poter andare al parcheggio
+
+---RAILWAY SYSTEM---    [05:36]
+Treno 0420 andra' al parcheggio
+
+---RAILWAY SYSTEM---    [05:42]
+Il treno numero 0420 diretto verso la stazione MONFALCONE non e' piu' in anticipo. Il treno e' in orario
+
+---RAILWAY SYSTEM---    [05:43]
+Treno 0420 in arrivo al binario 0
+
+---RAILWAY SYSTEM---    [05:46]
+Il treno regionale n.0420 delle ore 05:46 e' arrivato alla stazione di MONFALCONE
+
+---RAILWAY SYSTEM---    [05:53]
+Il treno n.0420 e' in partenza dalla stazione MONFALCONE dal binario 1
+
+---RAILWAY SYSTEM---    [05:59]
+Il treno regionale n.0420 ha ricevuto l'ordine dalla stazione di SAGRADO di poter andare al parcheggio
+
+---RAILWAY SYSTEM---    [06:00]
+Treno 0420 andra' al parcheggio
+
+---RAILWAY SYSTEM---    [06:05]
+Il treno numero 0420 diretto verso la stazione SAGRADO non e' piu' in anticipo. Il treno e' in orario
+
+---RAILWAY SYSTEM---    [06:06]
+Treno 0420 in arrivo al binario 0
+
+---RAILWAY SYSTEM---    [06:09]
+Il treno regionale n.0420 delle ore 06:09 e' arrivato alla stazione di SAGRADO
+
+---RAILWAY SYSTEM---    [06:16]
+Il treno n.0420 e' in partenza dalla stazione SAGRADO dal binario 1
+
+---RAILWAY SYSTEM---    [06:20]
+Il treno regionale n.0420 ha ricevuto l'ordine dalla stazione di GORIZIA CENTRALE di poter andare al parcheggio
+
+---RAILWAY SYSTEM---    [06:21]
+Treno 0420 andra' al parcheggio
+
+---RAILWAY SYSTEM---    [06:26]
+Il treno numero 0420 diretto verso la stazione GORIZIA CENTRALE non e' piu' in anticipo. Il treno e' in orario
+
+---RAILWAY SYSTEM---    [06:27]
+Treno 0420 in arrivo al binario 0
+
+---RAILWAY SYSTEM---    [06:30]
+Il treno regionale n.0420 delle ore 06:30 e' arrivato alla stazione di GORIZIA CENTRALE
+
+---RAILWAY SYSTEM---    [06:37]
+Il treno n.0420 e' in partenza dalla stazione GORIZIA CENTRALE dal binario 1
+
+---RAILWAY SYSTEM---    [06:41]
+Il treno regionale n.0420 ha ricevuto l'ordine dalla stazione di CORMONS di poter andare al parcheggio
+
+---RAILWAY SYSTEM---    [06:42]
+Treno 0420 andra' al parcheggio
+
+---RAILWAY SYSTEM---    [06:46]
+Il treno numero 0420 diretto verso la stazione CORMONS non e' piu' in anticipo. Il treno e' in orario
+
+---RAILWAY SYSTEM---    [06:47]
+Treno 0420 in arrivo al binario 0
+
+---RAILWAY SYSTEM---    [06:50]
+Il treno regionale n.0420 delle ore 06:50 e' arrivato alla stazione di CORMONS
+
+---RAILWAY SYSTEM---    [06:57]
+Il treno n.0420 e' in partenza dalla stazione CORMONS dal binario 1
+
+---RAILWAY SYSTEM---    [07:01]
+Il treno regionale n.0420 ha ricevuto l'ordine dalla stazione di UDINE di poter andare al parcheggio
+
+---RAILWAY SYSTEM---    [07:02]
+Treno 0420 andra' al parcheggio
+
+---RAILWAY SYSTEM---    [07:07]
+Il treno numero 0420 diretto verso la stazione UDINE non e' piu' in anticipo. Il treno e' in orario
+
+---RAILWAY SYSTEM---    [07:08]
+Treno 0420 in arrivo al binario 0
+
+---RAILWAY SYSTEM---    [07:11]
+Il treno regionale n.0420 delle ore 07:11 e' arrivato alla stazione di UDINE
+
+---RAILWAY SYSTEM---    [07:18]
+Il treno n.0420 e' in partenza dalla stazione UDINE dal binario 1
+
+---RAILWAY SYSTEM---    [07:22]
+Il treno regionale n.0420 ha ricevuto l'ordine dalla stazione di CODROIPO di poter andare al parcheggio
+
+---RAILWAY SYSTEM---    [07:23]
+Treno 0420 andra' al parcheggio
+
+---RAILWAY SYSTEM---    [07:29]
+Il treno numero 0420 diretto verso la stazione CODROIPO non e' piu' in anticipo. Il treno e' in orario
+
+---RAILWAY SYSTEM---    [07:30]
+Treno 0420 in arrivo al binario 0
+
+---RAILWAY SYSTEM---    [07:33]
+Il treno regionale n.0420 delle ore 07:33 e' arrivato alla stazione di CODROIPO
+
+---RAILWAY SYSTEM---    [07:40]
+Il treno n.0420 e' in partenza dalla stazione CODROIPO dal binario 1
+
+---RAILWAY SYSTEM---    [07:46]
+Il treno regionale n.0420 ha ricevuto l'ordine dalla stazione di CASARSA di poter andare al parcheggio
+
+---RAILWAY SYSTEM---    [07:47]
+Treno 0420 andra' al parcheggio
+
+---RAILWAY SYSTEM---    [07:53]
+Il treno numero 0420 diretto verso la stazione CASARSA non e' piu' in anticipo. Il treno e' in orario
+
+---RAILWAY SYSTEM---    [07:54]
+Treno 0420 in arrivo al binario 0
+
+---RAILWAY SYSTEM---    [07:57]
+Il treno regionale n.0420 delle ore 07:57 e' arrivato alla stazione di CASARSA
+
+---RAILWAY SYSTEM---    [08:04]
+Il treno n.0420 e' in partenza dalla stazione CASARSA dal binario 1
+
+---RAILWAY SYSTEM---    [08:08]
+Il treno regionale n.0420 ha ricevuto l'ordine dalla stazione di PORDENONE di poter andare al parcheggio
+
+---RAILWAY SYSTEM---    [08:09]
+Treno 0420 andra' al parcheggio
+
+---RAILWAY SYSTEM---    [08:13]
+Il treno numero 0420 diretto verso la stazione PORDENONE non e' piu' in anticipo. Il treno e' in orario
+
+---RAILWAY SYSTEM---    [08:14]
+Treno 0420 in arrivo al binario 0
+
+---RAILWAY SYSTEM---    [08:17]
+Il treno regionale n.0420 delle ore 08:17 e' arrivato alla stazione di PORDENONE
+
+---RAILWAY SYSTEM---    [08:24]
+Il treno n.0420 e' in partenza dalla stazione PORDENONE dal binario 1
+
+---RAILWAY SYSTEM---    [08:28]
+Il treno regionale n.0420 ha ricevuto l'ordine dalla stazione di SACILE di poter andare al parcheggio
+
+---RAILWAY SYSTEM---    [08:29]
+Treno 0420 andra' al parcheggio
+
+---RAILWAY SYSTEM---    [08:34]
+Il treno numero 0420 diretto verso la stazione SACILE non e' piu' in anticipo. Il treno e' in orario
+
+---RAILWAY SYSTEM---    [08:35]
+Treno 0420 in arrivo al binario 0
+
+---RAILWAY SYSTEM---    [08:38]
+Il treno regionale n.0420 delle ore 08:38 e' arrivato alla stazione di SACILE
+
+---RAILWAY SYSTEM---    [08:45]
+Il treno n.0420 e' in partenza dalla stazione SACILE dal binario 1
+
+---RAILWAY SYSTEM---    [08:52]
+Il treno regionale n.0420 ha ricevuto l'ordine dalla stazione di CONEGLIANO di poter andare al parcheggio
+
+---RAILWAY SYSTEM---    [08:53]
+Treno 0420 andra' al parcheggio
+
+---RAILWAY SYSTEM---    [08:58]
+Il treno numero 0420 diretto verso la stazione CONEGLIANO non e' piu' in anticipo. Il treno e' in orario
+
+---RAILWAY SYSTEM---    [08:59]
+Treno 0420 in arrivo al binario 0
+
+---RAILWAY SYSTEM---    [09:02]
+Il treno regionale n.0420 delle ore 09:02 e' arrivato alla stazione di CONEGLIANO
+
+---RAILWAY SYSTEM---    [09:09]
+Il treno n.0420 e' in partenza dalla stazione CONEGLIANO dal binario 1
+
+---RAILWAY SYSTEM---    [09:15]
+Il treno regionale n.0420 ha ricevuto l'ordine dalla stazione di TREVISO C. di poter andare al parcheggio
+
+---RAILWAY SYSTEM---    [09:16]
+Treno 0420 andra' al parcheggio
+
+---RAILWAY SYSTEM---    [09:21]
+Il treno numero 0420 diretto verso la stazione TREVISO C. non e' piu' in anticipo. Il treno e' in orario
+
+---RAILWAY SYSTEM---    [09:22]
+Treno 0420 in arrivo al binario 0
+
+---RAILWAY SYSTEM---    [09:25]
+Il treno regionale n.0420 delle ore 09:25 e' arrivato alla stazione di TREVISO C.
+
+---RAILWAY SYSTEM---    [09:32]
+Il treno n.0420 e' in partenza dalla stazione TREVISO C. dal binario 1
+
+---RAILWAY SYSTEM---    [09:36]
+Il treno regionale n.0420 ha ricevuto l'ordine dalla stazione di MOGLIANO VENETO di poter andare al parcheggio
+
+---RAILWAY SYSTEM---    [09:37]
+Treno 0420 andra' al parcheggio
+
+---RAILWAY SYSTEM---    [09:43]
+Il treno numero 0420 diretto verso la stazione MOGLIANO VENETO non e' piu' in anticipo. Il treno e' in orario
+
+---RAILWAY SYSTEM---    [09:44]
+Treno 0420 in arrivo al binario 0
+
+---RAILWAY SYSTEM---    [09:47]
+Il treno regionale n.0420 delle ore 09:47 e' arrivato alla stazione di MOGLIANO VENETO
+
+---RAILWAY SYSTEM---    [09:54]
+Il treno n.0420 e' in partenza dalla stazione MOGLIANO VENETO dal binario 1
+
+---RAILWAY SYSTEM---    [10:00]
+Il treno regionale n.0420 ha ricevuto l'ordine dalla stazione di VENEZIA MESTRE di poter andare al parcheggio
+
+---RAILWAY SYSTEM---    [10:01]
+Treno 0420 andra' al parcheggio
+
+---RAILWAY SYSTEM---    [10:07]
+Il treno numero 0420 diretto verso la stazione VENEZIA MESTRE non e' piu' in anticipo. Il treno e' in orario
+
+---RAILWAY SYSTEM---    [10:08]
+Treno 0420 in arrivo al binario 0
+
+---RAILWAY SYSTEM---    [10:11]
+Il treno regionale n.0420 delle ore 10:11 e' arrivato alla stazione di VENEZIA MESTRE
+
+---RAILWAY SYSTEM---    [10:12]
+Il treno regionale numero 0420 e' giunto al capolinea con un ritardo di 01 min
+
+
+
+
+
+
+
+# ESEMPIO 02
+--- RAILWAY ---
+---RAILWAY SYSTEM---    [00:00]
+Correzione timetable del treno 0420
+Correzione timetable del treno 2974
+Correzione timetable del treno 4895
+Correzione timetable del treno 6180
+Correzione timetable del treno 8210
+Correzione timetable del treno 1623
+---RAILWAY SYSTEM---    [00:01]
+Il treno n.8210 e' in partenza dalla stazione TRIESTE CENTRALE dal binario 2
+
+---RAILWAY SYSTEM---    [00:05]
+Il treno veloce n.8210 ha ricevuto l'ordine dalla stazione di MONFALCONE di poter andare al parcheggio
+
+---RAILWAY SYSTEM---    [00:06]
+Treno 8210 andra' al parcheggio
+
+---RAILWAY SYSTEM---    [00:09]
+Il treno numero 8210 diretto verso la stazione MONFALCONE non e' piÂ¨ in anticipo, ma in ritardo di 02 ore 07 min min
+
+---RAILWAY SYSTEM---    [00:10]
+Treno 8210 in arrivo al binario 0
+
+---RAILWAY SYSTEM---    [00:13]
+Il treno veloce n.8210 delle ore 00:14 e' arrivato alla stazione di MONFALCONE con un ritardo di 02 ore 07 min
+
+---RAILWAY SYSTEM---    [00:20]
+Il treno n.8210 e' in partenza dalla stazione MONFALCONE dal binario 1
+
+---RAILWAY SYSTEM---    [00:25]
+Il treno veloce n.8210 ha ricevuto l'ordine dalla stazione di SAGRADO di poter transitare
+
+---RAILWAY SYSTEM---    [00:26]
+Treno 8210 in transito
+
+---RAILWAY SYSTEM---    [00:31]
+Il treno n.0420 e' in partenza dalla stazione TRIESTE CENTRALE dal binario 2
+
+---RAILWAY SYSTEM---    [00:33]
+Il treno veloce n.8210 ha ricevuto l'ordine dalla stazione di GORIZIA CENTRALE di poter andare al parcheggio
+
+---RAILWAY SYSTEM---    [00:34]
+Treno 8210 andra' al parcheggio
+
+---RAILWAY SYSTEM---    [00:35]
+Il treno regionale n.0420 ha ricevuto l'ordine dalla stazione di MONFALCONE di poter andare al parcheggio
+
+---RAILWAY SYSTEM---    [00:36]
+Treno 0420 andra' al parcheggio
+
+---RAILWAY SYSTEM---    [00:37]
+Il treno numero 8210 diretto verso la stazione GORIZIA CENTRALE non e' piÂ¨ in anticipo, ma in ritardo di 02 ore 06 min m
+in
+
+---RAILWAY SYSTEM---    [00:38]
+Treno 8210 in arrivo al binario 0
+
+---RAILWAY SYSTEM---    [00:41]
+Il treno veloce n.8210 delle ore 00:43 e' arrivato alla stazione di GORIZIA CENTRALE con un ritardo di 02 ore 06 min
+
+---RAILWAY SYSTEM---    [00:42]
+Il treno numero 0420 diretto verso la stazione MONFALCONE non e' piu' in anticipo. Il treno e' in orario
+
+---RAILWAY SYSTEM---    [00:43]
+Treno 0420 in arrivo al binario 0
+
+---RAILWAY SYSTEM---    [00:46]
+Il treno regionale n.0420 delle ore 00:46 e' arrivato alla stazione di MONFALCONE
+
+---RAILWAY SYSTEM---    [00:49]
+Il treno n.8210 e' in partenza dalla stazione GORIZIA CENTRALE dal binario 1
+
+---RAILWAY SYSTEM---    [00:53]
+Il treno n.0420 e' in partenza dalla stazione MONFALCONE dal binario 1
+
+Il treno veloce n.8210 ha ricevuto l'ordine dalla stazione di CORMONS di poter transitare
+
+---RAILWAY SYSTEM---    [00:54]
+Treno 8210 in transito
+
+---RAILWAY SYSTEM---    [00:59]
+Il treno regionale n.0420 ha ricevuto l'ordine dalla stazione di SAGRADO di poter andare al parcheggio
+
+---RAILWAY SYSTEM---    [01:00]
+Treno 0420 andra' al parcheggio
+
+Il treno veloce n.8210 ha ricevuto l'ordine dalla stazione di UDINE di poter andare al parcheggio
+
+---RAILWAY SYSTEM---    [01:01]
+Treno 8210 andra' al parcheggio
+
+---RAILWAY SYSTEM---    [01:04]
+Il treno numero 8210 diretto verso la stazione UDINE non e' piÂ¨ in anticipo, ma in ritardo di 02 ore 06 min min
+
+---RAILWAY SYSTEM---    [01:05]
+Treno 8210 in arrivo al binario 0
+
+Il treno numero 0420 diretto verso la stazione SAGRADO non e' piu' in anticipo. Il treno e' in orario
+
+---RAILWAY SYSTEM---    [01:06]
+Treno 0420 in arrivo al binario 0
+
+---RAILWAY SYSTEM---    [01:08]
+Il treno veloce n.8210 delle ore 01:10 e' arrivato alla stazione di UDINE con un ritardo di 02 ore 06 min
+
+---RAILWAY SYSTEM---    [01:09]
+Il treno regionale n.0420 delle ore 01:09 e' arrivato alla stazione di SAGRADO
+
+---RAILWAY SYSTEM---    [01:16]
+Il treno n.0420 e' in partenza dalla stazione SAGRADO dal binario 1
+
+Il treno n.8210 e' in partenza dalla stazione UDINE dal binario 1
+
+---RAILWAY SYSTEM---    [01:20]
+Il treno regionale n.0420 ha ricevuto l'ordine dalla stazione di GORIZIA CENTRALE di poter andare al parcheggio
+
+Il treno veloce n.8210 ha ricevuto l'ordine dalla stazione di CODROIPO di poter transitare
+
+---RAILWAY SYSTEM---    [01:21]
+Treno 0420 andra' al parcheggio
+
+Treno 8210 in transito
+
+---RAILWAY SYSTEM---    [01:26]
+Il treno numero 0420 diretto verso la stazione GORIZIA CENTRALE non e' piu' in anticipo. Il treno e' in orario
+
+---RAILWAY SYSTEM---    [01:27]
+Treno 0420 in arrivo al binario 0
+
+---RAILWAY SYSTEM---    [01:29]
+Il treno veloce n.8210 ha ricevuto l'ordine dalla stazione di CASARSA di poter transitare
+
+---RAILWAY SYSTEM---    [01:30]
+Treno 8210 in transito
+
+Il treno regionale n.0420 delle ore 01:30 e' arrivato alla stazione di GORIZIA CENTRALE
+
+---RAILWAY SYSTEM---    [01:31]
+Il treno 1287 e' in partenza dalla stazione VENEZIA MESTRE dal binario 2
+
+---RAILWAY SYSTEM---    [01:37]
+Il treno n.0420 e' in partenza dalla stazione GORIZIA CENTRALE dal binario 1
+
+Il treno regionale n.1287 ha ricevuto l'ordine dalla stazione di MOGLIANO VENETO di poter andare al parcheggio
+
+---RAILWAY SYSTEM---    [01:38]
+Treno 1287 andra' al parcheggio
+
+Il treno veloce n.8210 ha ricevuto l'ordine dalla stazione di PORDENONE di poter andare al parcheggio
+
+---RAILWAY SYSTEM---    [01:39]
+Treno 8210 andra' al parcheggio
+
+---RAILWAY SYSTEM---    [01:41]
+Il treno regionale n.0420 ha ricevuto l'ordine dalla stazione di CORMONS di poter andare al parcheggio
+
+Il treno numero 8210 diretto verso la stazione PORDENONE non e' piÂ¨ in anticipo, ma in ritardo di 02 ore 06 min min
+
+---RAILWAY SYSTEM---    [01:42]
+Treno 0420 andra' al parcheggio
+
+Treno 8210 in arrivo al binario 0
+
+---RAILWAY SYSTEM---    [01:44]
+Il treno numero 1287 diretto verso la stazione MOGLIANO VENETO non e' piÂ¨ in anticipo, ma in ritardo di 05 min min
+
+---RAILWAY SYSTEM---    [01:45]
+Treno 1287 in arrivo al binario 0
+
+Il treno veloce n.8210 delle ore 01:47 e' arrivato alla stazione di PORDENONE con un ritardo di 02 ore 06 min
+
+---RAILWAY SYSTEM---    [01:46]
+Il treno numero 0420 diretto verso la stazione CORMONS non e' piu' in anticipo. Il treno e' in orario
+
+---RAILWAY SYSTEM---    [01:47]
+Treno 0420 in arrivo al binario 0
+
+---RAILWAY SYSTEM---    [01:50]
+Il treno regionale n.0420 delle ore 01:50 e' arrivato alla stazione di CORMONS
+
+---RAILWAY SYSTEM---    [01:53]
+Il treno n.8210 e' in partenza dalla stazione PORDENONE dal binario 1
+
+Il treno regionale n.1287 delle ore 01:43 con un ritardo di 05 min sta arrivando alla stazione di TREVISO C. al binario
+n.0
+
+---RAILWAY SYSTEM---    [01:54]
+Treno 1287 in arrivo al binario 0
+
+---RAILWAY SYSTEM---    [01:57]
+Il treno n.0420 e' in partenza dalla stazione CORMONS dal binario 1
+
+Il treno veloce n.8210 ha ricevuto l'ordine dalla stazione di SACILE di poter transitare
+
+---RAILWAY SYSTEM---    [01:58]
+Treno 8210 in transito
+
+---RAILWAY SYSTEM---    [01:59]
+Il treno regionale n.1287 delle ore 01:43 con un ritardo di 05 min sta arrivando alla stazione di TREVISO C. al binario
+n.0
+
+---RAILWAY SYSTEM---    [02:01]
+Il treno regionale n.0420 ha ricevuto l'ordine dalla stazione di UDINE di poter andare al parcheggio
+
+---RAILWAY SYSTEM---    [02:02]
+Treno 0420 andra' al parcheggio
+
+---RAILWAY SYSTEM---    [02:06]
+Il treno veloce n.8210 ha ricevuto l'ordine dalla stazione di CONEGLIANO di poter andare al parcheggio
+
+---RAILWAY SYSTEM---    [02:07]
+Treno 8210 andra' al parcheggio
+
+Il treno numero 0420 diretto verso la stazione UDINE non e' piu' in anticipo. Il treno e' in orario
+
+---RAILWAY SYSTEM---    [02:08]
+Treno 0420 in arrivo al binario 0
+
+Il treno regionale n.1287 delle ore 01:43 con un ritardo di 21 min sta arrivando alla stazione di CONEGLIANO al binario
+n.0
+
+---RAILWAY SYSTEM---    [02:09]
+Treno 1287 in arrivo al binario 0
+
+---RAILWAY SYSTEM---    [02:10]
+Il treno numero 8210 diretto verso la stazione CONEGLIANO non e' piÂ¨ in anticipo, ma in ritardo di 02 ore 06 min min
+
+---RAILWAY SYSTEM---    [02:11]
+Treno 8210 in arrivo al binario 0
+
+Il treno regionale n.0420 delle ore 02:11 e' arrivato alla stazione di UDINE
+
+---RAILWAY SYSTEM---    [02:13]
+Il treno regionale n.1287 delle ore 01:43 con un ritardo di 21 min sta arrivando alla stazione di CONEGLIANO al binario
+n.0
+
+---RAILWAY SYSTEM---    [02:14]
+Il treno veloce n.8210 delle ore 02:16 e' arrivato alla stazione di CONEGLIANO con un ritardo di 02 ore 06 min
+
+---RAILWAY SYSTEM---    [02:18]
+Il treno n.0420 e' in partenza dalla stazione UDINE dal binario 1
+
+---RAILWAY SYSTEM---    [02:22]
+Il treno n.8210 e' in partenza dalla stazione CONEGLIANO dal binario 1
+
+Il treno regionale n.0420 ha ricevuto l'ordine dalla stazione di CODROIPO di poter andare al parcheggio
+
+---RAILWAY SYSTEM---    [02:23]
+Treno 0420 andra' al parcheggio
+
+---RAILWAY SYSTEM---    [02:24]
+Il treno regionale n.1287 delle ore 01:43 con un ritardo di 36 min sta arrivando alla stazione di SACILE al binario n.0
+
+---RAILWAY SYSTEM---    [02:25]
+Treno 1287 in arrivo al binario 0
+
+---RAILWAY SYSTEM---    [02:27]
+Il treno veloce n.8210 ha ricevuto l'ordine dalla stazione di TREVISO C. di poter andare al parcheggio
+
+---RAILWAY SYSTEM---    [02:28]
+Treno 8210 andra' al parcheggio
+
+---RAILWAY SYSTEM---    [02:29]
+Il treno numero 0420 diretto verso la stazione CODROIPO non e' piu' in anticipo. Il treno e' in orario
+
+---RAILWAY SYSTEM---    [02:30]
+Treno 0420 in arrivo al binario 0
+
+Il treno regionale n.1287 delle ore 01:43 con un ritardo di 36 min sta arrivando alla stazione di SACILE al binario n.0
+
+---RAILWAY SYSTEM---    [02:32]
+Il treno numero 8210 diretto verso la stazione TREVISO C. non e' piÂ¨ in anticipo, ma in ritardo di 02 ore 07 min min
+
+---RAILWAY SYSTEM---    [02:33]
+Treno 8210 in arrivo al binario 0
+
+Il treno regionale n.0420 delle ore 02:33 e' arrivato alla stazione di CODROIPO
+
+---RAILWAY SYSTEM---    [02:36]
+Il treno veloce n.8210 delle ore 02:37 e' arrivato alla stazione di TREVISO C. con un ritardo di 02 ore 07 min
+
+---RAILWAY SYSTEM---    [02:38]
+Il treno regionale n.1287 delle ore 01:43 con un ritardo di 51 min sta arrivando alla stazione di PORDENONE al binario n
+.0
+
+---RAILWAY SYSTEM---    [02:39]
+Treno 1287 in arrivo al binario 0
+
+---RAILWAY SYSTEM---    [02:40]
+Il treno n.0420 e' in partenza dalla stazione CODROIPO dal binario 1
+
+---RAILWAY SYSTEM---    [02:43]
+Il treno n.8210 e' in partenza dalla stazione TREVISO C. dal binario 1
+
+Il treno regionale n.1287 delle ore 01:43 con un ritardo di 51 min sta arrivando alla stazione di PORDENONE al binario n
+.0
+
+---RAILWAY SYSTEM---    [02:46]
+Il treno regionale n.0420 ha ricevuto l'ordine dalla stazione di CASARSA di poter andare al parcheggio
+
+---RAILWAY SYSTEM---    [02:47]
+Treno 0420 andra' al parcheggio
+
+Il treno veloce n.8210 ha ricevuto l'ordine dalla stazione di MOGLIANO VENETO di poter transitare
+
+---RAILWAY SYSTEM---    [02:48]
+Treno 8210 in transito
+
+---RAILWAY SYSTEM---    [02:50]
+Il treno regionale n.1287 delle ore 01:43 con un ritardo di 01 ore 04 min sta arrivando alla stazione di CASARSA al bina
+rio n.0
+
+---RAILWAY SYSTEM---    [02:51]
+Treno 1287 in arrivo al binario 0
+
+---RAILWAY SYSTEM---    [02:53]
+Il treno numero 0420 diretto verso la stazione CASARSA non e' piu' in anticipo. Il treno e' in orario
+
+---RAILWAY SYSTEM---    [02:54]
+Treno 0420 in arrivo al binario 0
+
+Il treno regionale n.1287 delle ore 01:43 con un ritardo di 01 ore 04 min sta arrivando alla stazione di CASARSA al bina
+rio n.0
+
+---RAILWAY SYSTEM---    [02:56]
+Il treno veloce n.8210 ha ricevuto l'ordine dalla stazione di VENEZIA MESTRE di poter andare al parcheggio
+
+---RAILWAY SYSTEM---    [02:57]
+Treno 8210 andra' al parcheggio
+
+Il treno regionale n.0420 delle ore 02:57 e' arrivato alla stazione di CASARSA
+
+---RAILWAY SYSTEM---    [03:01]
+Il treno numero 8210 diretto verso la stazione VENEZIA MESTRE non e' piÂ¨ in anticipo, ma in ritardo di 02 ore 06 min min
+
+
+---RAILWAY SYSTEM---    [03:02]
+Treno 8210 in arrivo al binario 0
+
+---RAILWAY SYSTEM---    [03:04]
+Il treno n.0420 e' in partenza dalla stazione CASARSA dal binario 1
+
+Il treno regionale n.1287 delle ore 01:43 con un ritardo di 01 ore 17 min sta arrivando alla stazione di CODROIPO al bin
+ario n.0
+
+---RAILWAY SYSTEM---    [03:05]
+Treno 1287 in arrivo al binario 0
+
+Il treno veloce n.8210 delle ore 03:07 e' arrivato alla stazione di VENEZIA MESTRE con un ritardo di 02 ore 06 min
+
+---RAILWAY SYSTEM---    [03:06]
+Il treno veloce numero 8210 e' giunto al capolinea con un anticipo di 01 min
+
+---RAILWAY SYSTEM---    [03:08]
+Il treno regionale n.0420 ha ricevuto l'ordine dalla stazione di PORDENONE di poter andare al parcheggio
+
+---RAILWAY SYSTEM---    [03:09]
+Treno 0420 andra' al parcheggio
+
+Il treno regionale n.1287 delle ore 01:43 con un ritardo di 01 ore 17 min sta arrivando alla stazione di CODROIPO al bin
+ario n.0
+
+---RAILWAY SYSTEM---    [03:13]
+Il treno numero 0420 diretto verso la stazione PORDENONE non e' piu' in anticipo. Il treno e' in orario
+
+---RAILWAY SYSTEM---    [03:14]
+Treno 0420 in arrivo al binario 0
+
+---RAILWAY SYSTEM---    [03:17]
+Il treno regionale n.0420 delle ore 03:17 e' arrivato alla stazione di PORDENONE
+
+---RAILWAY SYSTEM---    [03:18]
+Il treno regionale n.1287 delle ore 01:43 con un ritardo di 01 ore 30 min sta arrivando alla stazione di UDINE al binari
+o n.0
+
+---RAILWAY SYSTEM---    [03:19]
+Treno 1287 in arrivo al binario 0
+
+---RAILWAY SYSTEM---    [03:23]
+Il treno regionale n.1287 delle ore 01:43 con un ritardo di 01 ore 30 min sta arrivando alla stazione di UDINE al binari
+o n.0
+
+---RAILWAY SYSTEM---    [03:24]
+Il treno n.0420 e' in partenza dalla stazione PORDENONE dal binario 1
+
+---RAILWAY SYSTEM---    [03:28]
+Il treno regionale n.0420 ha ricevuto l'ordine dalla stazione di SACILE di poter andare al parcheggio
+
+---RAILWAY SYSTEM---    [03:29]
+Treno 0420 andra' al parcheggio
+
+---RAILWAY SYSTEM---    [03:32]
+Il treno regionale n.1287 delle ore 01:43 con un ritardo di 01 ore 45 min sta arrivando alla stazione di CORMONS al bina
+rio n.0
+
+---RAILWAY SYSTEM---    [03:33]
+Treno 1287 in arrivo al binario 0
+
+---RAILWAY SYSTEM---    [03:34]
+Il treno numero 0420 diretto verso la stazione SACILE non e' piu' in anticipo. Il treno e' in orario
+
+---RAILWAY SYSTEM---    [03:35]
+Treno 0420 in arrivo al binario 0
+
+---RAILWAY SYSTEM---    [03:37]
+Il treno regionale n.1287 delle ore 01:43 con un ritardo di 01 ore 45 min sta arrivando alla stazione di CORMONS al bina
+rio n.0
+
+---RAILWAY SYSTEM---    [03:38]
+Il treno regionale n.0420 delle ore 03:38 e' arrivato alla stazione di SACILE
+
+---RAILWAY SYSTEM---    [03:45]
+Il treno n.0420 e' in partenza dalla stazione SACILE dal binario 1
+
+Il treno regionale n.1287 delle ore 01:43 con un ritardo di 01 ore 59 min sta arrivando alla stazione di GORIZIA CENTRAL
+E al binario n.0
+
+---RAILWAY SYSTEM---    [03:46]
+Treno 1287 in arrivo al binario 0
+
+---RAILWAY SYSTEM---    [03:49]
+Il treno regionale n.1287 delle ore 01:43 con un ritardo di 01 ore 59 min sta arrivando alla stazione di GORIZIA CENTRAL
+E al binario n.0
+
+---RAILWAY SYSTEM---    [03:52]
+Il treno regionale n.0420 ha ricevuto l'ordine dalla stazione di CONEGLIANO di poter andare al parcheggio
+
+---RAILWAY SYSTEM---    [03:53]
+Treno 0420 andra' al parcheggio
+
+---RAILWAY SYSTEM---    [03:57]
+Il treno regionale n.1287 delle ore 01:43 con un ritardo di 02 ore 10 min sta arrivando alla stazione di SAGRADO al bina
+rio n.0
+
+---RAILWAY SYSTEM---    [03:58]
+Treno 1287 in arrivo al binario 0
+
+Il treno numero 0420 diretto verso la stazione CONEGLIANO non e' piu' in anticipo. Il treno e' in orario
+
+---RAILWAY SYSTEM---    [03:59]
+Treno 0420 in arrivo al binario 0
+
+---RAILWAY SYSTEM---    [04:02]
+Il treno regionale n.0420 delle ore 04:02 e' arrivato alla stazione di CONEGLIANO
+
+Il treno regionale n.1287 delle ore 01:43 con un ritardo di 02 ore 10 min sta arrivando alla stazione di SAGRADO al bina
+rio n.0
+
+---RAILWAY SYSTEM---    [04:09]
+Il treno n.0420 e' in partenza dalla stazione CONEGLIANO dal binario 1
+
+---RAILWAY SYSTEM---    [04:12]
+Il treno regionale n.1287 delle ore 01:43 con un ritardo di 02 ore 25 min sta arrivando alla stazione di MONFALCONE al b
+inario n.0
+
+---RAILWAY SYSTEM---    [04:13]
+Treno 1287 in arrivo al binario 0
+
+---RAILWAY SYSTEM---    [04:15]
+Il treno regionale n.0420 ha ricevuto l'ordine dalla stazione di TREVISO C. di poter andare al parcheggio
+
+---RAILWAY SYSTEM---    [04:16]
+Treno 0420 andra' al parcheggio
+
+---RAILWAY SYSTEM---    [04:17]
+Il treno regionale n.1287 delle ore 01:43 con un ritardo di 02 ore 25 min sta arrivando alla stazione di MONFALCONE al b
+inario n.0
+
+---RAILWAY SYSTEM---    [04:21]
+Il treno numero 0420 diretto verso la stazione TREVISO C. non e' piu' in anticipo. Il treno e' in orario
+
+---RAILWAY SYSTEM---    [04:22]
+Treno 0420 in arrivo al binario 0
+
+---RAILWAY SYSTEM---    [04:25]
+Il treno regionale n.0420 delle ore 04:25 e' arrivato alla stazione di TREVISO C.
+
+---RAILWAY SYSTEM---    [04:26]
+Il treno regionale n.1287 delle ore 01:43 con un ritardo di 02 ore 39 min sta arrivando alla stazione di TRIESTE CENTRAL
+E al binario n.0
+
+---RAILWAY SYSTEM---    [04:27]
+Treno 1287 in arrivo al binario 0
+
+---RAILWAY SYSTEM---    [04:31]
+Il treno regionale n.1287 delle ore 01:43 con un ritardo di 02 ore 39 min sta arrivando alla stazione di TRIESTE CENTRAL
+E al binario n.0
+
+---RAILWAY SYSTEM---    [04:32]
+Il treno n.0420 e' in partenza dalla stazione TREVISO C. dal binario 1
+
+---RAILWAY SYSTEM---    [04:34]
+Il treno regionale n.1287 delle ore 01:43 e' arrivato alla stazione di TRIESTE CENTRALE con un ritardo di 02 ore 39 min
+
+---RAILWAY SYSTEM---    [04:35]
+Il treno regionale numero 1287 e' giunto al capolinea con un anticipo di 25 min
+
+---RAILWAY SYSTEM---    [04:36]
+Il treno regionale n.0420 ha ricevuto l'ordine dalla stazione di MOGLIANO VENETO di poter andare al parcheggio
+
+---RAILWAY SYSTEM---    [04:37]
+Treno 0420 andra' al parcheggio
+
+---RAILWAY SYSTEM---    [04:43]
+Il treno numero 0420 diretto verso la stazione MOGLIANO VENETO non e' piu' in anticipo. Il treno e' in orario
+
+---RAILWAY SYSTEM---    [04:44]
+Treno 0420 in arrivo al binario 0
+
+---RAILWAY SYSTEM---    [04:47]
+Il treno regionale n.0420 delle ore 04:47 e' arrivato alla stazione di MOGLIANO VENETO
+
+---RAILWAY SYSTEM---    [04:54]
+Il treno n.0420 e' in partenza dalla stazione MOGLIANO VENETO dal binario 1
+
+---RAILWAY SYSTEM---    [05:00]
+Il treno regionale n.0420 ha ricevuto l'ordine dalla stazione di VENEZIA MESTRE di poter andare al parcheggio
+
+---RAILWAY SYSTEM---    [05:01]
+Il treno n.6180 e' in partenza dalla stazione TRIESTE CENTRALE dal binario 2
+
+Treno 0420 andra' al parcheggio
+
+---RAILWAY SYSTEM---    [05:05]
+Il treno regionale n.6180 ha ricevuto l'ordine dalla stazione di MONFALCONE di poter andare al parcheggio
+
+---RAILWAY SYSTEM---    [05:06]
+Treno 6180 andra' al parcheggio
+
+---RAILWAY SYSTEM---    [05:07]
+Il treno numero 0420 diretto verso la stazione VENEZIA MESTRE non e' piu' in anticipo. Il treno e' in orario
+
+---RAILWAY SYSTEM---    [05:08]
+Treno 0420 in arrivo al binario 1
+
+---RAILWAY SYSTEM---    [05:11]
+Il treno regionale n.0420 delle ore 05:11 e' arrivato alla stazione di VENEZIA MESTRE
+
+---RAILWAY SYSTEM---    [05:12]
+Il treno regionale numero 0420 e' giunto al capolinea con un ritardo di 01 min
+
+Il treno numero 6180 diretto verso la stazione MONFALCONE non e' piu' in anticipo. Il treno e' in orario
+
+---RAILWAY SYSTEM---    [05:13]
+Treno 6180 in arrivo al binario 0
+
+---RAILWAY SYSTEM---    [05:16]
+Il treno regionale n.6180 delle ore 05:16 e' arrivato alla stazione di MONFALCONE
+
+---RAILWAY SYSTEM---    [05:23]
+Il treno n.6180 e' in partenza dalla stazione MONFALCONE dal binario 1
+
+---RAILWAY SYSTEM---    [05:29]
+Il treno regionale n.6180 ha ricevuto l'ordine dalla stazione di SAGRADO di poter andare al parcheggio
+
+---RAILWAY SYSTEM---    [05:30]
+Treno 6180 andra' al parcheggio
+
+---RAILWAY SYSTEM---    [05:31]
+Il treno n.2974 e' in partenza dalla stazione TRIESTE CENTRALE dal binario 2
+
+---RAILWAY SYSTEM---    [05:35]
+Il treno veloce n.2974 ha ricevuto l'ordine dalla stazione di MONFALCONE di poter andare al parcheggio
+
+Il treno numero 6180 diretto verso la stazione SAGRADO non e' piu' in anticipo. Il treno e' in orario
+
+---RAILWAY SYSTEM---    [05:36]
+Treno 2974 andra' al parcheggio
+
+Treno 6180 in arrivo al binario 0
+
+---RAILWAY SYSTEM---    [05:39]
+Il treno numero 2974 diretto verso la stazione MONFALCONE non e' piÂ¨ in anticipo, ma in ritardo di 02 ore 07 min min
+
+Il treno regionale n.6180 delle ore 05:39 e' arrivato alla stazione di SAGRADO
+
+---RAILWAY SYSTEM---    [05:40]
+Treno 2974 in arrivo al binario 0
+
+---RAILWAY SYSTEM---    [05:43]
+Il treno veloce n.2974 delle ore 05:44 e' arrivato alla stazione di MONFALCONE con un ritardo di 02 ore 07 min
+
+---RAILWAY SYSTEM---    [05:46]
+Il treno n.6180 e' in partenza dalla stazione SAGRADO dal binario 1
+
+---RAILWAY SYSTEM---    [05:50]
+Il treno n.2974 e' in partenza dalla stazione MONFALCONE dal binario 1
+
+Il treno regionale n.6180 ha ricevuto l'ordine dalla stazione di GORIZIA CENTRALE di poter andare al parcheggio
+
+---RAILWAY SYSTEM---    [05:51]
+Treno 6180 andra' al parcheggio
+
+---RAILWAY SYSTEM---    [05:55]
+Il treno veloce n.2974 ha ricevuto l'ordine dalla stazione di SAGRADO di poter transitare
+
+---RAILWAY SYSTEM---    [05:56]
+Treno 2974 in transito
+
+Il treno numero 6180 diretto verso la stazione GORIZIA CENTRALE non e' piu' in anticipo. Il treno e' in orario
+
+---RAILWAY SYSTEM---    [05:57]
+Treno 6180 in arrivo al binario 0
+
+---RAILWAY SYSTEM---    [06:00]
+Il treno regionale n.6180 delle ore 06:00 e' arrivato alla stazione di GORIZIA CENTRALE
+
+---RAILWAY SYSTEM---    [06:03]
+Il treno veloce n.2974 ha ricevuto l'ordine dalla stazione di GORIZIA CENTRALE di poter andare al parcheggio
+
+---RAILWAY SYSTEM---    [06:04]
+Treno 2974 andra' al parcheggio
+
+---RAILWAY SYSTEM---    [06:07]
+Il treno n.6180 e' in partenza dalla stazione GORIZIA CENTRALE dal binario 1
+
+Il treno numero 2974 diretto verso la stazione GORIZIA CENTRALE non e' piÂ¨ in anticipo, ma in ritardo di 02 ore 06 min m
+in
+
+---RAILWAY SYSTEM---    [06:08]
+Treno 2974 in arrivo al binario 0
+
+---RAILWAY SYSTEM---    [06:11]
+Il treno veloce n.2974 delle ore 06:13 e' arrivato alla stazione di GORIZIA CENTRALE con un ritardo di 02 ore 06 min
+
+Il treno regionale n.6180 ha ricevuto l'ordine dalla stazione di CORMONS di poter andare al parcheggio
+
+---RAILWAY SYSTEM---    [06:12]
+Treno 6180 andra' al parcheggio
+
+---RAILWAY SYSTEM---    [06:16]
+Il treno numero 6180 diretto verso la stazione CORMONS non e' piu' in anticipo. Il treno e' in orario
+
+---RAILWAY SYSTEM---    [06:17]
+Treno 6180 in arrivo al binario 0
+
+---RAILWAY SYSTEM---    [06:19]
+Il treno n.2974 e' in partenza dalla stazione GORIZIA CENTRALE dal binario 1
+
+---RAILWAY SYSTEM---    [06:20]
+Il treno regionale n.6180 delle ore 06:20 e' arrivato alla stazione di CORMONS
+
+---RAILWAY SYSTEM---    [06:23]
+Il treno veloce n.2974 ha ricevuto l'ordine dalla stazione di CORMONS di poter transitare
+
+---RAILWAY SYSTEM---    [06:24]
+Treno 2974 in transito
+
+---RAILWAY SYSTEM---    [06:30]
+Il treno veloce n.2974 ha ricevuto l'ordine dalla stazione di UDINE di poter andare al parcheggio
+
+---RAILWAY SYSTEM---    [06:31]
+Il treno n.6180 e' in partenza dalla stazione CORMONS dal binario 1
+
+Treno 2974 andra' al parcheggio
+
+---RAILWAY SYSTEM---    [06:34]
+Il treno numero 2974 diretto verso la stazione UDINE non e' piÂ¨ in anticipo, ma in ritardo di 02 ore 06 min min
+
+---RAILWAY SYSTEM---    [06:35]
+Treno 2974 in arrivo al binario 0
+
+Il treno regionale n.6180
+---RAILWAY SYSTEM---    [06:36]
+Treno 6180 in arrivo al binario 1
+
+---RAILWAY SYSTEM---    [06:38]
+Il treno veloce n.2974 delle ore 06:40 e' arrivato alla stazione di UDINE con un ritardo di 02 ore 06 min
+
+---RAILWAY SYSTEM---    [06:40]
+Il treno regionale n.6180 delle ore 06:41 con un ritardo di 03 min sta arrivando alla stazione di UDINE al binario n.1
+
+---RAILWAY SYSTEM---    [06:44]
+Il treno regionale n.6180 delle ore 06:41 e' arrivato alla stazione di UDINE con un ritardo di 03 min
+
+---RAILWAY SYSTEM---    [06:46]
+Il treno n.2974 e' in partenza dalla stazione UDINE dal binario 1
+
+---RAILWAY SYSTEM---    [06:50]
+Il treno veloce n.2974 ha ricevuto l'ordine dalla stazione di CODROIPO di poter transitare
+
+---RAILWAY SYSTEM---    [06:51]
+Il treno n.6180 e' in partenza dalla stazione UDINE dal binario 2
+
+Treno 2974 in transito
+
+---RAILWAY SYSTEM---    [06:55]
+Il treno regionale n.6180 delle ore 07:03 con un ritardo di 01 min sta arrivando alla stazione di CODROIPO al binario n.
+1
+
+---RAILWAY SYSTEM---    [06:56]
+Treno 6180 in arrivo al binario 0
+
+---RAILWAY SYSTEM---    [06:59]
+Il treno veloce n.2974 ha ricevuto l'ordine dalla stazione di CASARSA di poter transitare
+
+---RAILWAY SYSTEM---    [07:00]
+Treno 2974 in transito
+
+---RAILWAY SYSTEM---    [07:01]
+Il treno regionale n.6180 delle ore 07:03 con un ritardo di 01 min sta arrivando alla stazione di CODROIPO al binario n.
+0
+
+---RAILWAY SYSTEM---    [07:04]
+Il treno regionale n.6180 delle ore 07:03 e' arrivato alla stazione di CODROIPO con un ritardo di 01 min
+
+---RAILWAY SYSTEM---    [07:08]
+Il treno veloce n.2974 ha ricevuto l'ordine dalla stazione di PORDENONE di poter andare al parcheggio
+
+---RAILWAY SYSTEM---    [07:09]
+Treno 2974 andra' al parcheggio
+
+---RAILWAY SYSTEM---    [07:11]
+Il treno n.6180 e' in partenza dalla stazione CODROIPO dal binario 1
+
+Il treno numero 2974 diretto verso la stazione PORDENONE non e' piÂ¨ in anticipo, ma in ritardo di 02 ore 06 min min
+
+---RAILWAY SYSTEM---    [07:12]
+Treno 2974 in arrivo al binario 0
+
+---RAILWAY SYSTEM---    [07:15]
+Il treno veloce n.2974 delle ore 07:17 e' arrivato alla stazione di PORDENONE con un ritardo di 02 ore 06 min
+
+---RAILWAY SYSTEM---    [07:17]
+Il treno regionale n.6180 ha ricevuto l'ordine dalla stazione di CASARSA di poter andare al parcheggio
+
+---RAILWAY SYSTEM---    [07:18]
+Treno 6180 andra' al parcheggio
+
+---RAILWAY SYSTEM---    [07:23]
+Il treno n.2974 e' in partenza dalla stazione PORDENONE dal binario 1
+
+---RAILWAY SYSTEM---    [07:24]
+Il treno numero 6180 diretto verso la stazione CASARSA non e' piÂ¨ in anticipo, ma in ritardo di 01 min min
+
+---RAILWAY SYSTEM---    [07:25]
+Treno 6180 in arrivo al binario 0
+
+---RAILWAY SYSTEM---    [07:27]
+Il treno veloce n.2974 ha ricevuto l'ordine dalla stazione di SACILE di poter transitare
+
+---RAILWAY SYSTEM---    [07:28]
+Treno 2974 in transito
+
+Il treno regionale n.6180 delle ore 07:27 e' arrivato alla stazione di CASARSA con un ritardo di 01 min
+
+---RAILWAY SYSTEM---    [07:35]
+Il treno n.6180 e' in partenza dalla stazione CASARSA dal binario 1
+
+---RAILWAY SYSTEM---    [07:36]
+Il treno veloce n.2974 ha ricevuto l'ordine dalla stazione di CONEGLIANO di poter andare al parcheggio
+
+---RAILWAY SYSTEM---    [07:37]
+Treno 2974 andra' al parcheggio
+
+---RAILWAY SYSTEM---    [07:39]
+Il treno regionale n.6180 ha ricevuto l'ordine dalla stazione di PORDENONE di poter andare al parcheggio
+
+---RAILWAY SYSTEM---    [07:40]
+Treno 6180 andra' al parcheggio
+
+Il treno numero 2974 diretto verso la stazione CONEGLIANO non e' piÂ¨ in anticipo, ma in ritardo di 02 ore 06 min min
+
+---RAILWAY SYSTEM---    [07:41]
+Treno 2974 in arrivo al binario 0
+
+---RAILWAY SYSTEM---    [07:44]
+Il treno veloce n.2974 delle ore 07:46 e' arrivato alla stazione di CONEGLIANO con un ritardo di 02 ore 06 min
+
+Il treno numero 6180 diretto verso la stazione PORDENONE non e' piÂ¨ in anticipo, ma in ritardo di 01 min min
+
+---RAILWAY SYSTEM---    [07:45]
+Treno 6180 in arrivo al binario 0
+
+---RAILWAY SYSTEM---    [07:48]
+Il treno regionale n.6180 delle ore 07:47 e' arrivato alla stazione di PORDENONE con un ritardo di 01 min
+
+---RAILWAY SYSTEM---    [07:52]
+Il treno n.2974 e' in partenza dalla stazione CONEGLIANO dal binario 1
+
+---RAILWAY SYSTEM---    [07:55]
+Il treno n.6180 e' in partenza dalla stazione PORDENONE dal binario 1
+
+---RAILWAY SYSTEM---    [07:57]
+Il treno veloce n.2974 ha ricevuto l'ordine dalla stazione di TREVISO C. di poter andare al parcheggio
+
+---RAILWAY SYSTEM---    [07:58]
+Treno 2974 andra' al parcheggio
+
+---RAILWAY SYSTEM---    [07:59]
+Il treno regionale n.6180 ha ricevuto l'ordine dalla stazione di SACILE di poter andare al parcheggio
+
+---RAILWAY SYSTEM---    [08:00]
+Treno 6180 andra' al parcheggio
+
+---RAILWAY SYSTEM---    [08:02]
+Il treno numero 2974 diretto verso la stazione TREVISO C. non e' piÂ¨ in anticipo, ma in ritardo di 02 ore 07 min min
+
+---RAILWAY SYSTEM---    [08:03]
+Treno 2974 in arrivo al binario 0
+
+---RAILWAY SYSTEM---    [08:05]
+Il treno numero 6180 diretto verso la stazione SACILE non e' piÂ¨ in anticipo, ma in ritardo di 01 min min
+
+---RAILWAY SYSTEM---    [08:06]
+Treno 6180 in arrivo al binario 0
+
+Il treno veloce n.2974 delle ore 08:07 e' arrivato alla stazione di TREVISO C. con un ritardo di 02 ore 07 min
+
+---RAILWAY SYSTEM---    [08:09]
+Il treno regionale n.6180 delle ore 08:08 e' arrivato alla stazione di SACILE con un ritardo di 01 min
+
+---RAILWAY SYSTEM---    [08:13]
+Il treno n.2974 e' in partenza dalla stazione TREVISO C. dal binario 1
+
+---RAILWAY SYSTEM---    [08:16]
+Il treno n.6180 e' in partenza dalla stazione SACILE dal binario 1
+
+---RAILWAY SYSTEM---    [08:17]
+Il treno veloce n.2974 ha ricevuto l'ordine dalla stazione di MOGLIANO VENETO di poter transitare
+
+---RAILWAY SYSTEM---    [08:18]
+Treno 2974 in transito
+
+---RAILWAY SYSTEM---    [08:23]
+Il treno regionale n.6180 delle ore 08:32 sta arrivando alla stazione di CONEGLIANO al binario n.0
+
+---RAILWAY SYSTEM---    [08:24]
+Treno 6180 in arrivo al binario 0
+
+---RAILWAY SYSTEM---    [08:26]
+Il treno veloce n.2974 ha ricevuto l'ordine dalla stazione di VENEZIA MESTRE di poter andare al parcheggio
+
+---RAILWAY SYSTEM---    [08:27]
+Treno 2974 andra' al parcheggio
+
+---RAILWAY SYSTEM---    [08:28]
+Il treno regionale n.6180 delle ore 08:32 sta arrivando alla stazione di CONEGLIANO al binario n.0
+
+---RAILWAY SYSTEM---    [08:32]
+Il treno regionale n.6180 delle ore 08:32 e' arrivato alla stazione di CONEGLIANO
+
+---RAILWAY SYSTEM---    [08:39]
+Il treno n.6180 e' in partenza dalla stazione CONEGLIANO dal binario 1
+
+---RAILWAY SYSTEM---    [08:45]
+Il treno regionale n.6180 ha ricevuto l'ordine dalla stazione di TREVISO C. di poter andare al parcheggio
+
+---RAILWAY SYSTEM---    [08:46]
+Treno 6180 andra' al parcheggio
+
+---RAILWAY SYSTEM---    [08:51]
+Il treno numero 6180 diretto verso la stazione TREVISO C. non e' piu' in anticipo. Il treno e' in orario
+
+---RAILWAY SYSTEM---    [08:52]
+Treno 6180 in arrivo al binario 0
+
+---RAILWAY SYSTEM---    [08:55]
+Il treno regionale n.6180 delle ore 08:55 e' arrivato alla stazione di TREVISO C.
+
+---RAILWAY SYSTEM---    [09:02]
+Il treno n.6180 e' in partenza dalla stazione TREVISO C. dal binario 1
+
+---RAILWAY SYSTEM---    [09:06]
+Il treno regionale n.6180 ha ricevuto l'ordine dalla stazione di MOGLIANO VENETO di poter andare al parcheggio
+
+---RAILWAY SYSTEM---    [09:07]
+Treno 6180 andra' al parcheggio
+
+---RAILWAY SYSTEM---    [09:13]
+Il treno numero 6180 diretto verso la stazione MOGLIANO VENETO non e' piu' in anticipo. Il treno e' in orario
+
+---RAILWAY SYSTEM---    [09:14]
+Treno 6180 in arrivo al binario 0
+
+---RAILWAY SYSTEM---    [09:17]
+Il treno regionale n.6180 delle ore 09:17 e' arrivato alla stazione di MOGLIANO VENETO
+
+---RAILWAY SYSTEM---    [09:24]
+Il treno n.6180 e' in partenza dalla stazione MOGLIANO VENETO dal binario 1
+
+---RAILWAY SYSTEM---    [09:30]
+Il treno regionale n.6180 ha ricevuto l'ordine dalla stazione di VENEZIA MESTRE di poter andare al parcheggio
+
+---RAILWAY SYSTEM---    [09:31]
+Treno 6180 andra' al parcheggio
+
+---RAILWAY SYSTEM---    [12:11]
+Il treno n.1623 e' in partenza dalla stazione TRIESTE CENTRALE dal binario 2
+
+---RAILWAY SYSTEM---    [12:15]
+Il treno alta velocita' n.1623 ha ricevuto l'ordine dalla stazione di MONFALCONE di poter andare al parcheggio
+
+---RAILWAY SYSTEM---    [12:16]
+Treno 1623 andra' al parcheggio
+
+---RAILWAY SYSTEM---    [12:18]
+Il treno numero 1623 diretto verso la stazione MONFALCONE non e' piÂ¨ in anticipo, ma in ritardo di 02 ore 07 min min
+
+---RAILWAY SYSTEM---    [12:19]
+Treno 1623 in arrivo al binario 0
+
+---RAILWAY SYSTEM---    [12:22]
+Il treno alta velocita' n.1623 delle ore 12:23 e' arrivato alla stazione di MONFALCONE con un ritardo di 02 ore 07 min
+
+---RAILWAY SYSTEM---    [12:29]
+Il treno n.1623 e' in partenza dalla stazione MONFALCONE dal binario 1
+
+---RAILWAY SYSTEM---    [12:34]
+Il treno alta velocita' n.1623 ha ricevuto l'ordine dalla stazione di SAGRADO di poter transitare
+
+---RAILWAY SYSTEM---    [12:35]
+Treno 1623 in transito
+
+---RAILWAY SYSTEM---    [12:41]
+Il treno alta velocita' n.1623 ha ricevuto l'ordine dalla stazione di GORIZIA CENTRALE di poter andare al parcheggio
+
+---RAILWAY SYSTEM---    [12:42]
+Treno 1623 andra' al parcheggio
+
+---RAILWAY SYSTEM---    [12:45]
+Il treno numero 1623 diretto verso la stazione GORIZIA CENTRALE non e' piÂ¨ in anticipo, ma in ritardo di 02 ore 06 min m
+in
+
+---RAILWAY SYSTEM---    [12:46]
+Treno 1623 in arrivo al binario 0
+
+---RAILWAY SYSTEM---    [12:49]
+Il treno alta velocita' n.1623 delle ore 12:51 e' arrivato alla stazione di GORIZIA CENTRALE con un ritardo di 02 ore 06
+ min
+
+---RAILWAY SYSTEM---    [12:57]
+Il treno n.1623 e' in partenza dalla stazione GORIZIA CENTRALE dal binario 1
+
+---RAILWAY SYSTEM---    [13:01]
+Il treno alta velocita' n.1623 ha ricevuto l'ordine dalla stazione di CORMONS di poter transitare
+
+---RAILWAY SYSTEM---    [13:02]
+Treno 1623 in transito
+
+---RAILWAY SYSTEM---    [13:07]
+Il treno alta velocita' n.1623 ha ricevuto l'ordine dalla stazione di UDINE di poter andare al parcheggio
+
+---RAILWAY SYSTEM---    [13:08]
+Treno 1623 andra' al parcheggio
+
+---RAILWAY SYSTEM---    [13:10]
+Il treno numero 1623 diretto verso la stazione UDINE non e' piÂ¨ in anticipo, ma in ritardo di 02 ore 05 min min
+
+---RAILWAY SYSTEM---    [13:11]
+Treno 1623 in arrivo al binario 0
+
+---RAILWAY SYSTEM---    [13:14]
+Il treno alta velocita' n.1623 delle ore 13:17 e' arrivato alla stazione di UDINE con un ritardo di 02 ore 05 min
+
+---RAILWAY SYSTEM---    [13:23]
+Il treno n.1623 e' in partenza dalla stazione UDINE dal binario 1
+
+---RAILWAY SYSTEM---    [13:27]
+Il treno alta velocita' n.1623 ha ricevuto l'ordine dalla stazione di CODROIPO di poter transitare
+
+---RAILWAY SYSTEM---    [13:28]
+Treno 1623 in transito
+
+---RAILWAY SYSTEM---    [13:35]
+Il treno alta velocita' n.1623 ha ricevuto l'ordine dalla stazione di CASARSA di poter transitare
+
+---RAILWAY SYSTEM---    [13:36]
+Treno 1623 in transito
+
+---RAILWAY SYSTEM---    [13:44]
+Il treno alta velocita' n.1623 ha ricevuto l'ordine dalla stazione di PORDENONE di poter andare al parcheggio
+
+---RAILWAY SYSTEM---    [13:45]
+Treno 1623 andra' al parcheggio
+
+---RAILWAY SYSTEM---    [13:46]
+Il treno numero 1623 diretto verso la stazione PORDENONE non e' piÂ¨ in anticipo, ma in ritardo di 02 ore 06 min min
+
+---RAILWAY SYSTEM---    [13:47]
+Treno 1623 in arrivo al binario 0
+
+---RAILWAY SYSTEM---    [13:50]
+Il treno alta velocita' n.1623 delle ore 13:52 e' arrivato alla stazione di PORDENONE con un ritardo di 02 ore 06 min
+
+---RAILWAY SYSTEM---    [13:58]
+Il treno n.1623 e' in partenza dalla stazione PORDENONE dal binario 1
+
+---RAILWAY SYSTEM---    [14:02]
+Il treno alta velocita' n.1623 ha ricevuto l'ordine dalla stazione di SACILE di poter transitare
+
+---RAILWAY SYSTEM---    [14:03]
+Treno 1623 in transito
+
+---RAILWAY SYSTEM---    [14:10]
+Il treno alta velocita' n.1623 ha ricevuto l'ordine dalla stazione di CONEGLIANO di poter andare al parcheggio
+
+---RAILWAY SYSTEM---    [14:11]
+Treno 1623 andra' al parcheggio
+
+---RAILWAY SYSTEM---    [14:14]
+Il treno numero 1623 diretto verso la stazione CONEGLIANO non e' piÂ¨ in anticipo, ma in ritardo di 02 ore 06 min min
+
+---RAILWAY SYSTEM---    [14:15]
+Treno 1623 in arrivo al binario 0
+
+---RAILWAY SYSTEM---    [14:18]
+Il treno alta velocita' n.1623 delle ore 14:20 e' arrivato alla stazione di CONEGLIANO con un ritardo di 02 ore 06 min
+
+---RAILWAY SYSTEM---    [14:21]
+Il treno n.4895 e' in partenza dalla stazione TRIESTE CENTRALE dal binario 2
+
+---RAILWAY SYSTEM---    [14:25]
+Il treno alta velocita' n.4895 ha ricevuto l'ordine dalla stazione di MONFALCONE di poter andare al parcheggio
+
+---RAILWAY SYSTEM---    [14:26]
+Treno 4895 andra' al parcheggio
+
+Il treno n.1623 e' in partenza dalla stazione CONEGLIANO dal binario 1
+
+---RAILWAY SYSTEM---    [14:28]
+Il treno numero 4895 diretto verso la stazione MONFALCONE non e' piÂ¨ in anticipo, ma in ritardo di 02 ore 07 min min
+
+---RAILWAY SYSTEM---    [14:29]
+Treno 4895 in arrivo al binario 0
+
+---RAILWAY SYSTEM---    [14:31]
+Il treno alta velocita' n.1623 ha ricevuto l'ordine dalla stazione di TREVISO C. di poter andare al parcheggio
+
+---RAILWAY SYSTEM---    [14:32]
+Treno 1623 andra' al parcheggio
+
+Il treno alta velocita' n.4895 delle ore 14:33 e' arrivato alla stazione di MONFALCONE con un ritardo di 02 ore 07 min
+
+---RAILWAY SYSTEM---    [14:35]
+Il treno numero 1623 diretto verso la stazione TREVISO C. non e' piÂ¨ in anticipo, ma in ritardo di 02 ore 07 min min
+
+---RAILWAY SYSTEM---    [14:36]
+Treno 1623 in arrivo al binario 0
+
+---RAILWAY SYSTEM---    [14:39]
+Il treno n.4895 e' in partenza dalla stazione MONFALCONE dal binario 1
+
+Il treno alta velocita' n.1623 delle ore 14:40 e' arrivato alla stazione di TREVISO C. con un ritardo di 02 ore 07 min
+
+---RAILWAY SYSTEM---    [14:44]
+Il treno alta velocita' n.4895 ha ricevuto l'ordine dalla stazione di SAGRADO di poter transitare
+
+---RAILWAY SYSTEM---    [14:45]
+Treno 4895 in transito
+
+---RAILWAY SYSTEM---    [14:46]
+Il treno n.1623 e' in partenza dalla stazione TREVISO C. dal binario 1
+
+---RAILWAY SYSTEM---    [14:50]
+Il treno alta velocita' n.1623 ha ricevuto l'ordine dalla stazione di MOGLIANO VENETO di poter transitare
+
+---RAILWAY SYSTEM---    [14:51]
+Treno 1623 in transito
+
+Il treno alta velocita' n.4895 ha ricevuto l'ordine dalla stazione di GORIZIA CENTRALE di poter andare al parcheggio
+
+---RAILWAY SYSTEM---    [14:52]
+Treno 4895 andra' al parcheggio
+
+---RAILWAY SYSTEM---    [14:55]
+Il treno numero 4895 diretto verso la stazione GORIZIA CENTRALE non e' piÂ¨ in anticipo, ma in ritardo di 02 ore 06 min m
+in
+
+---RAILWAY SYSTEM---    [14:56]
+Treno 4895 in arrivo al binario 0
+
+---RAILWAY SYSTEM---    [14:59]
+Il treno alta velocita' n.4895 delle ore 15:01 e' arrivato alla stazione di GORIZIA CENTRALE con un ritardo di 02 ore 06
+ min
+
+Il treno alta velocita' n.1623 ha ricevuto l'ordine dalla stazione di VENEZIA MESTRE di poter andare al parcheggio
+
+---RAILWAY SYSTEM---    [15:00]
+Treno 1623 andra' al parcheggio
+
+---RAILWAY SYSTEM---    [15:07]
+Il treno n.4895 e' in partenza dalla stazione GORIZIA CENTRALE dal binario 1
+
+---RAILWAY SYSTEM---    [15:11]
+Il treno alta velocita' n.4895 ha ricevuto l'ordine dalla stazione di CORMONS di poter transitare
+
+---RAILWAY SYSTEM---    [15:12]
+Treno 4895 in transito
+
+---RAILWAY SYSTEM---    [15:17]
+Il treno alta velocita' n.4895 ha ricevuto l'ordine dalla stazione di UDINE di poter andare al parcheggio
+
+---RAILWAY SYSTEM---    [15:18]
+Treno 4895 andra' al parcheggio
+
+---RAILWAY SYSTEM---    [15:20]
+Il treno numero 4895 diretto verso la stazione UDINE non e' piÂ¨ in anticipo, ma in ritardo di 02 ore 05 min min
+
+---RAILWAY SYSTEM---    [15:21]
+Treno 4895 in arrivo al binario 0
+
+---RAILWAY SYSTEM---    [15:24]
+Il treno alta velocita' n.4895 delle ore 15:27 e' arrivato alla stazione di UDINE con un ritardo di 02 ore 05 min
+
+---RAILWAY SYSTEM---    [15:33]
+Il treno n.4895 e' in partenza dalla stazione UDINE dal binario 1
+
+---RAILWAY SYSTEM---    [15:37]
+Il treno alta velocita' n.4895 ha ricevuto l'ordine dalla stazione di CODROIPO di poter transitare
+
+---RAILWAY SYSTEM---    [15:38]
+Treno 4895 in transito
+
+---RAILWAY SYSTEM---    [15:45]
+Il treno alta velocita' n.4895 ha ricevuto l'ordine dalla stazione di CASARSA di poter transitare
+
+---RAILWAY SYSTEM---    [15:46]
+Treno 4895 in transito
+
+---RAILWAY SYSTEM---    [15:54]
+Il treno alta velocita' n.4895 ha ricevuto l'ordine dalla stazione di PORDENONE di poter andare al parcheggio
+
+---RAILWAY SYSTEM---    [15:55]
+Treno 4895 andra' al parcheggio
+
+---RAILWAY SYSTEM---    [15:56]
+Il treno numero 4895 diretto verso la stazione PORDENONE non e' piÂ¨ in anticipo, ma in ritardo di 02 ore 06 min min
+
+---RAILWAY SYSTEM---    [15:57]
+Treno 4895 in arrivo al binario 0
+
+---RAILWAY SYSTEM---    [16:00]
+Il treno alta velocita' n.4895 delle ore 16:02 e' arrivato alla stazione di PORDENONE con un ritardo di 02 ore 06 min
+
+---RAILWAY SYSTEM---    [16:08]
+Il treno n.4895 e' in partenza dalla stazione PORDENONE dal binario 1
+
+---RAILWAY SYSTEM---    [16:12]
+Il treno alta velocita' n.4895 ha ricevuto l'ordine dalla stazione di SACILE di poter transitare
+
+---RAILWAY SYSTEM---    [16:13]
+Treno 4895 in transito
+
+---RAILWAY SYSTEM---    [16:20]
+Il treno alta velocita' n.4895 ha ricevuto l'ordine dalla stazione di CONEGLIANO di poter andare al parcheggio
+
+---RAILWAY SYSTEM---    [16:21]
+Treno 4895 andra' al parcheggio
+
+---RAILWAY SYSTEM---    [16:24]
+Il treno numero 4895 diretto verso la stazione CONEGLIANO non e' piÂ¨ in anticipo, ma in ritardo di 02 ore 06 min min
+
+---RAILWAY SYSTEM---    [16:25]
+Treno 4895 in arrivo al binario 0
+
+---RAILWAY SYSTEM---    [16:28]
+Il treno alta velocita' n.4895 delle ore 16:30 e' arrivato alla stazione di CONEGLIANO con un ritardo di 02 ore 06 min
+
+---RAILWAY SYSTEM---    [16:36]
+Il treno n.4895 e' in partenza dalla stazione CONEGLIANO dal binario 1
+
+---RAILWAY SYSTEM---    [16:41]
+Il treno alta velocita' n.4895 ha ricevuto l'ordine dalla stazione di TREVISO C. di poter andare al parcheggio
+
+---RAILWAY SYSTEM---    [16:42]
+Treno 4895 andra' al parcheggio
+
+---RAILWAY SYSTEM---    [16:45]
+Il treno numero 4895 diretto verso la stazione TREVISO C. non e' piÂ¨ in anticipo, ma in ritardo di 02 ore 07 min min
+
+---RAILWAY SYSTEM---    [16:46]
+Treno 4895 in arrivo al binario 0
+
+---RAILWAY SYSTEM---    [16:49]
+Il treno alta velocita' n.4895 delle ore 16:50 e' arrivato alla stazione di TREVISO C. con un ritardo di 02 ore 07 min
+
+---RAILWAY SYSTEM---    [16:56]
+Il treno n.4895 e' in partenza dalla stazione TREVISO C. dal binario 1
+
+---RAILWAY SYSTEM---    [17:00]
+Il treno alta velocita' n.4895 ha ricevuto l'ordine dalla stazione di MOGLIANO VENETO di poter transitare
+
+---RAILWAY SYSTEM---    [17:01]
+Treno 4895 in transito
+
+---RAILWAY SYSTEM---    [17:09]
+Il treno alta velocita' n.4895 ha ricevuto l'ordine dalla stazione di VENEZIA MESTRE di poter andare al parcheggio
+
+---RAILWAY SYSTEM---    [17:10]
+Treno 4895 andra' al parcheggio
