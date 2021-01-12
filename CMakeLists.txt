@@ -7,7 +7,7 @@ add_library(components
     Railway.h
     Railway.cpp
     Station.cpp
-        Train.cpp
+    Train.cpp
 )
 
 add_executable(main mainRailway.cpp)

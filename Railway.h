@@ -47,15 +47,15 @@ public:
 
 	~Railway();
 private:
-	void sort_trains_pts();					// riordina trains_pt e trains_rev_pt
+	void sort_trains_pts();					    // riordina trains_pt e trains_rev_pt
 	void sort_trains_rev_pts();					// riordina trains_pt e trains_rev_pt
 
-	int curr_time_;							// Tempo corrente
-	std::vector<Station> stations_;			// Vettore che contiene tutte le stazioni in sequenza line_description.txt
-	std::vector<Train> trains_;				// Vettore che contiene tutti i teni presenti in timetables.txt
+	int curr_time_;							    // Tempo corrente
+	std::vector<Station> stations_;			    // Vettore che contiene tutte le stazioni in sequenza line_description.txt
+	std::vector<Train> trains_;				    // Vettore che contiene tutti i teni presenti in timetables.txt
 	std::vector<Train*> trains_pts_;			// Vettore che contiene i puntatori ai treni ordinati partendo dal più lontano dall'origine
 	std::vector<Train*> trains_rev_pts_;		// Vettore che contiene i puntatori ai treni di ritorno ordinati partendo dal più lontano dal capolinea
-	std::string messages_;					// Stringa per l'output a console
+	std::string messages_;					    // Stringa per l'output a console
 };
 
 // ===== STAZIONI ===== DIEGO SPINOSA
@@ -63,20 +63,20 @@ class Station{
 public:
     Station(const Station& s) = delete;				//
     Station& operator=(const Station& s) = delete;	// Construttori e assegnamenti
-    Station(Station&& s) = delete;					   // disattivati
+    Station(Station&& s) = delete;				    // disattivati
     Station& operator=(Station&& s) = delete;		//
 
-    std::string station_name() const;				   // Restituisce il nome della stazione
-    std::string announcements;                     // Stringa per comunicazioni
-    int distance() const;							      // Restituisce la distanza della stazione dall'origine
-    int getHaltTimer() const;						      // Restituisce il numero di minuti trascorsi dall'ultima partenza della stazione
-    Station* next_stat() const;						   // Restituisce il puntatore alla prossima stazione
-    Station* prev_stat() const;						   // Restituisce il puntatore alla stazione precedente (usato per i treni reverse)
+    std::string station_name() const;			    // Restituisce il nome della stazione
+    std::string announcements;                      // Stringa per comunicazioni
+    int distance() const;						    // Restituisce la distanza della stazione dall'origine
+    int getHaltTimer() const;					    // Restituisce il numero di minuti trascorsi dall'ultima partenza della stazione
+    Station* next_stat() const;					    // Restituisce il puntatore alla prossima stazione
+    Station* prev_stat() const;					    // Restituisce il puntatore alla stazione precedente (usato per i treni reverse)
 
-    virtual int request(Train* t) = 0; 			   // (Interazione con stazione) -2: transito, -1: binario non disponibile (vai in park, chiedi binario di nuovo dopo), >=0 n. binario (ogni ciclo: partenze, richiesta e risposta)
-    bool request_exit(Train* t);		               // (Con treno sui binari) TRUE: partenza consentita, FALSE: stazionamento
-    void update();                                 // Metodo con cui "far passare il tempo" in stazione. Verrà invocato da Railway nella parte inziale d'ogni minuto, PRIMA di verifiche varie/avanzamento treni. Riporta aggiornamenti.
-    void delete_train(Train* t);                   // Chiamato da un treno al capolinea per essere rimosso dai binari
+    virtual int request(Train* t) = 0; 			    // (Interazione con stazione) -2: transito, -1: binario non disponibile (vai in park, chiedi binario di nuovo dopo), >=0 n. binario (ogni ciclo: partenze, richiesta e risposta)
+    bool request_exit(Train* t);		            // (Con treno sui binari) TRUE: partenza consentita, FALSE: stazionamento
+    void update();                                  // Metodo con cui "far passare il tempo" in stazione. Verrà invocato da Railway nella parte inziale d'ogni minuto, PRIMA di verifiche varie/avanzamento treni. Riporta aggiornamenti.
+    void delete_train(Train* t);                    // Chiamato da un treno al capolinea per essere rimosso dai binari
 
     virtual ~Station();
 
@@ -85,25 +85,25 @@ protected:
 
     std::string station_name_;						// Nome della stazione
     std::vector<Train*> platforms;					// Binari passeggeri e transito andata LUNGHEZZA FISSA DEFINITA IN COSTRUTTORE
-    std::vector<Train*> platforms_reverse;		// Binari passeggeri e transito ritorno LUNGHEZZA FISSA DEFINITA IN COSTRUTTORE
+    std::vector<Train*> platforms_reverse;		    // Binari passeggeri e transito ritorno LUNGHEZZA FISSA DEFINITA IN COSTRUTTORE
     std::vector<Train*> park_;						// (Binari) Parcheggio andata
     std::vector<Train*> park_reverse_;				// (Binari) Parcheggio ritorno
-    int distance_;									   // Distanza dalla stazione primaria
-    Station* next_stat_;							   // Punta alla stazione sucessiva per poterlo comunicare ai treni che dovranno partire
-    Station* prev_stat_;							   // Punta alla precedente per il reverse
-    int haltTimer;								      // Minuti di fermo stazione (caricato da partenze o transiti, quando >0 ferma partenze)
-    int haltTimerR;								      // Minuti di fermo stazione (caricato da partenze o transiti, quando >0 ferma partenze) ritorno
-    Railway* central_railw_; 						   // Per avere il tempo corrente mi serve il riferimento al rail
+    int distance_;								    // Distanza dalla stazione primaria
+    Station* next_stat_;						    // Punta alla stazione sucessiva per poterlo comunicare ai treni che dovranno partire
+    Station* prev_stat_;						    // Punta alla precedente per il reverse
+    int haltTimer;								    // Minuti di fermo stazione (caricato da partenze o transiti, quando >0 ferma partenze)
+    int haltTimerR;								    // Minuti di fermo stazione (caricato da partenze o transiti, quando >0 ferma partenze) ritorno
+    Railway* central_railw_; 					    // Per avere il tempo corrente mi serve il riferimento al rail
    
-    double getPriority(Train* t) const;         // Restituisce priorità treno
-  	 bool busy() const;                          // Se stazione è piena in senso andata
-  	 bool busyR() const;                         // Se stazione è piena in senso ritorno
-    double getMaxPP() const;                    // Ricava la priorità massima fra i treni in parcheggio
-    double getMaxPPR() const;                   // Ricava la priorità massima fra i treni in parcheggio (ritorno)
-    void removeParking(Train* t);               // Rimuove treno dal parcheggio (se presente)
-    void removeParkingR(Train* t);              // Rimuove treno dal parcheggio (se presente) ritorno
-    int assignPlatform(Train* t);               // Funzione ausiliaria per assegnazione binari
-    int assignPlatformR(Train* t);              // Funzione ausiliaria per assegnazione binari (ritorno)
+    double getPriority(Train* t) const;             // Restituisce priorità treno
+  	 bool busy() const;                             // Se stazione è piena in senso andata
+  	 bool busyR() const;                            // Se stazione è piena in senso ritorno
+    double getMaxPP() const;                        // Ricava la priorità massima fra i treni in parcheggio
+    double getMaxPPR() const;                       // Ricava la priorità massima fra i treni in parcheggio (ritorno)
+    void removeParking(Train* t);                   // Rimuove treno dal parcheggio (se presente)
+    void removeParkingR(Train* t);                  // Rimuove treno dal parcheggio (se presente) ritorno
+    int assignPlatform(Train* t);                   // Funzione ausiliaria per assegnazione binari
+    int assignPlatformR(Train* t);                  // Funzione ausiliaria per assegnazione binari (ritorno)
 };
 
 class Principal : public Station{
@@ -114,7 +114,7 @@ public:
 };
 
 class Secondary : public Station{					// Il binario di transito è dato dal diverso comportamento delle stazioni di tipo Principal e Secondary
-public:                                         // (perchè nel secondo caso lasciamo passare il treno transito facendo aspettare gli altri)
+public:                                             // (perchè nel secondo caso lasciamo passare il treno transito facendo aspettare gli altri)
     Secondary(std::string name, int distance, Station* prev, Railway* rail);
     int request(Train* t); 							// (Interazione con stazione) -1: binario non disponibile (vai in park, chiedi binario di nuovo dopo), >=0 n. binario (ogni ciclo: partenze, richiesta e risposta)
     ~Secondary();
