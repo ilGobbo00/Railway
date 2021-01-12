@@ -405,19 +405,19 @@ void Train::set_status(int status){
 
 
 // ===== CLASSE REGIONAL =====
-Regional::Regional(std::string number, bool rev, Station* curr, std::vector<int> times, Railway* rail) : Train(number, rev, 160/60, curr, times, rail){}
+Regional::Regional(std::string number, bool rev, Station* curr, std::vector<int> times, Railway* rail) : Train(number, rev, 160.0/60, curr, times, rail){}
 std::string Regional::get_train_type()const{
     return "regionale";
 }
 
 // ===== CLASSE FAST =====
-Fast::Fast(std::string number, bool rev, Station* curr, std::vector<int> times, Railway* rail):Train(number, rev, 240/60, curr, times, rail){}
+Fast::Fast(std::string number, bool rev, Station* curr, std::vector<int> times, Railway* rail):Train(number, rev, 240.0/60, curr, times, rail){}
 std::string Fast::get_train_type()const{
     return "veloce";
 }
 
 // ===== CLASSE SUPERFAST =====
-SuperFast::SuperFast(std::string number, bool rev, Station* curr, std::vector<int> times, Railway* rail):Train(number, rev, 300/60, curr, times, rail){}
+SuperFast::SuperFast(std::string number, bool rev, Station* curr, std::vector<int> times, Railway* rail):Train(number, rev, 300.0/60, curr, times, rail){}
 std::string SuperFast::get_train_type()const{
     return "alta velocita'";
 }
